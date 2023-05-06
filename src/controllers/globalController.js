@@ -1,3 +1,4 @@
 export const home = (req, res) => {
-  res.send("Welcome!");
+  console.log("home");
+  res.render("home");
 };
