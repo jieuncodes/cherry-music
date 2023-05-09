@@ -1,0 +1,37 @@
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3rem;
+
+    #logo {
+        font-size: 5rem;
+    }
+
+    #hamburger_menu {
+        position: relative;
+        right: 0;
+        z-index: 13;
+
+        input#check_box {
+            display: none;
+        }
+
+        label.hamburger {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 2.5rem;
+            width: 3.5rem;
+
+            span {
+                display: block;
+                height: 4px;
+                width: 100%;
+                background-color: white;
+                border-radius: 1px;
+            }
+        }
+    }
+}
