@@ -10,7 +10,8 @@
     "build:server": "babel src -d build",
     "build:assets": "webpack --mode=production",
     "dev:server": "nodemon",
-    "dev:assets": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack --mode=development -w"
+    "dev:assets": "webpack --mode=development -w",
+    "test" : "npm run build && npm run dev:server"
   },
   "author": "jieuncodes(youredith3)",
   "license": "ISC",

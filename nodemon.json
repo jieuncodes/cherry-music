@@ -1,0 +1,6 @@
+{
+    "watch": ["src/**/*.js", "views/**/*.pug", "assets/scss/**/*.scss"],
+    "ext": "js,pug",
+    "ignore": ["webpack.config.js", "src/client/*", "assets/*"],
+    "exec": "babel-node src/init.js"
+}   

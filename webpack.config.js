@@ -1,9 +1,13 @@
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const path = require("path");
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const BASE_JS = "./src/client/js/";
 
-module.exports = {
+const config = {
   entry: {
     main: BASE_JS + "main.js",
   },
@@ -35,3 +39,5 @@ module.exports = {
     ],
   },
 };
+
+export default config;
