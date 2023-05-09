@@ -1,3 +1,6 @@
+//fonts
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+
 // Config
 @import "./config/_variables.scss";
 @import "./config/_reset.scss";
@@ -6,6 +9,8 @@
 @import "./components/header.scss";
 @import "./components/footer.scss";
 @import "./components/slidingMenu.scss";
+@import "./components/homeSections.scss";
+
 
 
 // Screens
@@ -28,5 +33,13 @@ body {
   background-color: $bg;
   color: white;
   font-size: 40px;
-}
+  align-items: center;
+  justify-self: center;
 
+  main {
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    padding: 1rem $default-padding;
+  }
+}

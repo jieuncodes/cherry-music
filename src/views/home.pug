@@ -1,4 +1,13 @@
 extends base
+include mixin/music_card
+
 block content
-  h1 Masked Wolf Playlist
-  
+  #section
+    .section__header
+      span.section__update-time 오늘 23:00 기준
+      span.section__title TOP Tracks
+      div.show-all-btn
+        span show all
+    .section__body
+      each track, index in topTracks
+        +musicCard(index + 1, track.name, track.artist.name, track.image[1]["#text"])

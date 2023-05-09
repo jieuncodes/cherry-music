@@ -1,0 +1,8 @@
+mixin musicCard(ranking, trackTitle, artist, imageUrl)
+  #music__card
+    .album-cover(style=`background-image: url(${imageUrl})`)
+    .ranking #{ranking}
+    .track-title #{trackTitle}
+    .artist #{artist}
+    .play-btn
+      i.fa-solid.fa-play

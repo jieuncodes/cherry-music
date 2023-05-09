@@ -1,0 +1,91 @@
+#section {
+    display: flex;
+    flex-direction: column;
+    height: 50rem;
+    width: 100%;
+
+    .section__header {
+        display: grid;
+
+        grid-template-areas:
+            "update-time ."
+            "section__title show-all";
+        grid-template-columns: 3fr 1fr;
+        grid-template-rows: 1fr 2fr;
+        justify-content: space-between;
+        align-items: center;
+
+        .section__update-time {
+            grid-area: update-time;
+            font-size: 2rem;
+            color: $fall-back-black;
+        }
+
+        .section__title {
+            grid-area: section__title;
+            font-size: 3.5rem;
+            margin-top: 1rem;
+        }
+
+        .show-all-btn {
+            display: flex;
+            grid-area: show-all;
+            place-content: end;
+            color: $fall-back-black;
+            cursor: pointer;
+        }
+    }
+
+    .section__body {
+        grid-area: section__body;
+
+        #music__card {
+            display: grid;
+            grid-template-areas: 
+                "album-cover ranking track-title play-btn"
+                "album-cover . artist play-btn"
+            ;
+            grid-template-columns: 1.2fr 0.5fr 4fr 0.7fr;
+            background-color: #4444444e;
+            border-radius: 10px;
+            margin-top: $default-gap;
+            height: 10rem;
+
+            .album-cover {
+                grid-area:album-cover ;
+                align-self: center;
+                justify-self: center;
+                width: 8rem;
+                height: 8rem;
+                background-color: #e0e0e0;
+                border-radius: 5px;
+            }
+            .ranking{
+                grid-area: ranking;
+
+                align-self: center;
+                justify-self: center;
+            }
+
+            .track-title {
+                grid-area: track-title ;
+                margin-right: 1rem;
+                align-self: center;
+            }
+
+            .artist {
+                grid-area: artist;
+                color:$fall-back-black;
+                margin-right: auto;
+            }
+
+            .play-btn {
+                grid-area:play-btn;
+                font-size: 3rem;
+
+                align-self: center;
+                justify-self: center;
+            }
+        }
+    }
+}

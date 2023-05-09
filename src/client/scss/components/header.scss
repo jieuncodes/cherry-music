@@ -4,14 +4,34 @@ header {
     justify-content: space-between;
     padding: 3rem;
 
+    #search{
+        color:white;
+        font-size: 3.5rem;
+        position: absolute;
+        right: 9rem;
+
+    }
     #logo {
-        font-size: 5rem;
+        span:first-child {
+            font-size: 5rem;
+        }
+
+        span:last-child {
+            margin-left: 0.5rem;
+            font-size: 4rem;
+            font-family: 'Righteous';
+            background: linear-gradient(to top, $cherry, rgb(255, 74, 74));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
     }
 
     #hamburger_menu {
+        display: flex;
+        align-items: center;
         position: relative;
-        right: 0;
         z-index: 13;
+        margin-left: auto;
 
         input#check_box {
             display: none;
@@ -27,7 +47,7 @@ header {
 
             span {
                 display: block;
-                height: 4px;
+                height: 5px;
                 width: 100%;
                 background-color: white;
                 border-radius: 1px;
