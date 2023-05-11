@@ -9,5 +9,5 @@ block content
       div.show-all-btn
         span show all
     .section__body
-      each track, index in topTracks
-        +musicCard(index + 1, track.name, track.artist.name, track.image[1]["#text"])
+      each track, index in trackDetails
+        +musicCard(index + 1, track.trackDetailTitle, track.trackDetailArtist, track.albumImage)

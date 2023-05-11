@@ -1,9 +1,30 @@
-import { fetchTopTracks } from "../api/lastFmApi.js";
+import { fetchTopTracks, getTrackInfo } from "../api/lastFmApi.js";
 
 export const home = async (req, res) => {
-  const data = await fetchTopTracks();
-  const topTracks = data.tracks.track;
-  console.log('', topTracks[0].image);
-  
-  return res.render("home", { topTracks, pageTitle: "Home" });
+  const lastFmTopTracks = await fetchTopTracks();
+  const topTracks = lastFmTopTracks.tracks.track;
+
+  const trackDetails = await Promise.all(
+    topTracks.map(async (track) => {
+      const artist = track.artist.name;
+      const trackTitle = track.name;
+      const trackDetail = await getTrackInfo({ artist, trackTitle });
+      const albumImage =
+        trackDetail?.track?.album?.image[2]["#text"] || "../../logo.png";
+      const trackDetailArtist =
+        trackDetail?.track?.artist?.name || "No artist info";
+      const trackDetailTitle = trackDetail?.track?.name || "No title info";
+
+      return {
+        ...trackDetail,
+        trackDetailArtist,
+        trackDetailTitle,
+        albumImage,
+      };
+    })
+  );
+  console.log("", trackDetails);
+  return res.render("home", {trackDetails,
+    pageTitle: "Home",
+  });
 };
