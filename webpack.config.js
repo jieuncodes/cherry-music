@@ -1,6 +1,6 @@
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import path, { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import path, { dirname } from "path";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -10,6 +10,7 @@ const BASE_JS = "./src/client/js/";
 const config = {
   entry: {
     main: BASE_JS + "main.js",
+    player: BASE_JS + "player.js",
   },
   plugins: [
     new MiniCssExtractPlugin({
