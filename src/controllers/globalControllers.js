@@ -17,7 +17,9 @@ export const home = async (req, res) => {
 
       const trackTitle = trackDetail?.track?.name || "No title info";
       const artist = trackDetail?.track?.artist?.name || "No artist info";
+
       const youtubeVideoId = await getYoutubeVideoId({ trackTitle, artist });
+
       return {
         trackTitle,
         artist,
@@ -26,7 +28,6 @@ export const home = async (req, res) => {
       };
     })
   );
-  console.log("", trackDetails);
   return res.render("home", {
     trackDetails,
     pageTitle: "Home",
