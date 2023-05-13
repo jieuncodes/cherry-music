@@ -1,8 +1,9 @@
 #section {
     display: flex;
     flex-direction: column;
-    height: auto;
+    height: 75vh;
     width: 100%;
+    overflow: hidden;
 
     .section__header {
         display: grid;
@@ -38,6 +39,5 @@
 
     .section__body {
         grid-area: section__body;
-
     }
 }
