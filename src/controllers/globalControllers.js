@@ -7,16 +7,17 @@ export const home = async (req, res) => {
 
   const trackDetails = await Promise.all(
     topTracks.map(async (track) => {
-      const trackDetail = await getLastFmTrackInfo({
+      const lastFmTrackInfo = await getLastFmTrackInfo({
         artist: track.artist.name,
         trackTitle: track.name,
       });
-      const albumImage =
-        trackDetail?.track?.album?.image[2]["#text"] ||
-        "../../default_album_img.png";
 
-      const trackTitle = trackDetail?.track?.name || "No title info";
-      const artist = trackDetail?.track?.artist?.name || "No artist info";
+      const albumImage =
+        lastFmTrackInfo.albumImg ||
+        "/images/default_album_img.png";
+
+      const trackTitle = lastFmTrackInfo.trackTitle || "No title info";
+      const artist = lastFmTrackInfo.artist || "No artist info";
 
       const youtubeVideoId = await getYoutubeVideoId({ trackTitle, artist });
 

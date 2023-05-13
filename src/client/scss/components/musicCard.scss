@@ -1,0 +1,53 @@
+
+#music__card {
+    display: grid;
+    grid-template-areas: 
+        "album-cover ranking track-title play-btn"
+        "album-cover . artist play-btn"
+    ;
+    grid-template-columns: 1.2fr 0.5fr 4fr 0.7fr;
+    background-color: #4444444e;
+    border-radius: 10px;
+    margin-top: $default-gap;
+    height: 10rem;
+
+    .album-cover {
+        grid-area: album-cover;
+        align-self: center;
+        justify-self: center;
+        width: 8rem;
+        height: 8rem;
+        background-color: rgba(138, 138, 138, 0.318);
+        border-radius: 5px;
+        background-size: auto 100%;
+        background-position: center;
+      }
+
+
+    .ranking{
+        grid-area: ranking;
+
+        align-self: center;
+        justify-self: center;
+    }
+
+    .track-title {
+        grid-area: track-title ;
+        margin-right: 1rem;
+        align-self: center;
+    }
+
+    .artist {
+        grid-area: artist;
+        color:$fall-back-black;
+        margin-right: auto;
+    }
+
+    .play-btn {
+        grid-area:play-btn;
+        font-size: 3rem;
+
+        align-self: center;
+        justify-self: center;
+    }
+}

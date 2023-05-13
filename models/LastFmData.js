@@ -4,7 +4,8 @@ const lastFmTrackSchema = new mongoose.Schema(
   {
     artist: { type: String, required: true },
     trackTitle: { type: String, required: true },
-    album: { type: String },
+    albumName: { type: String },
+    albumImg: {type:String},
     duration: { type: Number },
     playcount: { type: Number },
     trackId: { type: String,required:true },
