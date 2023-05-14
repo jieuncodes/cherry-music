@@ -1,5 +1,4 @@
-
-#music__card {
+#music-card {
     display: grid;
     grid-template-areas: 
         "album-cover ranking track-title play-btn"
@@ -17,7 +16,7 @@
         justify-self: center;
         width: 8rem;
         height: 8rem;
-        background-color: rgba(138, 138, 138, 0.318);
+        background-color: rgba(100, 100, 100, 0.318);
         border-radius: 5px;
         background-size: auto 100%;
         background-position: center;

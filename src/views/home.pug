@@ -10,4 +10,4 @@ block content
         span show all
     .section__body
       each track, index in trackDetails
-        +musicCard(index + 1, track.trackTitle, track.artist, track.albumImage)
+        +musicCard(index + 1, track.trackTitle, track.artist, track.albumImage, track.youtubeVideoId)

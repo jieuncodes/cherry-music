@@ -7,7 +7,7 @@
 
     .section__header {
         display: grid;
-
+        margin-bottom: 30px;
         grid-template-areas:
             "update-time ."
             "section__title show-all";
@@ -39,5 +39,6 @@
 
     .section__body {
         grid-area: section__body;
+        overflow:scroll;
     }
 }

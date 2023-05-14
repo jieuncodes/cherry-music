@@ -1,5 +1,5 @@
-mixin musicCard(ranking, trackTitle, artist, albumImage)
-  #music__card
+mixin musicCard(ranking, trackTitle, artist, albumImage, videoId)
+  #music-card(data-videoId=videoId)
     .album-cover(style=`background-image: url(${albumImage})`)
     .ranking #{ranking}
     .track-title #{trackTitle}

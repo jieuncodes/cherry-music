@@ -1,4 +1,7 @@
-#player {
+#youtube-player{
+    display: none;
+}
+#player-box {
     background-color: black;
     z-index: 10;
     width: 100%;
@@ -10,7 +13,7 @@
         "album-cover track-title play-btn next-btn"
         "album-cover artist play-btn next-btn"
     ;
-    grid-template-columns: 1.2fr 2.5fr 0.7fr 0.7fr;
+    grid-template-columns: 0.8fr 2fr 0.5fr 0.7fr;
     background-color: #a6a6a64e;
     padding: 0 2rem;
     margin-top: $default-gap;
@@ -44,15 +47,13 @@
 
     .play-btn {
         grid-area:play-btn;
-        font-size: 4.5rem;
+        font-size: 4rem;
 
         align-self: center;
-        // justify-self: center;
     }
     .next-btn {
         grid-area:next-btn;
-        font-size: 5rem;
+        font-size: 4.5rem;
         align-self: center;
-        // justify-self: center;
     }
 }
