@@ -29,7 +29,6 @@ export const getLastFmTrackInfo = async ({ artist, trackTitle }) => {
     const cachedData = await LastFmTrack.findOne({ trackId });
 
     if (cachedData) {
-      console.log('cache', cachedData);
       return cachedData;
     } else {
       const url = new URL(LAST_FM_BASE_URL);
@@ -44,13 +43,12 @@ export const getLastFmTrackInfo = async ({ artist, trackTitle }) => {
 
       const response = await fetch(url);
       const data = await response.json();
-      console.log("data", data);
 
       const lasfFmTrackInfo = new LastFmTrack({
         artist: data.track.artist.name,
         trackTitle: data.track.name,
         album: data.track.album?.name || "None",
-        albumImg: data.track.album?.image[2]["#text"] ,
+        albumImg: data.track.album?.image[2]["#text"],
         duration: data.track.duration,
         playcount: data.track.playcount,
         trackId,

@@ -6,9 +6,10 @@ import flash from "express-flash";
 import { localsMiddleware } from "./middlewares.js";
 import rootRouter from "./routers/rootRouter.js";
 import "./db.js";
+import { queueRouter } from "./routers/queueRouter.js";
 
 const app = express();
-const logger = morgan("dev");
+// const logger = morgan("dev");
 
 app.set("view engine", "pug");
 app.set("views", process.cwd() + "/src/views");
@@ -30,5 +31,6 @@ app.use("/static", express.static("assets"));
 app.use(express.static("public"));
 
 app.use("/", rootRouter);
+app.use("/queue", queueRouter);
 
 export default app;
