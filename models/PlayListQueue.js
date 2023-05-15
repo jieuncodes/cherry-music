@@ -12,6 +12,12 @@ const queueSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
+      title: {
+        type: String,
+      },
+      artist: {
+        type: String,
+      },
     },
   ],
 });

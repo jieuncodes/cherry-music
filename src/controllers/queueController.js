@@ -6,10 +6,10 @@ export const addMusicToQueue = async (req, res) => {
   try {
     const {
       params: { id },
+      body: { title, artist },
     } = req;
 
     let queue = await Queue.findOne({ _id: defaultQueueId });
-
     if (!queue) {
       queue = await Queue.create({
         _id: defaultQueueId,
@@ -17,7 +17,7 @@ export const addMusicToQueue = async (req, res) => {
       });
     }
 
-    queue.queue.unshift({ videoId: id });
+    queue.queue.unshift({ videoId: id, title, artist });
     await queue.save();
 
     res.status(200).send("Music added to the queue successfully.");
