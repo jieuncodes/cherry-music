@@ -1,8 +1,8 @@
-mixin musicCard(ranking, trackTitle, artist, albumImage, videoId,albumImage)
-  #music-card(data-videoId=videoId, data-title=trackTitle,data-artist=artist,data-albumImage=albumImage)
-    .album-cover(style=`background-image: url(${albumImage})`)
+mixin musicCard(ranking, trackTitle, artist, albumImageUrl, videoId)
+  #music-card(data-videoId=videoId, data-title=trackTitle,data-artist=artist,data-albumImageUrl=albumImageUrl)
+    .album-cover(style=`background-image: url(${albumImageUrl})`)
     .ranking #{ranking}
     .track-title #{trackTitle}
     .artist #{artist}
-    .play-btn
+    button.play-btn
       i.fa-solid.fa-play

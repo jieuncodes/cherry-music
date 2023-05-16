@@ -46,6 +46,7 @@
     }
 
     .play-btn {
+        padding: 2rem;
         grid-area:play-btn;
         font-size: 4rem;
 
@@ -53,6 +54,7 @@
     }
     .next-btn {
         grid-area:next-btn;
+        padding: 2rem;
         font-size: 4.5rem;
         align-self: center;
     }

@@ -12,7 +12,7 @@ export const home = async (req, res) => {
         artist: track.artist.name,
         trackTitle: track.name,
       });
-      const albumImage =
+      const albumImageUrl =
         lastFmTrackInfo.albumImg || "/images/default_album_img.png";
 
       const trackTitle = lastFmTrackInfo.trackTitle || "No title info";
@@ -23,7 +23,7 @@ export const home = async (req, res) => {
       const newTrack = await Track.create({
         trackTitle,
         artist,
-        albumImage,
+        albumImageUrl,
         youtubeVideoId,
       });
 
