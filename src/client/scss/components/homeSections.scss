@@ -3,7 +3,7 @@
     flex-direction: column;
     height: 75vh;
     width: 100%;
-    overflow: hidden;
+    overflow: scroll;
 
     .section__header {
         display: grid;
@@ -39,6 +39,6 @@
 
     .section__body {
         grid-area: section__body;
-        overflow:scroll;
+        overflow: scroll;
     }
 }

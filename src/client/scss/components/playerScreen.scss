@@ -4,7 +4,7 @@
 
 #player-screen {
     // erase
-    // top:0;
+    // top: 0;
 
     padding: $default-padding;
     position: fixed;
@@ -84,7 +84,48 @@
 
         }
 
-        .runtime {}
+        .progress-bar-area {
+            display: grid;
+            grid-template-areas: "bar bar"
+                "current-time duration";
+            align-self: center;
+
+            gap: 1.5rem;
+
+            .progress-bar-container {
+                grid-area: bar;
+                width: 100%;
+                height: 1rem;
+                background-color: #333;
+
+                .progress-bar {
+                    height: 100%;
+                    background-color: white;
+                    width: 0;
+                    position: relative;
+                }
+
+                .progress-bar-handle {
+                    position: absolute;
+                    width: 2rem;
+                    height: 2rem;
+                    border-radius: 50%;
+                    background-color: white;
+                    margin-top: -1.5rem;
+                }
+            }
+
+            span.current-time {
+                grid-area: current-time;
+            }
+
+            span.duration {
+                grid-area: duration;
+                justify-self: end;
+
+            }
+        }
+
 
         .player-commands {
             display: flex;
@@ -99,6 +140,9 @@
             }
 
             .play-btn {
+                box-sizing: border-box;
+                padding: 1.5rem;
+
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -109,7 +153,17 @@
 
                 i {
                     position: absolute;
+
+
+
+                }
+
+                .fa-play {
                     margin-left: 0.7rem;
+                }
+
+                &hover {
+                    background-color: $fall-back-black-darker;
                 }
             }
         }

@@ -18,17 +18,25 @@
 
             .like 
                 i.fa-regular.fa-thumbs-up
-        .runtime 
+
+        .progress-bar-area
+            .progress-bar-container
+                .progress-bar
+                .progress-bar-handle(draggable="true")
+
+            span.current-time 00:00
+            span.duration 00:00
+
         .player-commands
-            .shuffle 
+            button.shuffle 
                 i.fa-solid.fa-shuffle
-            .prev-btn 
+            button.prev-btn 
                 i.fa-solid.fa-backward-step
-            .play-btn
+            button.play-btn
                 i.fa-solid.fa-play
-            .next-btn 
+            button.next-btn 
                 i.fa-solid.fa-forward-step
-            .repeat-btn
+            button.repeat-btn
                 i.fa-solid.fa-repeat
     .player-screen__nav 
         .handle-bar 

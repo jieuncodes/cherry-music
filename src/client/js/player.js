@@ -1,15 +1,33 @@
-import { paintPlayerScreen } from "./playerScreen.js";
+import { paintPlayerScreen, updateProgressBar } from "./playerScreen.js";
 
-let player;
+export let player;
 const musicCards = document.querySelectorAll("#music-card");
 const playerBox = document.getElementById("player-box");
-const playButton = playerBox.querySelector(".play-btn");
-const nextButton = playerBox.querySelector(".next-btn");
+const playerBoxPlayBtn = playerBox.querySelector(".play-btn");
+const playerBoxNextBtn = playerBox.querySelector(".next-btn");
 
 export let clientPlayList = [];
 export let currentTrackIndex = 0;
+
+export const togglePlayPause = () => {
+  const playerScreenPlayBtn = document
+    .getElementById("player-screen")
+    .querySelector(".play-btn");
+
+  if (player && player.getPlayerState() === YT.PlayerState.PLAYING) {
+    player.pauseVideo();
+    playerBoxPlayBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+    playerScreenPlayBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+  } else if (player && player.getPlayerState() === YT.PlayerState.PAUSED) {
+    player.playVideo();
+    playerBoxPlayBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+    playerScreenPlayBtn.innerHTML =
+      '<i class="fa-solid fa-pause" style="font-size: 4rem; "></i>';
+  }
+};
+
 const paintPlayerWithTrackInfo = () => {
-  playButton.innerHTML = '<i class="fa-solid fa-pause"></i>';
+  playerBoxPlayBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
 
   const track = clientPlayList[currentTrackIndex];
   const albumImgArea = playerBox.querySelector(".album-cover");
@@ -20,17 +38,23 @@ const paintPlayerWithTrackInfo = () => {
   artistArea.innerHTML = track.artist;
 };
 
-const handlePlayBtnClick = () => {
+export const handlePlayBtnClick = () => {
+  console.log("playclick");
+  const playerScreen = document.getElementById("player-screen");
+  const playerScreenPlayBtn = playerScreen.querySelector(".play-btn");
   if (
     player &&
     (player.getPlayerState() === YT.PlayerState.PLAYING) |
       (player.getPlayerState() === -1)
   ) {
     player.pauseVideo();
-    playButton.innerHTML = '<i class="fa-solid fa-play"></i>';
+    playerBoxPlayBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+    playerScreenPlayBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
   } else if (player && player.getPlayerState() === YT.PlayerState.PAUSED) {
     player.playVideo();
-    playButton.innerHTML = '<i class="fa-solid fa-pause"></i>';
+    playerBoxPlayBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+    playerScreenPlayBtn.innerHTML =
+      '<i class="fa-solid fa-pause" style="font-size: 4rem; "></i>';
   }
 };
 
@@ -118,8 +142,8 @@ const onPlayerStateChange = (event) => {
 
 //eventListeners
 
-playButton.addEventListener("click", handlePlayBtnClick);
-nextButton.addEventListener("click", handleNextBtnClick);
+playerBoxPlayBtn.addEventListener("click", togglePlayPause);
+playerBoxNextBtn.addEventListener("click", handleNextBtnClick);
 document.addEventListener("DOMContentLoaded", () => {
   const tag = document.createElement("script");
   tag.src = "https://www.youtube.com/iframe_api";
@@ -135,6 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
           onStateChange: onPlayerStateChange,
         },
       });
+      setInterval(updateProgressBar, 200);
     } else {
       console.error("Player element not found in the DOM");
     }
