@@ -1,10 +1,15 @@
+#player-screen.active{
+    bottom:0;
+}
 #player-screen {
     padding: $default-padding;
-    position: absolute;
+    position: fixed;
+    bottom: -100%;
+    left:0;
+    transition: bottom 0.3s;
     width: 100%;
     height: 100%;
     box-sizing: border-box;
-    top: 0;
     z-index: 30;
     background-color: black;
     display: grid;
@@ -67,8 +72,11 @@
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
-            font-size: 4rem;
+            font-size: 3.5rem;
             
+            .prev-btn,.next-btn{
+                font-size: 4.5rem;
+            }
             .play-btn{
                 display:flex;
                 align-items: center;

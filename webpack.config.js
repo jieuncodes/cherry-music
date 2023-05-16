@@ -11,6 +11,8 @@ const config = {
   entry: {
     main: BASE_JS + "main.js",
     player: BASE_JS + "player.js",
+    player: BASE_JS + "playerScreen.js",
+
   },
   plugins: [
     new MiniCssExtractPlugin({
