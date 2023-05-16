@@ -4,11 +4,14 @@ html(lang="ko")
         title Cherry Music
         script(src="https://kit.fontawesome.com/5f69680060.js" crossorigin="anonymous")
         link(rel="stylesheet", href="/static/css/styles.css")
-        include partials/header
     body
+        include partials/header
+
+        include partials/player_screen
+
         main
             block content
-        include partials/player-box
+        include partials/player_box
         //- include partials/footer
             
         script(src="/static/js/main.js") 

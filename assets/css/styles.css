@@ -302,6 +302,101 @@ input:checked ~ nav#sliding-menu {
   align-self: center;
 }
 
+#player-screen {
+  padding: 3rem;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  top: 0;
+  z-index: 30;
+  background-color: black;
+  display: grid;
+  grid-template-rows: 1fr 10fr 3fr;
+}
+#player-screen .player-screen__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 3.5rem;
+}
+#player-screen .player-screen__body {
+  padding: 3rem;
+  display: grid;
+  grid-template-rows: 4.5fr 1fr 1fr 1fr;
+}
+#player-screen .player-screen__body .like-and-title {
+  display: grid;
+  grid-template-columns: 1fr 10fr 1fr;
+  place-items: center;
+}
+#player-screen .player-screen__body .like-and-title .dislike {
+  transform: scaleX(-1);
+  font-size: 4rem;
+  place-self: left;
+}
+#player-screen .player-screen__body .like-and-title .track-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  line-height: 5rem;
+}
+#player-screen .player-screen__body .like-and-title .track-info .title {
+  font-weight: bold;
+  font-size: 4rem;
+}
+#player-screen .player-screen__body .like-and-title .track-info .artist {
+  font-size: 3rem;
+  color: rgba(255, 255, 255, 0.625);
+}
+#player-screen .player-screen__body .like-and-title .like {
+  font-size: 4rem;
+}
+#player-screen .player-screen__body .player-commands {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 4rem;
+}
+#player-screen .player-screen__body .player-commands .play-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 13rem;
+  height: 13rem;
+  border-radius: 50%;
+  background-color: rgba(127, 127, 127, 0.472);
+}
+#player-screen .player-screen__body .player-commands .play-btn i {
+  position: absolute;
+  margin-left: 0.7rem;
+}
+#player-screen .player-screen__nav {
+  background-color: rgba(127, 127, 127, 0.472);
+  position: absolute;
+  bottom: 0;
+  width: 100vw;
+  height: 10vh;
+  display: grid;
+  grid-template-rows: 0.5fr 2fr;
+}
+#player-screen .player-screen__nav .handle-bar {
+  place-self: center;
+  width: 5rem;
+  height: 0.5rem;
+  background-color: white;
+}
+#player-screen .player-screen__nav .handle-bar span {
+  content: "";
+}
+#player-screen .player-screen__nav .nav-items {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  place-items: center;
+}
+
 a {
   color: inherit;
   text-decoration: none;
