@@ -1,5 +1,4 @@
 import Track from "../../models/Track.js";
-import YoutubeData from "../../models/YoutubeData.js";
 import { getLastFmTopTracks, getLastFmTrackInfo } from "../api/lastFmApi.js";
 import { getYoutubeVideoId } from "../api/youtubeApi.js";
 

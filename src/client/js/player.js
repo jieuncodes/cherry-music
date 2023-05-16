@@ -2,18 +2,22 @@ let player;
 const musicCards = document.querySelectorAll("#music-card");
 const playerBox = document.getElementById("player-box");
 const playButton = playerBox.querySelector(".play-btn");
+const nextButton = playerBox.querySelector(".next-btn");
+
 let clientPlayList = [];
+let currentTrackIndex = 0;
+
 
 const paintPlayerWithTrackInfo = () => {
   playButton.innerHTML = '<i class="fa-solid fa-pause"></i>';
 
-  const queueFirstTrack = clientPlayList[0];
+  const track = clientPlayList[currentTrackIndex];
   const albumImgArea = playerBox.querySelector(".album-cover");
   const trackTitleArea = playerBox.querySelector(".track-title");
   const artistArea = playerBox.querySelector(".artist");
-  albumImgArea.style.backgroundImage = `url(${queueFirstTrack.albumImage})`;
-  trackTitleArea.innerHTML = queueFirstTrack.title;
-  artistArea.innerHTML = queueFirstTrack.artist;
+  albumImgArea.style.backgroundImage = `url(${track.albumImage})`;
+  trackTitleArea.innerHTML = track.title;
+  artistArea.innerHTML = track.artist;
 };
 
 const handlePlayBtnClick = () => {
@@ -27,6 +31,18 @@ const handlePlayBtnClick = () => {
   } else if (player && player.getPlayerState() === YT.PlayerState.PAUSED) {
     player.playVideo();
     playButton.innerHTML = '<i class="fa-solid fa-pause"></i>';
+  }
+};
+
+const handleNextBtnClick = () => {
+  console.log('click', );
+  if (currentTrackIndex < clientPlayList.length - 1) { 
+    currentTrackIndex++;
+    const nextTrack = clientPlayList[currentTrackIndex];
+    paintPlayerWithTrackInfo();
+    player.loadVideoById(nextTrack.videoId);
+  } else {
+    console.log("End of playlist reached");
   }
 };
 
@@ -52,6 +68,9 @@ const addMusicToQueue = async ({ videoId, title, artist, albumImage }) => {
     artist,
     albumImage,
   });
+
+  currentTrackIndex = 0;
+
 
   if (player) {
     player.stopVideo();
@@ -88,17 +107,20 @@ musicCards.forEach((musicCard) => {
   }
 });
 
-playButton.addEventListener("click", handlePlayBtnClick);
 
 const onPlayerStateChange = (event) => {
   if (event.data === YT.PlayerState.ENDED) {
-    const nextVideo = clientPlayList.shift();
+    handleNextBtnClick();
     if (nextVideo) {
       player.loadVideoById(nextVideo.videoId);
     }
   }
 };
 
+//eventListeners
+
+playButton.addEventListener("click", handlePlayBtnClick);
+nextButton.addEventListener("click", handleNextBtnClick);
 document.addEventListener("DOMContentLoaded", () => {
   const tag = document.createElement("script");
   tag.src = "https://www.youtube.com/iframe_api";
