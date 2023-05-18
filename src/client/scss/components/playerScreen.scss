@@ -92,28 +92,39 @@
 
             gap: 1.5rem;
 
-            .progress-bar-container {
+
+            #timeline {
                 grid-area: bar;
+                -webkit-appearance: none;
+                appearance: none;
                 width: 100%;
                 height: 1rem;
-                background-color: #333;
+                background: $fall-back-black-dark;
+                outline: none;
+                opacity: 0.7;
+                -webkit-transition: .2s;
+                transition: opacity .2s;
+                overflow: hidden;
 
-                .progress-bar {
-                    height: 100%;
-                    background-color: white;
-                    width: 0;
-                    position: relative;
-                }
-
-                .progress-bar-handle {
-                    position: absolute;
-                    width: 2rem;
-                    height: 2rem;
-                    border-radius: 50%;
-                    background-color: white;
-                    margin-top: -1.5rem;
+                &:hover {
+                    opacity: 1;
                 }
             }
+
+
+            #timeline::-webkit-slider-thumb {
+                -webkit-appearance: none;
+                appearance: none;
+                width: 2rem;
+                height: 2rem;
+                background: #fff;
+                cursor: pointer;
+                margin-top: 0;
+                margin-left: -2rem;
+                box-shadow: -900px 0 0 900px white;
+
+            }
+
 
             span.current-time {
                 grid-area: current-time;

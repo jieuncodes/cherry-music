@@ -1,34 +1,78 @@
-import { paintPlayerScreen, updateProgressBar } from "./playerScreen.js";
+import {
+  paintPlayerScreen,
+  playerScreenPlayBtn,
+  updateProgressBar,
+} from "./playerScreen.js";
 
 export let player;
+let isVideoPlaying = false;
+
 const musicCards = document.querySelectorAll("#music-card");
-const playerBox = document.getElementById("player-box");
-const playerBoxPlayBtn = playerBox.querySelector(".play-btn");
-const playerBoxNextBtn = playerBox.querySelector(".next-btn");
+export const playerBox = document.getElementById("player-box");
+export const playerBoxPlayBtn = playerBox.querySelector(".play-btn");
+export const playerBoxNextBtn = playerBox.querySelector(".next-btn");
+export const timeline = document.getElementById("timeline");
 
 export let clientPlayList = [];
 export let currentTrackIndex = 0;
 
-export const togglePlayPause = () => {
-  const playerScreenPlayBtn = document
-    .getElementById("player-screen")
-    .querySelector(".play-btn");
-
+// player commands
+export function togglePlayPauseBtn() {
+  console.log("click playbtn");
   if (player && player.getPlayerState() === YT.PlayerState.PLAYING) {
     player.pauseVideo();
-    playerBoxPlayBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-    playerScreenPlayBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-  } else if (player && player.getPlayerState() === YT.PlayerState.PAUSED) {
+  } else {
     player.playVideo();
-    playerBoxPlayBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-    playerScreenPlayBtn.innerHTML =
-      '<i class="fa-solid fa-pause" style="font-size: 4rem; "></i>';
   }
-};
+}
 
+export function handleNextBtnClick() {
+  if (currentTrackIndex < clientPlayList.length - 1) {
+    currentTrackIndex++;
+    const nextTrack = clientPlayList[currentTrackIndex];
+    console.log("currTrackIndex", currentTrackIndex);
+    paintPlayerWithTrackInfo();
+    paintPlayerScreen();
+    player.loadVideoById(nextTrack.videoId);
+  } else {
+    console.log("End of playlist reached");
+  }
+  updateNextButtonStatus();
+}
+
+function handleTimeLineChange(event) {
+  const {
+    target: { value },
+  } = event;
+  if (player && player.getDuration) {
+    const videoDuration = player.getDuration();
+    const seekToSeconds = (value / 100) * videoDuration;
+    player.seekTo(seekToSeconds, true);
+  } else {
+    console.error("Player is not ready");
+  }
+}
+
+function handleTimeLineMouseDown() {
+  isVideoPlaying = player.getPlayerState() === YT.PlayerState.PLAYING;
+  if (isVideoPlaying) {
+    player.pauseVideo();
+    playerBoxPlayBtn.childNodes[0].classList.replace("fa-pause", "fa-play");
+    playerScreenPlayBtn.childNodes[0].classList.replace("fa-pause", "fa-play");
+  }
+}
+
+function handleTimeLineMouseUp() {
+  if (isVideoPlaying) {
+    player.playVideo();
+    playerBoxPlayBtn.childNodes[0].classList.replace("fa-play", "fa-pause");
+    playerScreenPlayBtn.childNodes[0].classList.replace("fa-play", "fa-pause");
+  }
+}
+
+// painters
 const paintPlayerWithTrackInfo = () => {
-  playerBoxPlayBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-
+  togglePlayPauseBtn();
   const track = clientPlayList[currentTrackIndex];
   const albumImgArea = playerBox.querySelector(".album-cover");
   const trackTitleArea = playerBox.querySelector(".track-title");
@@ -38,52 +82,34 @@ const paintPlayerWithTrackInfo = () => {
   artistArea.innerHTML = track.artist;
 };
 
-export const handlePlayBtnClick = () => {
-  console.log("playclick");
-  const playerScreen = document.getElementById("player-screen");
-  const playerScreenPlayBtn = playerScreen.querySelector(".play-btn");
+const updateNextButtonStatus = () => {
   if (
-    player &&
-    (player.getPlayerState() === YT.PlayerState.PLAYING) |
-      (player.getPlayerState() === -1)
+    clientPlayList.length <= 1 ||
+    currentTrackIndex == clientPlayList.length - 1
   ) {
-    player.pauseVideo();
-    playerBoxPlayBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-    playerScreenPlayBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-  } else if (player && player.getPlayerState() === YT.PlayerState.PAUSED) {
-    player.playVideo();
-    playerBoxPlayBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-    playerScreenPlayBtn.innerHTML =
-      '<i class="fa-solid fa-pause" style="font-size: 4rem; "></i>';
-  }
-};
-
-const handleNextBtnClick = () => {
-  if (currentTrackIndex < clientPlayList.length - 1) {
-    currentTrackIndex++;
-    const nextTrack = clientPlayList[currentTrackIndex];
-    paintPlayerWithTrackInfo();
-    player.loadVideoById(nextTrack.videoId);
+    playerBoxNextBtn.disabled = true;
   } else {
-    console.log("End of playlist reached");
+    playerBoxNextBtn.disabled = false;
   }
 };
 
+// queue functions
 const addMusicToQueue = async ({ videoId, title, artist, albumImageUrl }) => {
-  try {
-    const response = await fetch(`/queue/${videoId}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-    if (!response.ok) {
-      console.error("Error!!");
-      return;
-    }
-  } catch (error) {
-    console.error("Fetch failed");
-  }
+  // try {
+  //   const response = await fetch(`/queue/${videoId}`, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   });
+  //   if (!response.ok) {
+  //     console.error("Error!!");
+  //     return;
+  //   }
+  //   console.log("", clientPlayList);
+  // } catch (error) {
+  //   console.error("Fetch failed");
+  // }
 
   clientPlayList.unshift({
     videoId,
@@ -91,8 +117,8 @@ const addMusicToQueue = async ({ videoId, title, artist, albumImageUrl }) => {
     artist,
     albumImageUrl,
   });
-
   currentTrackIndex = 0;
+  updateNextButtonStatus();
 
   if (player) {
     player.stopVideo();
@@ -116,6 +142,26 @@ const onMusicCardClick = ({ videoId, title, artist, albumImageUrl }) => {
   }
 };
 
+// iframe
+const onPlayerStateChange = (event) => {
+  console.log("playerstate", event.data);
+
+  if (event.data === YT.PlayerState.PLAYING) {
+    playerBoxPlayBtn.childNodes[0].classList.replace("fa-play", "fa-pause");
+    playerScreenPlayBtn.childNodes[0].classList.replace("fa-play", "fa-pause");
+    playerScreenPlayBtn.childNodes[0].style.fontSize = "4rem";
+  } else if (event.data === YT.PlayerState.PAUSED) {
+    playerBoxPlayBtn.childNodes[0].classList.replace("fa-pause", "fa-play");
+    playerScreenPlayBtn.childNodes[0].classList.replace("fa-pause", "fa-play");
+  } else if (event.data === YT.PlayerState.ENDED) {
+    handleNextBtnClick();
+    if (nextVideo) {
+      player.loadVideoById(nextVideo.videoId);
+    }
+  }
+};
+
+//eventListeners
 musicCards.forEach((musicCard) => {
   const videoId = musicCard.dataset.videoid;
   const title = musicCard.dataset.title;
@@ -130,19 +176,7 @@ musicCards.forEach((musicCard) => {
     console.error("Music card does not have a data-videoid attribute");
   }
 });
-
-const onPlayerStateChange = (event) => {
-  if (event.data === YT.PlayerState.ENDED) {
-    handleNextBtnClick();
-    if (nextVideo) {
-      player.loadVideoById(nextVideo.videoId);
-    }
-  }
-};
-
-//eventListeners
-
-playerBoxPlayBtn.addEventListener("click", togglePlayPause);
+playerBoxPlayBtn.addEventListener("click", togglePlayPauseBtn);
 playerBoxNextBtn.addEventListener("click", handleNextBtnClick);
 document.addEventListener("DOMContentLoaded", () => {
   const tag = document.createElement("script");
@@ -155,13 +189,19 @@ document.addEventListener("DOMContentLoaded", () => {
       player = new YT.Player(playerElement, {
         videoId: "Xit3nVfE18M",
         events: {
-          onReady: (event) => event.target.playVideo(),
+          onReady: (event) => {
+            event.target.playVideo();
+            togglePlayPauseBtn();
+          },
           onStateChange: onPlayerStateChange,
         },
       });
-      setInterval(updateProgressBar, 200);
+      setInterval(updateProgressBar, 100);
     } else {
       console.error("Player element not found in the DOM");
     }
   };
 });
+timeline.addEventListener("input", handleTimeLineChange);
+timeline.addEventListener("mousedown", handleTimeLineMouseDown);
+timeline.addEventListener("mouseup", handleTimeLineMouseUp);

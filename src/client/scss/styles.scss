@@ -32,6 +32,10 @@ button {
   all: unset;
 }
 
+:disabled {
+  color: $disabled;
+}
+
 body {
   width: 100%;
   bottom: 280px;

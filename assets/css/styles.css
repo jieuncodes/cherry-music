@@ -175,7 +175,7 @@ input:checked ~ nav#sliding-menu {
   flex-direction: column;
   height: 75vh;
   width: 100%;
-  overflow: hidden;
+  overflow: scroll;
 }
 #section .section__header {
   display: grid;
@@ -292,12 +292,14 @@ input:checked ~ nav#sliding-menu {
   margin-left: 2rem;
 }
 #player-box .play-btn {
+  padding: 2rem;
   grid-area: play-btn;
   font-size: 4rem;
   align-self: center;
 }
 #player-box .next-btn {
   grid-area: next-btn;
+  padding: 2rem;
   font-size: 4.5rem;
   align-self: center;
 }
@@ -331,6 +333,17 @@ input:checked ~ nav#sliding-menu {
   display: grid;
   grid-template-rows: 4.5fr 1fr 1fr 1fr;
 }
+#player-screen .player-screen__body .album-cover {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#player-screen .player-screen__body .album-cover img {
+  width: 100%;
+  border-radius: 1rem;
+  object-fit: cover;
+  overflow: hidden;
+}
 #player-screen .player-screen__body .like-and-title {
   display: grid;
   grid-template-columns: 1fr 10fr 1fr;
@@ -359,6 +372,46 @@ input:checked ~ nav#sliding-menu {
 #player-screen .player-screen__body .like-and-title .like {
   font-size: 4rem;
 }
+#player-screen .player-screen__body .progress-bar-area {
+  display: grid;
+  grid-template-areas: "bar bar" "current-time duration";
+  align-self: center;
+  gap: 1.5rem;
+}
+#player-screen .player-screen__body .progress-bar-area #timeline {
+  grid-area: bar;
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 1rem;
+  background: rgba(127, 127, 127, 0.472);
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+  overflow: hidden;
+}
+#player-screen .player-screen__body .progress-bar-area #timeline:hover {
+  opacity: 1;
+}
+#player-screen .player-screen__body .progress-bar-area #timeline::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 2rem;
+  height: 2rem;
+  background: #fff;
+  cursor: pointer;
+  margin-top: 0;
+  margin-left: -2rem;
+  box-shadow: -900px 0 0 900px white;
+}
+#player-screen .player-screen__body .progress-bar-area span.current-time {
+  grid-area: current-time;
+}
+#player-screen .player-screen__body .progress-bar-area span.duration {
+  grid-area: duration;
+  justify-self: end;
+}
 #player-screen .player-screen__body .player-commands {
   display: flex;
   flex-direction: row;
@@ -366,10 +419,13 @@ input:checked ~ nav#sliding-menu {
   justify-content: space-between;
   font-size: 3.5rem;
 }
-#player-screen .player-screen__body .player-commands .prev-btn, #player-screen .player-screen__body .player-commands .next-btn {
+#player-screen .player-screen__body .player-commands .prev-btn,
+#player-screen .player-screen__body .player-commands .next-btn {
   font-size: 4.5rem;
 }
 #player-screen .player-screen__body .player-commands .play-btn {
+  box-sizing: border-box;
+  padding: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -380,7 +436,12 @@ input:checked ~ nav#sliding-menu {
 }
 #player-screen .player-screen__body .player-commands .play-btn i {
   position: absolute;
+}
+#player-screen .player-screen__body .player-commands .play-btn .fa-play {
   margin-left: 0.7rem;
+}
+#player-screen .player-screen__body .player-commands .play-btnhover {
+  background-color: rgba(127, 127, 127, 0.174);
 }
 #player-screen .player-screen__nav {
   background-color: rgba(127, 127, 127, 0.472);
@@ -411,8 +472,12 @@ a {
   text-decoration: none;
 }
 
-* {
-  outline: 1px solid rgba(255, 0, 0, 0.5);
+button {
+  all: unset;
+}
+
+:disabled {
+  color: rgba(154, 154, 154, 0.51);
 }
 
 body {
