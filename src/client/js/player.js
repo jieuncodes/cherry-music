@@ -202,6 +202,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 });
+
 timeline.addEventListener("input", handleTimeLineChange);
 timeline.addEventListener("mousedown", handleTimeLineMouseDown);
 timeline.addEventListener("mouseup", handleTimeLineMouseUp);

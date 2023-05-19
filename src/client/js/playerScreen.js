@@ -44,7 +44,6 @@ export const updateProgressBar = () => {
   durationDisplay.textContent = formatTime(duration);
 };
 
-//eventListeners
 chevron.addEventListener("click", () => {
   playerScreen.classList.remove("active");
 });
