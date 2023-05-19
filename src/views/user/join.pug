@@ -1,0 +1,15 @@
+extends ../base
+
+block content
+    .join-box 
+        .join-box__header
+            span Cherry Music에 가입하세요!
+        .join__form
+            form.submit-form(method="POST")
+                div.input-box
+                    input(placeholder="e-mail", type="email", name="email", required)
+                div.input-box
+                    input(placeholder="유저 아이디", type="text", name="user-id", required)
+                div.input-box
+                    input(placeholder="비밀번호", type="password", name="password", required)        
+                button.submit-btn(type="submit", value="로그인") 회원가입
