@@ -24,6 +24,7 @@ const config = {
     path: path.resolve(__dirname, "assets"),
     clean: true,
   },
+
   module: {
     rules: [
       {

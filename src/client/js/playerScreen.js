@@ -3,6 +3,8 @@ import {
   currentTrackIndex,
   handleNextBtnClick,
   player,
+  playerReadyPromise,
+  timeline,
   togglePlayPauseBtn,
 } from "./player.js";
 import { formatTime } from "./util/formatTime.js";
@@ -10,7 +12,6 @@ import { formatTime } from "./util/formatTime.js";
 const playerBox = document.getElementById("player-box");
 const playerScreen = document.getElementById("player-screen");
 const chevron = document.querySelector(".fa-chevron-down");
-const progressBar = document.querySelector(".progress-bar");
 export const playerScreenNextBtn = playerScreen.querySelector(".next-btn");
 export const playerScreenPlayBtn = playerScreen.querySelector(".play-btn");
 
@@ -26,10 +27,13 @@ export const paintPlayerScreen = () => {
   artistArea.innerHTML = artist;
 };
 
-export const updateProgressBar = () => {
+export const updateProgressBar = async () => {
+  await playerReadyPromise;
+
   if (!player) {
     return;
   }
+
   const currentTime = player.getCurrentTime();
   const duration = player.getDuration();
 
@@ -43,7 +47,6 @@ export const updateProgressBar = () => {
   currentTimeDisplay.textContent = formatTime(currentTime);
   durationDisplay.textContent = formatTime(duration);
 };
-
 chevron.addEventListener("click", () => {
   playerScreen.classList.remove("active");
 });

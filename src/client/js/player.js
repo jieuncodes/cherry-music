@@ -16,6 +16,28 @@ export const timeline = document.getElementById("timeline");
 export let clientPlayList = [];
 export let currentTrackIndex = 0;
 
+export let playerReadyPromise = new Promise((resolve) => {
+  window.onYouTubeIframeAPIReady = () => {
+    const playerElement = document.getElementById("youtube-player");
+    if (playerElement) {
+      player = new YT.Player(playerElement, {
+        videoId: "",
+        events: {
+          onReady: (event) => {
+            event.target.playVideo();
+            togglePlayPauseBtn();
+            resolve();
+          },
+          onStateChange: onPlayerStateChange,
+        },
+      });
+      setInterval(updateProgressBar, 100);
+    } else {
+      console.error("Player element not found in the DOM");
+    }
+  };
+});
+
 // player commands
 export function togglePlayPauseBtn() {
   console.log("click playbtn");
@@ -95,22 +117,6 @@ const updateNextButtonStatus = () => {
 
 // queue functions
 const addMusicToQueue = async ({ videoId, title, artist, albumImageUrl }) => {
-  // try {
-  //   const response = await fetch(`/queue/${videoId}`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   });
-  //   if (!response.ok) {
-  //     console.error("Error!!");
-  //     return;
-  //   }
-  //   console.log("", clientPlayList);
-  // } catch (error) {
-  //   console.error("Fetch failed");
-  // }
-
   clientPlayList.unshift({
     videoId,
     title,
@@ -155,9 +161,6 @@ const onPlayerStateChange = (event) => {
     playerScreenPlayBtn.childNodes[0].classList.replace("fa-pause", "fa-play");
   } else if (event.data === YT.PlayerState.ENDED) {
     handleNextBtnClick();
-    if (nextVideo) {
-      player.loadVideoById(nextVideo.videoId);
-    }
   }
 };
 
@@ -182,25 +185,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const tag = document.createElement("script");
   tag.src = "https://www.youtube.com/iframe_api";
   document.body.appendChild(tag);
-
-  window.onYouTubeIframeAPIReady = () => {
-    const playerElement = document.getElementById("youtube-player");
-    if (playerElement) {
-      player = new YT.Player(playerElement, {
-        videoId: "Xit3nVfE18M",
-        events: {
-          onReady: (event) => {
-            event.target.playVideo();
-            togglePlayPauseBtn();
-          },
-          onStateChange: onPlayerStateChange,
-        },
-      });
-      setInterval(updateProgressBar, 100);
-    } else {
-      console.error("Player element not found in the DOM");
-    }
-  };
 });
 
 timeline.addEventListener("input", handleTimeLineChange);

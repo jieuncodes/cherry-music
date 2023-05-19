@@ -1,0 +1,26 @@
+.sliding_menu_area 
+    .sliding_menu__header 
+        .avatar 
+            img(src="/images/default_user_avatar.jpeg")
+        span.login-msg 로그인 해주세요 
+        button.login-btn(onclick="location.href='/user/login'") 로그인
+
+        //- if loggedInUser
+            .avatar 
+                    img(src="/images/default_user_avatar.jpeg")
+                span.login-msg User-name
+                button.my-page-btn(onclick="location.href='/user/mypage'") 내 정보
+    .sliding_menu__body
+        ul 
+            li 
+                i.fa-solid.fa-fire
+                span Popular
+            li 
+                i.fa-solid.fa-headphones
+                span My Playlist 
+            li 
+                i.fa-solid.fa-heart
+                span Favorites
+
+            
+            

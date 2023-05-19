@@ -1,12 +1,15 @@
 #sliding-menu {
     position: fixed;
+    z-index: 50;
     top: 0;
-    right: -100%;
+    // right: -100%;
+    left: 0;
     width: 100%;
     height: 100%;
     background-color: $bg;
     transition: right 0.3s ease;
     display: flex;
+
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -21,19 +24,21 @@
             color: #fff;
         }
     }
-    label.exit{
-        position:absolute;
+
+    label.exit {
+        position: absolute;
         top: 3rem;
-        right:3rem;
+        right: 3rem;
+
         span {
             position: relative;
             height: 5rem;
-            width: 5rem; 
+            width: 5rem;
             display: flex;
             flex-direction: column;
             justify-content: center;
         }
-        
+
         span::before,
         span::after {
             position: absolute;
@@ -42,11 +47,11 @@
             height: 4px;
             background-color: white;
         }
-        
+
         span::before {
             transform: rotate(45deg);
         }
-        
+
         span::after {
             transform: rotate(-45deg);
         }
@@ -55,4 +60,105 @@
 
 input:checked~nav#sliding-menu {
     right: 0;
+}
+
+.sliding_menu_area {
+    width: 100%;
+    height: 100%;
+    margin-top: 10rem;
+    font-size: 3.5rem;
+
+
+    .sliding_menu__header {
+        top: 0;
+        display: grid;
+        place-content: center;
+        align-items: center;
+        grid-template-areas: "avatar msg btn";
+        grid-template-columns: 1fr 10fr 3fr;
+        place-content: center;
+        padding: 0 $default-padding;
+
+        .avatar {
+            grid-area: avatar;
+            width: 9rem;
+            height: 9rem;
+            overflow: hidden;
+            border-radius: 50%;
+            object-fit: cover;
+
+            img {
+                height: 100%;
+            }
+        }
+
+        .login-msg {
+            grid-area: msg;
+            margin-left: $default-gap;
+        }
+
+        .login-btn {
+            font-size: 2.5rem;
+            grid-area: btn;
+            display: flex;
+            background-color: $cherry;
+            height: 5rem;
+            width: 12rem;
+            border-radius: 3rem;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .my-page-btn {
+            font-size: 2.5rem;
+            grid-area: btn;
+            display: flex;
+            height: 5rem;
+            width: 12rem;
+            border-radius: 3rem;
+            justify-content: center;
+            align-items: center;
+            border: solid 1px $fall-back-black-dark;
+        }
+    }
+
+    .sliding_menu__body {
+        padding: 0 $default-padding;
+        margin-top: 10rem;
+
+        ul {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+
+
+
+            li {
+                display: flex;
+                align-items: center;
+                margin-top: 2rem;
+                height: 10rem;
+
+
+                i {
+                    font-size: 4rem;
+                }
+
+                span {
+                    margin-left: $default-gap;
+                    font-size: 4rem;
+                }
+            }
+
+            li:hover {
+
+                i,
+                span {
+                    color: $highlight-dark;
+
+                }
+            }
+
+        }
+    }
 }
