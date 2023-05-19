@@ -1,0 +1,22 @@
+extends ../base
+
+block content
+    .login-box 
+        .login-box__header
+            span Cherry Music에 오신걸 환영합니다!
+        .login__form
+            form.submit-form(method="POST")
+                div.input-box
+                    input(placeholder="유저 아이디", type="text", name="user-id", required)
+                div.input-box
+                    input(placeholder="비밀번호", type="password", name="password", required)        
+                button.submit-btn(type="submit", value="로그인") 로그인
+        .break-line 
+            span 또는
+
+        .social-logins 
+        .cant-login
+            span(onclick="location.href='/user/join'") 회원가입
+            span(onclick="location.href='/user/find-user-id'") 계정 찾기
+            span |
+            span(onclick="location.href='/user/find-password'") 비밀번호 찾기
