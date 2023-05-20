@@ -11,7 +11,6 @@ export const postJoin = async (req, res) => {
 
   let picFile = req.file;
   let noAvatar = false;
-console.log('',picFile );
   if (!picFile) {
     picFile = {
       path: "/images/default_user_avatar.jpeg",
@@ -52,7 +51,7 @@ console.log('',picFile );
       email,
       password,
       username,
-      profilePicPath: picFile.location,
+      profilePicPath: picFile.path,
     });
 
     console.log("userCreated!!", newUser);
