@@ -4,12 +4,14 @@ import User from "../../models/User.js";
 export const getJoin = (req, res) => {
   return res.render("user/join", { pageTitle: "Join Cherry Music" });
 };
+
 export const postJoin = async (req, res) => {
   const pageTitle = "Join Cherry Music!";
-  const { email, password, password2, username } = req.body;
+  const { email, username, password, password2 } = req.body;
 
   let picFile = req.file;
   let noAvatar = false;
+console.log('',picFile );
   if (!picFile) {
     picFile = {
       path: "/images/default_user_avatar.jpeg",
@@ -17,34 +19,56 @@ export const postJoin = async (req, res) => {
     noAvatar = true;
   }
 
-  const exists = await User.exists({ $or: [{ username }] });
-  if (exists) {
+  const emailExists = await User.exists({ email  });
+  if (emailExists) {
     return res.status(400).render("user/join", {
       pageTitle,
-      errorMessage: "! This username is already taken.",
+      error: {
+        emailErrorMessage: "이미 가입된 이메일입니다.",
+        field: "email",
+      },
     });
   }
+  const usernameExists = await User.exists({ username });
+  if (usernameExists) {
+    return res.status(400).render("user/join", {
+      pageTitle,
+      error: {
+        usernameErrorMessage: "유저 아이디가 이미 사용되었습니다.",
+        field: "username",
+      },
+    });
+  }
+
   if (password !== password2) {
     return res.status(400).render("user/join", {
       pageTitle,
-      errorMessage: "! Password confirmation does not match.",
+      passwordErrorMessage: "비밀번호가 일치하지 않습니다. ",
     });
   }
 
   try {
     const newUser = await User.create({
+      email,
       password,
       username,
+      profilePicPath: picFile.location,
     });
+
     console.log("userCreated!!", newUser);
     return res.redirect("/user/login");
+
   } catch (error) {
+    console.log('errorMsg', error);
+
     return res.status(400).render("join", {
       pageTitle,
       errorMessage: error._message,
     });
+
   }
 };
+
 
 export const getLogin = (req, res) => {
   return res.render("user/login", { pageTitle: "Login" });

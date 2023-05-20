@@ -617,29 +617,47 @@ input:checked ~ div#sliding-menu {
   display: flex;
   flex-direction: column;
 }
-.join-box .join__form .submit-form .input-box {
-  width: 100%;
+.join-box .join__form .submit-form .join-input-box {
+  display: flex;
+  align-items: center;
+  width: 99%;
   font-size: 3rem;
-  border-bottom: solid 4px white;
-  margin-top: 3rem;
+  border: solid 4px rgba(127, 127, 127, 0.472);
+  margin-bottom: 4rem;
+  margin-top: 1.5rem;
 }
-.join-box .join__form .submit-form .input-box input {
+.join-box .join__form .submit-form .join-input-box input {
   width: 100%;
   height: 7rem;
   padding-left: 3rem;
 }
-.join-box .join__form .submit-form .submit-btn {
-  text-align: center;
+.join-box .join__form .submit-form .error-message {
+  text-align: end;
+  color: rgba(255, 0, 106, 0.866);
+  font-size: 2.5rem;
+  font-weight: light;
+}
+.join-box .join__form .submit-form .profile-pic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 4rem;
+  padding-top: 2rem;
+}
+.join-box .join__form .submit-form .user-id {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
   width: 100%;
-  height: 8rem;
-  border-radius: 1rem;
-  background-color: rgba(216, 35, 65, 0.78);
-  margin-top: 5rem;
 }
-.join-box .join__form .submit-form .submit-btn :hover {
-  color: rgba(216, 35, 65, 0.348);
+.join-box .join__form .submit-form .user-id .join-input-box {
+  width: 69%;
+  display: flex;
+  align-items: center;
 }
-
+.join-box .join__form .submit-form .user-id button {
+  margin-top: 1.5rem;
+}
 a {
   color: inherit;
   text-decoration: none;
@@ -689,6 +707,29 @@ input {
 
 .break-line span {
   padding: 0 10px;
+}
+
+.check-btn {
+  font-size: 2.5rem;
+  text-align: center;
+  width: 25%;
+  height: 7.5rem;
+  border-radius: 0.5rem;
+  background-color: rgba(216, 35, 65, 0.78);
+}
+.check-btn :hover {
+  color: rgba(216, 35, 65, 0.348);
+}
+
+.submit-btn {
+  text-align: center;
+  width: 100%;
+  height: 8rem;
+  border-radius: 1rem;
+  background-color: rgba(216, 35, 65, 0.78);
+}
+.submit-btn :hover {
+  color: rgba(216, 35, 65, 0.348);
 }
 
 body {

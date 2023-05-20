@@ -6,10 +6,39 @@ block content
             span Cherry Music에 가입하세요!
         .join__form
             form.submit-form(method="POST")
-                div.input-box
-                    input(placeholder="e-mail", type="email", name="email", required)
-                div.input-box
-                    input(placeholder="유저 아이디", type="text", name="user-id", required)
-                div.input-box
-                    input(placeholder="비밀번호", type="password", name="password", required)        
-                button.submit-btn(type="submit", value="로그인") 회원가입
+                label(for="email") 이메일˚
+                p.error-message=emailErrorMessage
+                div.join-input-box
+                    input(placeholder="예: userid1234@naver.com", type="email", name="email", required)
+
+                label(for="username") 아이디˚
+                p.error-message=usernameErrorMessage
+                .user-id
+                    div.join-input-box
+                        input(placeholder="예: userid1234", type="text", name="username", required)
+                    button.check-btn 중복확인
+
+                label(for="password") 비밀번호˚
+                p.error-message=passwordErrorMessage
+                div.join-input-box.password-box
+                    input(placeholder="비밀번호를 입력해주세요", type="password", name="password", required)  
+                
+                label(for="password") 비밀번호 확인˚
+                div.join-input-box
+                    input(placeholder="비밀번호를 한번 더 입력해주세요", type="password2", name="password2", required)   
+                
+                label(for="profile_pic") 프로필 사진 
+                p.error-message=profilePicErrorMessage
+                div.join-input-box.profile-pic
+                    input(id="profile_pic", type="file", name="profile_pic", accept="image/*")
+
+                button.submit-btn(type="submit", value="회원가입") 회원가입
+    //- script.
+    //-     const error = !{JSON.stringify(error)}
+
+    //-     if (error) {
+    //-         handleInputError();
+    //-     }
+    
+    //- script(src="/static/js/util/handleInputError.js")
+        
