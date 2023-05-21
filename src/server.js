@@ -12,7 +12,7 @@ const app = express();
 
 app.set("view engine", "pug");
 app.set("views", process.cwd() + "/src/views");
-app.use(logger);
+// app.use(logger);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(
@@ -35,7 +35,6 @@ app.use(express.static("public"));
 
 app.use("/", rootRouter);
 app.use("/user", userRouter);
-
 app.use("/queue", queueRouter);
 
 export default app;

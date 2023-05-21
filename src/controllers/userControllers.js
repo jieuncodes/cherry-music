@@ -5,11 +5,20 @@ export const getJoin = (req, res) => {
   return res.render("user/join", { pageTitle: "Join Cherry Music" });
 };
 
+export const checkUsername = async (req, res) => {
+  console.log("checking");
+  const username = req.params.username;
+  const usernameExists = await User.exists({ username });
+  res.send({ usernameExists });
+};
+
 export const postJoin = async (req, res) => {
   const pageTitle = "Join Cherry Music!";
   const { email, username, password, password2 } = req.body;
+  console.log("", req.body);
 
   let picFile = req.file;
+  console.log("", picFile);
   let noAvatar = false;
   if (!picFile) {
     picFile = {
@@ -18,31 +27,25 @@ export const postJoin = async (req, res) => {
     noAvatar = true;
   }
 
-  const emailExists = await User.exists({ email  });
+  const errors = {};
+
+  const emailExists = await User.exists({ email });
   if (emailExists) {
-    return res.status(400).render("user/join", {
-      pageTitle,
-      error: {
-        emailErrorMessage: "이미 가입된 이메일입니다.",
-        field: "email",
-      },
-    });
+    errors.emailErrorMessage = "이미 가입된 이메일입니다.";
   }
   const usernameExists = await User.exists({ username });
   if (usernameExists) {
-    return res.status(400).render("user/join", {
-      pageTitle,
-      error: {
-        usernameErrorMessage: "유저 아이디가 이미 사용되었습니다.",
-        field: "username",
-      },
-    });
+    errors.usernameErrorMessage = "유저 아이디가 이미 사용되었습니다.";
   }
 
   if (password !== password2) {
+    errors.passwordErrorMessage = "비밀번호가 일치하지 않습니다. ";
+  }
+
+  if (Object.keys(errors).length > 0) {
     return res.status(400).render("user/join", {
       pageTitle,
-      passwordErrorMessage: "비밀번호가 일치하지 않습니다. ",
+      error: errors,
     });
   }
 
@@ -56,18 +59,15 @@ export const postJoin = async (req, res) => {
 
     console.log("userCreated!!", newUser);
     return res.redirect("/user/login");
-
   } catch (error) {
-    console.log('errorMsg', error);
+    console.log("errorMsg", error);
 
-    return res.status(400).render("join", {
+    return res.status(400).render("user/join", {
       pageTitle,
       errorMessage: error._message,
     });
-
   }
 };
-
 
 export const getLogin = (req, res) => {
   return res.render("user/login", { pageTitle: "Login" });

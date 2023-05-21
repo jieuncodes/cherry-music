@@ -31,4 +31,4 @@ export const publicOnlyMiddleware = (req, res, next) => {
 
 export const profilePicUpload = multer({
   dest: "uploads/profile_pic/",
-});
+}).fields([{ name: 'profile_pic', maxCount: 1 }]);
