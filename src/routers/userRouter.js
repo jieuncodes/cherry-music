@@ -9,7 +9,11 @@ import {
   postChangePassword,
   checkUsername,
 } from "../controllers/userControllers.js";
-import { profilePicUpload, publicOnlyMiddleware } from "../middleware.js";
+import {
+  profilePicErrorHandlerMiddleware,
+  profilePicUploadMiddleware,
+  publicOnlyMiddleware,
+} from "../middleware.js";
 
 const userRouter = express.Router();
 
@@ -17,7 +21,7 @@ userRouter
   .route("/join")
   .all(publicOnlyMiddleware)
   .get(getJoin)
-  .post(profilePicUpload, postJoin);
+  .post(profilePicUploadMiddleware, profilePicErrorHandlerMiddleware, postJoin);
 userRouter.route("/login").get(publicOnlyMiddleware, getLogin).post(postLogin);
 userRouter.get("/logout", logout);
 userRouter

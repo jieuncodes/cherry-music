@@ -30,6 +30,21 @@ export const publicOnlyMiddleware = (req, res, next) => {
   }
 };
 
-export const profilePicUpload = multer({
+export const profilePicUploadMiddleware = multer({
   dest: "uploads/profile_pic/",
-}).fields([{ name: "profile_pic", maxCount: 1 }]);
+  limits: { fileSize: 10000000 },
+}).single("profile_pic");
+
+export const profilePicErrorHandlerMiddleware = (err, req, res, next) => {
+  if (err instanceof multer.MulterError) {
+    if (err.code === "LIMIT_FILE_SIZE") {
+      req.multerError =
+        "파일의 용량이 너무 큽니다. 10MB이하의 이미지를 올려주세요.";
+    } else {
+      req.multerError = "An error occurred when uploading the file.";
+    }
+  } else if (err) {
+    req.multerError = err;
+  }
+  next();
+};

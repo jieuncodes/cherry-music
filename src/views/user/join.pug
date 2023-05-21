@@ -28,6 +28,7 @@ block content
                     input(placeholder="비밀번호를 한번 더 입력해주세요", type="password", name="password2", required)   
                 
                 label(for="profile_pic") 프로필 사진 
+                p.error-message=error && error.fileErrorMessage ? error.fileErrorMessage : ''
                 div.join-input-box.profile-pic
                     input(id="profile_pic", type="file", name="profile_pic", accept="image/*")
 

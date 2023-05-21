@@ -41,6 +41,9 @@ export const postJoin = async (req, res) => {
   if (password !== password2) {
     errors.passwordErrorMessage = "비밀번호가 일치하지 않습니다. ";
   }
+  if (req.multerError) {
+    errors.fileErrorMessage = req.multerError;
+  }
 
   if (Object.keys(errors).length > 0) {
     return res.status(400).render("user/join", {
