@@ -8,6 +8,7 @@ import {
   getChangePassword,
   postChangePassword,
   checkUsername,
+  myPage,
 } from "../controllers/userControllers.js";
 import {
   profilePicErrorHandlerMiddleware,
@@ -30,5 +31,6 @@ userRouter
   .post(postChangePassword);
 
 userRouter.get("/checkUsername/:username", checkUsername);
+userRouter.get("/mypage", myPage);
 
 export default userRouter;

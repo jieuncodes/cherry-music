@@ -227,7 +227,7 @@ input:checked ~ div#sliding-menu {
   border: solid 1px rgba(255, 255, 255, 0.625);
 }
 .sliding_menu_area .sliding_menu__header .my-page-btn:hover {
-  background-color: rgba(127, 127, 127, 0.174);
+  background-color: white;
   border: solid 1px rgba(127, 127, 127, 0.174);
 }
 .sliding_menu_area .sliding_menu__body {
@@ -669,6 +669,70 @@ input:checked ~ div#sliding-menu {
 .join-box .join__form .submit-form .user-id-form button {
   margin-top: 1.5rem;
 }
+#my-page {
+  margin-top: 3rem;
+}
+#my-page .my-page__box {
+  box-sizing: border-box;
+  width: 100%;
+  background-color: rgba(127, 127, 127, 0.174);
+  padding: 6rem 6rem 0 6rem;
+  margin-bottom: 3rem;
+  border-radius: 1.5rem;
+}
+#my-page .my-page__box a {
+  color: rgb(255, 28, 96);
+}
+#my-page .my-page__box .my-page__box__header {
+  font-size: 3.5rem;
+  margin-bottom: 2rem;
+}
+#my-page .my-page__box .my-page__box__body {
+  display: flex;
+  flex-direction: column;
+  color: rgba(255, 255, 255, 0.625);
+}
+#my-page .my-page__box .my-page__box__body span {
+  line-height: 4rem;
+}
+#my-page .my-page__box .my-page__box__body i {
+  position: relative;
+  place-self: end;
+  bottom: 4rem;
+  font-size: 10rem;
+  color: rgba(127, 127, 127, 0.472);
+}
+#my-page .my-page__box .my-page__box__body a {
+  margin-top: 6rem;
+}
+#my-page .my-page__box.user-info {
+  padding: 3rem 0;
+}
+#my-page .my-page__box.user-info .my-page__box__header {
+  display: grid;
+  grid-template-areas: "avatar welcome-msg" "avatar email";
+}
+#my-page .my-page__box.user-info .my-page__box__header .avatar {
+  grid-area: avatar;
+  height: 10rem;
+  width: 10rem;
+  border-radius: 50%;
+  object-fit: cover;
+  overflow: hidden;
+  place-self: center;
+}
+#my-page .my-page__box.user-info .my-page__box__header .avatar img {
+  height: 100%;
+}
+#my-page .my-page__box.user-info .my-page__box__header .user-welcome {
+  grid-area: welcome-msg;
+  font-size: 3.5rem;
+}
+#my-page .my-page__box.user-info .my-page__box__header .user-email {
+  grid-area: "email";
+  color: rgba(255, 255, 255, 0.625);
+}
+
 a {
   color: inherit;
   text-decoration: none;

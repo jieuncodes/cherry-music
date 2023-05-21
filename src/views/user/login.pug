@@ -1,6 +1,8 @@
 extends ../base
 
 block content
+    if errorMessage 
+        span.errorMessage=errorMessage
     .login-box 
         .login-box__header
             span Cherry Music에 오신걸 환영합니다!

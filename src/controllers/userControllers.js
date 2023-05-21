@@ -103,6 +103,10 @@ export const logout = (req, res) => {
   return res.redirect("/");
 };
 
+export const myPage = (req, res) => {
+  res.render("user/my_page", { pageTitle: "내정보" });
+};
+
 export const getChangePassword = (req, res) => {
   return res.render("user/change_password", { pageTitle: "Change Password" });
 };
