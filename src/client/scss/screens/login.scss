@@ -40,7 +40,7 @@
                 background-color: $cherry-dark;
                 margin-top: $default-padding;
 
-                :hover {
+                &:hover {
                     color: $cherry-darker;
                 }
             }
@@ -54,7 +54,7 @@
         display: grid;
         grid-template-columns: 3fr 1.3fr 0.2fr 1.65fr;
 
-        :hover:not(:nth-child(3)) {
+        &:hover:not(:nth-child(3)) {
             color: $fall-back-black
         }
     }

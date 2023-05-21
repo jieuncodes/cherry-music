@@ -75,7 +75,7 @@ input {
 }
 
 //button styles
-.check-btn{
+.check-btn {
   font-size: 2.5rem;
   text-align: center;
   width: 25%;
@@ -83,8 +83,8 @@ input {
   border-radius: 0.5rem;
   background-color: $cherry-dark;
 
-  :hover {
-      color: $cherry-darker;
+  &:hover {
+    color: $cherry-darker;
   }
 }
 
@@ -95,8 +95,8 @@ input {
   border-radius: 1rem;
   background-color: $cherry-dark;
 
-  :hover {
-      color: $cherry-darker;
+  &:hover {
+    color: $cherry-darker;
   }
 }
 
