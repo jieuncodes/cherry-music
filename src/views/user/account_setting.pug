@@ -1,0 +1,33 @@
+extends ../base
+
+block content
+    .account-setting-box 
+        .account-setting-box__header
+            div.user-avatar
+                img(src=loggedInUser.profilePicPath)
+            span=loggedInUser.username
+        .account-setting__form
+            form.submit-form(method="POST", enctype="multipart/form-data")
+                label(for="email") 이메일
+                div.account-setting-input-box.fixed-info
+                    span=loggedInUser.email
+                
+                label.password-change(for="change-password-box") 비밀번호 변경
+                p.error-message=error && error.passwordErrorMessage ? error.passwordErrorMessage : ''
+
+                div.change-password-box(name="change-password-box")
+
+                    div.account-setting-input-box.password-box
+                        input(placeholder="비밀번호를 입력해주세요", type="password", name="password", required)  
+                    
+                    div.account-setting-input-box.password-box
+                        input(placeholder="비밀번호를 한번 더 입력", type="password", name="password2", required)   
+                
+                label(for="profile_pic") 프로필 사진 변경
+                p.error-message=error && error.fileErrorMessage ? error.fileErrorMessage : ''
+                div.account-setting-input-box.profile-pic
+                    input(id="profile_pic", type="file", name="profile_pic", accept="image/*")
+
+                button.submit-btn(type="submit", value="회원가입") 회원정보 수정
+        
+    script(src="/static/js/checkUserId.js")

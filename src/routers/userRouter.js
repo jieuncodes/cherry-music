@@ -9,8 +9,10 @@ import {
   postChangePassword,
   checkUsername,
   myPage,
+  accountSetting,
 } from "../controllers/userControllers.js";
 import {
+  loggedInOnlyMiddleware,
   profilePicErrorHandlerMiddleware,
   profilePicUploadMiddleware,
   publicOnlyMiddleware,
@@ -25,12 +27,10 @@ userRouter
   .post(profilePicUploadMiddleware, profilePicErrorHandlerMiddleware, postJoin);
 userRouter.route("/login").get(publicOnlyMiddleware, getLogin).post(postLogin);
 userRouter.get("/logout", logout);
-userRouter
-  .route("/change_password")
-  .get(getChangePassword)
-  .post(postChangePassword);
+userRouter.route("/change_password").post(postChangePassword);
 
 userRouter.get("/checkUsername/:username", checkUsername);
-userRouter.get("/mypage", myPage);
+userRouter.get("/mypage", loggedInOnlyMiddleware, myPage);
+userRouter.get("/setting", loggedInOnlyMiddleware, accountSetting);
 
 export default userRouter;

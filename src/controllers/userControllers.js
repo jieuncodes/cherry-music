@@ -81,7 +81,7 @@ export const postLogin = async (req, res) => {
   if (!user) {
     return res.status(400).render("user/login", {
       pageTitle: "Login",
-      errorMessage: "An account with this user-id does not exists.",
+      errorMessage: "가입된 유저 아이디가 아닙니다.",
     });
   }
 
@@ -99,12 +99,18 @@ export const postLogin = async (req, res) => {
 export const logout = (req, res) => {
   req.session.user = null;
   req.session.loggedIn = false;
+  req.session.destroy();
+
   // flash msg here
   return res.redirect("/");
 };
 
 export const myPage = (req, res) => {
   res.render("user/my_page", { pageTitle: "내정보" });
+};
+
+export const accountSetting = (req, res) => {
+  res.render("user/account_setting", { pageTitle: "개인정보 관리" });
 };
 
 export const getChangePassword = (req, res) => {
@@ -118,6 +124,7 @@ export const postChangePassword = async (req, res) => {
     },
     body: { password, password2 },
   } = req;
+
   const userBeforeUpdate = await User.findById(_id);
   const isItSamePWAsBefore = await bcrypt.compare(
     password,

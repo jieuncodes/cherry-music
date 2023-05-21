@@ -122,7 +122,8 @@ input:checked~div#sliding-menu {
             border: solid 1px $fall-back-black;
 
             &:hover {
-                background-color: white;
+                color: $fall-back-black;
+                background-color: $fall-back-black-darker;
                 border: solid 1px $fall-back-black-darker;
 
             }

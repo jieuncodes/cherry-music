@@ -227,7 +227,8 @@ input:checked ~ div#sliding-menu {
   border: solid 1px rgba(255, 255, 255, 0.625);
 }
 .sliding_menu_area .sliding_menu__header .my-page-btn:hover {
-  background-color: white;
+  color: rgba(255, 255, 255, 0.625);
+  background-color: rgba(127, 127, 127, 0.174);
   border: solid 1px rgba(127, 127, 127, 0.174);
 }
 .sliding_menu_area .sliding_menu__body {
@@ -595,14 +596,15 @@ input:checked ~ div#sliding-menu {
   margin-top: 3rem;
 }
 .login-box .login__form .submit-form .submit-btn:hover {
-  color: rgba(216, 35, 65, 0.348);
+  color: rgba(255, 255, 255, 0.716);
+  background-color: rgba(216, 35, 65, 0.348);
 }
 .login-box .cant-login {
   font-size: 2.7rem;
   display: grid;
   grid-template-columns: 3fr 1.3fr 0.2fr 1.65fr;
 }
-.login-box .cant-login:hover:not(:nth-child(3)) {
+.login-box .cant-login :hover:not(:nth-child(3)) {
   color: rgba(255, 255, 255, 0.625);
 }
 
@@ -733,13 +735,127 @@ input:checked ~ div#sliding-menu {
   color: rgba(255, 255, 255, 0.625);
 }
 
+.account-setting-box {
+  box-sizing: border-box;
+  padding: 3rem;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 6rem;
+}
+.account-setting-box .account-setting-box__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.account-setting-box .account-setting-box__header .user-avatar {
+  height: 20rem;
+  width: 20rem;
+  overflow: hidden;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.account-setting-box .account-setting-box__header .user-avatar img {
+  height: 100%;
+}
+.account-setting-box .account-setting-box__header span {
+  margin-top: 3rem;
+  text-align: center;
+  font-size: 4rem;
+}
+.account-setting-box .account-setting__form {
+  margin-top: 6rem;
+  width: 100%;
+}
+.account-setting-box .account-setting__form label {
+  font-size: 3.5rem;
+}
+.account-setting-box .account-setting__form .submit-form {
+  display: flex;
+  flex-direction: column;
+}
+.account-setting-box .account-setting__form .account-setting-input-box {
+  display: flex;
+  align-items: center;
+  width: 99%;
+  font-size: 3rem;
+  border: solid 4px rgba(127, 127, 127, 0.472);
+  margin-bottom: 7rem;
+  margin-top: 1.5rem;
+}
+.account-setting-box .account-setting__form .account-setting-input-box input {
+  width: 100%;
+  height: 7rem;
+  padding-left: 3rem;
+}
+.account-setting-box .account-setting__form label.password-change {
+  background-color: #0e1117;
+}
+.account-setting-box .account-setting__form .change-password-box {
+  border: solid 4px rgba(127, 127, 127, 0.472);
+  box-sizing: border-box;
+  padding: 3rem;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 6rem;
+}
+.account-setting-box .account-setting__form .change-password-box .password-box {
+  width: 90%;
+  margin-bottom: 0;
+}
+.account-setting-box .account-setting__form .fixed-info {
+  border: none;
+  padding-left: 3rem;
+  font-size: 3.5rem;
+  color: rgba(255, 255, 255, 0.625);
+  margin-bottom: 7rem;
+}
+.account-setting-box .account-setting__form .error-message {
+  text-align: end;
+  color: rgba(255, 0, 106, 0.866);
+  font-size: 2.5rem;
+  font-weight: light;
+}
+.account-setting-box .account-setting__form .valid-username {
+  color: rgb(94, 41, 255);
+}
+.account-setting-box .account-setting__form .profile-pic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 4rem;
+  padding-top: 2rem;
+}
+.account-setting-box .account-setting__form .user-id-form {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+}
+.account-setting-box .account-setting__form .user-id-form .account-setting-input-box {
+  width: 69%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 7rem;
+}
+.account-setting-box .account-setting__form .user-id-form button {
+  margin-top: 4rem;
+}
 a {
   color: inherit;
   text-decoration: none;
 }
 
-* {
-  outline: 1px solid rgba(255, 0, 0, 0.5);
+.errorMessage {
+  margin-top: 4rem;
+  margin-bottom: -3rem;
+  color: rgb(255, 28, 96);
 }
 
 button {

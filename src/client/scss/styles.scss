@@ -20,7 +20,7 @@
 @import "./screens/login.scss";
 @import "./screens/join.scss";
 @import "./screens/myPage.scss";
-
+@import "./screens/accountSetting.scss";
 
 
 // Defaults
@@ -30,7 +30,13 @@ a {
 }
 
 * {
-  outline: 1px solid rgba(255, 0, 0, 0.5);
+  // outline: 1px solid rgba(255, 0, 0, 0.5);
+}
+
+.errorMessage {
+  margin-top: 4rem;
+  margin-bottom: -3rem;
+  color: $highlight-cherry;
 }
 
 button {
