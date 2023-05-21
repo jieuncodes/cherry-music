@@ -91,8 +91,12 @@ input {
   background-color: $cherry-dark;
 
   &:hover {
-    color: $cherry-darker;
+    color: $disabled-white;
   }
+}
+
+.valid {
+  color: $valid-blue;
 }
 
 .submit-btn {
@@ -103,7 +107,7 @@ input {
   background-color: $cherry-dark;
 
   &:hover {
-    color: $cherry-darker;
+    color: $disabled-white;
   }
 }
 

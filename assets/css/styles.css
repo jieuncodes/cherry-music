@@ -596,7 +596,7 @@ input:checked ~ div#sliding-menu {
   margin-top: 3rem;
 }
 .login-box .login__form .submit-form .submit-btn:hover {
-  color: rgba(255, 255, 255, 0.716);
+  color: rgba(255, 255, 255, 0.864);
   background-color: rgba(216, 35, 65, 0.348);
 }
 .login-box .cant-login {
@@ -687,7 +687,7 @@ input:checked ~ div#sliding-menu {
 }
 #my-page .my-page__box .my-page__box__header {
   font-size: 3.5rem;
-  margin-bottom: 2rem;
+  margin: 2rem 0;
 }
 #my-page .my-page__box .my-page__box__body {
   display: flex;
@@ -732,12 +732,12 @@ input:checked ~ div#sliding-menu {
 }
 #my-page .my-page__box.user-info .my-page__box__header .user-email {
   grid-area: "email";
-  color: rgba(255, 255, 255, 0.625);
+  color: rgba(127, 127, 127, 0.472);
 }
 
 .account-setting-box {
   box-sizing: border-box;
-  padding: 3rem;
+  padding: 0 3rem;
   display: flex;
   width: 100%;
   justify-content: center;
@@ -794,10 +794,13 @@ input:checked ~ div#sliding-menu {
 .account-setting-box .account-setting__form label.password-change {
   background-color: #0e1117;
 }
+.account-setting-box .account-setting__form .success-message {
+  margin-top: 2rem;
+}
 .account-setting-box .account-setting__form .change-password-box {
   border: solid 4px rgba(127, 127, 127, 0.472);
   box-sizing: border-box;
-  padding: 3rem;
+  padding: 3rem 3rem;
   margin-top: 2rem;
   display: flex;
   flex-direction: column;
@@ -806,8 +809,11 @@ input:checked ~ div#sliding-menu {
   margin-bottom: 6rem;
 }
 .account-setting-box .account-setting__form .change-password-box .password-box {
-  width: 90%;
+  width: 95%;
   margin-bottom: 0;
+}
+.account-setting-box .account-setting__form .change-password-box .password-box:first-child {
+  margin-top: 0;
 }
 .account-setting-box .account-setting__form .fixed-info {
   border: none;
@@ -909,7 +915,11 @@ input {
   background-color: rgba(216, 35, 65, 0.78);
 }
 .check-btn:hover {
-  color: rgba(216, 35, 65, 0.348);
+  color: rgba(255, 255, 255, 0.864);
+}
+
+.valid {
+  color: rgb(84, 87, 255);
 }
 
 .submit-btn {
@@ -920,7 +930,7 @@ input {
   background-color: rgba(216, 35, 65, 0.78);
 }
 .submit-btn:hover {
-  color: rgba(216, 35, 65, 0.348);
+  color: rgba(255, 255, 255, 0.864);
 }
 
 body {

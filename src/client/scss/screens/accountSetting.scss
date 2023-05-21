@@ -1,6 +1,6 @@
 .account-setting-box {
     box-sizing: border-box;
-    padding: $default-padding;
+    padding: 0 $default-padding;
     display: flex;
     width: 100%;
     justify-content: center;
@@ -9,7 +9,6 @@
     margin-top: 6rem;
 
     .account-setting-box__header {
-
         display: flex;
         align-items: center;
         justify-content: center;
@@ -47,7 +46,6 @@
             display: flex;
             flex-direction: column;
 
-
         }
 
 
@@ -72,10 +70,14 @@
             background-color: $bg;
         }
 
+        .success-message {
+            margin-top: 2rem;
+        }
+
         .change-password-box {
             border: solid 4px $fall-back-black-dark;
             box-sizing: border-box;
-            padding: $default-padding;
+            padding: 3rem $default-padding;
             margin-top: $default-gap;
             display: flex;
             flex-direction: column;
@@ -84,9 +86,12 @@
             margin-bottom: 6rem;
 
             .password-box {
-                width: 90%;
+                width: 95%;
                 margin-bottom: 0;
+            }
 
+            .password-box:first-child {
+                margin-top: 0;
             }
 
         }
@@ -97,7 +102,6 @@
             font-size: 3.5rem;
             color: $fall-back-black;
             margin-bottom: 7rem;
-
 
         }
 
@@ -110,7 +114,6 @@
 
         .valid-username {
             color: rgb(94, 41, 255);
-
         }
 
         .profile-pic {

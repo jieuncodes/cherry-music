@@ -6,7 +6,6 @@ export const getJoin = (req, res) => {
 };
 
 export const checkUsername = async (req, res) => {
-  console.log("checking");
   const username = req.params.username;
   const usernameExists = await User.exists({ username });
   res.send({ usernameExists });
@@ -15,10 +14,8 @@ export const checkUsername = async (req, res) => {
 export const postJoin = async (req, res) => {
   const pageTitle = "Join Cherry Music!";
   const { email, username, password, password2 } = req.body;
-  console.log("", req.body);
-
+  console.log("req.body", req.body);
   let picFile = req.file;
-  console.log("", picFile);
   let noAvatar = false;
   if (!picFile) {
     picFile = {
@@ -96,6 +93,7 @@ export const postLogin = async (req, res) => {
   req.session.user = user;
   return res.redirect("/");
 };
+
 export const logout = (req, res) => {
   req.session.user = null;
   req.session.loggedIn = false;
@@ -109,15 +107,11 @@ export const myPage = (req, res) => {
   res.render("user/my_page", { pageTitle: "내정보" });
 };
 
-export const accountSetting = (req, res) => {
+export const getAccountSetting = (req, res) => {
   res.render("user/account_setting", { pageTitle: "개인정보 관리" });
 };
 
-export const getChangePassword = (req, res) => {
-  return res.render("user/change_password", { pageTitle: "Change Password" });
-};
-export const postChangePassword = async (req, res) => {
-  const pageTitle = "Change Password";
+export const postAccountSetting = async (req, res) => {
   const {
     session: {
       user: { _id },
@@ -125,27 +119,34 @@ export const postChangePassword = async (req, res) => {
     body: { password, password2 },
   } = req;
 
+  //change password
+  if (password !== password2) {
+    return res.status(400).render("user/account_setting", {
+      errorMessage: "비밀번호가 일치하지 않습니다.",
+    });
+  }
   const userBeforeUpdate = await User.findById(_id);
+  if (!userBeforeUpdate || !userBeforeUpdate.password) {
+    return res.status(400).render("user/account_setting", {
+      errorMessage: "No user found or user has no password.",
+    });
+  }
+
   const isItSamePWAsBefore = await bcrypt.compare(
     password,
     userBeforeUpdate.password
   );
 
-  if (password !== password2) {
-    return res.status(400).render("user/change_password", {
-      pageTitle,
-      errorMessage: "Password confirmation does not match.",
-    });
-  }
   if (isItSamePWAsBefore) {
-    return res.status(400).render("user/change_password", {
-      pageTitle,
-      errorMessage: "The password must be different from the previous one.",
+    return res.status(400).render("user/account_setting", {
+      errorMessage: "사용하던 비밀번호와 달라야 합니다.",
     });
   }
 
   userBeforeUpdate.password = password;
   await userBeforeUpdate.save();
-  req.session.destroy();
-  return res.redirect(`/user/${_id}`);
+
+  return res.status(200).render("user/account_setting", {
+    successMessage: "비밀번호가 성공적으로 변경되었습니다.",
+  });
 };

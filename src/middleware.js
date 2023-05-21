@@ -5,8 +5,8 @@ export const localsMiddleware = (req, res, next) => {
   res.locals.siteTitle = "Cherry Music";
   res.locals.loggedIn = Boolean(req.session.loggedIn);
   res.locals.loggedInUser = req.session.user;
-  console.log("", res.locals.loggedInUser);
-  console.log("**session**", req.session);
+  // console.log("", res.locals.loggedInUser);
+  // console.log("**session**", req.session);
   next();
 };
 

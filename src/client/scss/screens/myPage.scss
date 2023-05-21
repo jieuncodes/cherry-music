@@ -15,7 +15,7 @@
 
         .my-page__box__header {
             font-size: 3.5rem;
-            margin-bottom: $default-gap;
+            margin: $default-gap 0;
 
         }
 
@@ -72,7 +72,7 @@
 
             .user-email {
                 grid-area: "email";
-                color: $fall-back-black;
+                color: $fall-back-black-dark;
             }
         }
     }
