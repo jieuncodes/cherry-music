@@ -172,10 +172,6 @@ input:checked ~ div#sliding-menu {
   right: 0;
 }
 
-input:checked ~ div#player-box {
-  bottom: -100%;
-}
-
 .sliding_menu_area {
   width: 100%;
   height: 100%;
