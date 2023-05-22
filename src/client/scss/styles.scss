@@ -111,6 +111,34 @@ input {
   }
 }
 
+// marquee
+.track-title-area {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.marquee-container {
+  overflow: hidden;
+  width: 100%;
+}
+
+.marquee-animation {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee 12s linear infinite;
+  margin-right: 25%;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-150%);
+  }
+}
+
 
 
 

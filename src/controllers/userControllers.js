@@ -82,9 +82,7 @@ export const postLogin = async (req, res) => {
       errorMessage: "가입된 유저 아이디가 아닙니다.",
     });
   }
-  console.log("pass", password, user.password);
   const ok = await bcrypt.compare(password, user.password);
-  console.log("ok?", await ok);
   if (!ok) {
     return res.status(400).render("user/login", {
       pageTitle: "로그인",

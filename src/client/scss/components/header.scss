@@ -5,6 +5,10 @@ header {
     padding: 3rem;
     z-index: 20;
 
+    &:hover {
+        cursor: pointer;
+    }
+
     #search {
         color: white;
         font-size: 3.5rem;

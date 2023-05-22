@@ -1,8 +1,9 @@
 mixin musicCard(ranking, trackTitle, artist, albumImageUrl, videoId)
-  #music-card(data-videoId=videoId, data-title=trackTitle,data-artist=artist,data-albumImageUrl=albumImageUrl)
+  #music-card(data-videoId=videoId, data-title=trackTitle, data-artist=artist, data-albumImageUrl=albumImageUrl)
     .album-cover(style=`background-image: url(${albumImageUrl})`)
     .ranking #{ranking}
-    .track-title #{trackTitle}
+    .track-title-area.marquee-container
+      .track-title #{trackTitle}
     .artist #{artist}
-    button.play-btn
+    button.play-btn 
       i.fa-solid.fa-play

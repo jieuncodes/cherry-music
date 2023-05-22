@@ -62,6 +62,9 @@ header {
   padding: 3rem;
   z-index: 20;
 }
+header:hover {
+  cursor: pointer;
+}
 header #search {
   color: white;
   font-size: 3.5rem;
@@ -264,6 +267,7 @@ input:checked ~ div#sliding-menu {
   height: 50vh;
   width: 100%;
   overflow: scroll;
+  margin-top: 3rem;
 }
 #section .section__header {
   display: grid;
@@ -298,13 +302,14 @@ input:checked ~ div#sliding-menu {
 
 #music-card {
   display: grid;
-  grid-template-areas: "album-cover ranking track-title play-btn" "album-cover . artist play-btn";
-  grid-template-columns: 1.2fr 0.5fr 4fr 0.7fr;
+  grid-template-areas: "album-cover ranking track-title-area play-btn" "album-cover . artist play-btn";
+  grid-template-columns: 1.3fr 0.9fr 4fr 0.7fr;
   background-color: rgba(68, 68, 68, 0.3058823529);
   border-radius: 10px;
   margin-top: 2rem;
-  height: 10rem;
-  font-size: 2.7rem;
+  height: 7rem;
+  font-size: 3rem;
+  padding: 3rem 3rem 4rem 3rem;
 }
 #music-card .album-cover {
   grid-area: album-cover;
@@ -313,7 +318,7 @@ input:checked ~ div#sliding-menu {
   width: 8rem;
   height: 8rem;
   background-color: rgba(100, 100, 100, 0.318);
-  border-radius: 5px;
+  border-radius: 1rem;
   background-size: auto 100%;
   background-position: center;
 }
@@ -322,10 +327,28 @@ input:checked ~ div#sliding-menu {
   align-self: center;
   justify-self: center;
 }
-#music-card .track-title {
-  grid-area: track-title;
-  margin-right: 1rem;
+#music-card .track-title-area {
+  grid-area: track-title-area;
+  display: flex;
+  justify-content: flex-start;
+  white-space: nowrap;
   align-self: center;
+  width: 95%;
+  height: 4rem;
+  overflow: hidden;
+}
+#music-card .track-title-area .track-title.marquee-animation {
+  width: fit-content;
+  white-space: nowrap;
+  animation: marquee 12s linear infinite;
+}
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-150%);
+  }
 }
 #music-card .artist {
   grid-area: artist;
@@ -334,7 +357,7 @@ input:checked ~ div#sliding-menu {
 }
 #music-card .play-btn {
   grid-area: play-btn;
-  font-size: 3rem;
+  font-size: 4rem;
   align-self: center;
   justify-self: center;
 }
@@ -364,17 +387,23 @@ input:checked ~ div#sliding-menu {
   justify-self: center;
   width: 9rem;
   height: 9rem;
-  background-color: rgba(138, 138, 138, 0.318);
   border-radius: 5px;
   background-size: auto 100%;
   background-position: center;
 }
-#player-box .track-title {
+#player-box .track-title-area {
   grid-area: track-title;
   margin-left: 2rem;
   margin-top: 1rem;
   font-size: 3rem;
   align-self: center;
+  white-space: nowrap;
+  max-width: 90%;
+  width: fit-content;
+  overflow: hidden;
+}
+#player-box .track-title-area .track-title {
+  white-space: nowrap;
 }
 #player-box .artist {
   grid-area: artist;
@@ -933,6 +962,31 @@ input {
   color: rgba(255, 255, 255, 0.864);
 }
 
+.track-title-area {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.marquee-container {
+  overflow: hidden;
+  width: 100%;
+}
+
+.marquee-animation {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee 12s linear infinite;
+  margin-right: 25%;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-150%);
+  }
+}
 body {
   z-index: 0;
   width: 100%;

@@ -13,5 +13,8 @@ block content
         +musicCard(index + 1, track.trackTitle, track.artist, track.albumImageUrl, track.youtubeVideoId)
   include partials/player_box
 
-  script(src="/static/js/player.js")
-  script(src="/static/js/playerScreen.js")
+  block scripts
+    script(src="/static/js/player.js")
+    script(src="/static/js/playerScreen.js")
+    script(src="/static/js/util/marquee.js")
+
