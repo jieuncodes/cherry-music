@@ -74,6 +74,7 @@ export const getLogin = (req, res) => {
 };
 export const postLogin = async (req, res) => {
   const { userId, password } = req.body;
+
   const user = await User.findOne({ userId });
   if (!user) {
     return res.status(400).render("user/login", {
@@ -81,14 +82,16 @@ export const postLogin = async (req, res) => {
       errorMessage: "가입된 유저 아이디가 아닙니다.",
     });
   }
-
-  const ok = bcrypt.compare(password, user.password);
+  console.log("pass", password, user.password);
+  const ok = await bcrypt.compare(password, user.password);
+  console.log("ok?", await ok);
   if (!ok) {
-    return res.status(400).render("login", {
-      pageTitle: "Login",
-      errorMessage: "Wrong Password",
+    return res.status(400).render("user/login", {
+      pageTitle: "로그인",
+      errorMessage: "비밀번호가 틀렸습니다.",
     });
   }
+
   req.session.loggedIn = true;
   req.session.user = user;
   return res.redirect("/");
@@ -114,9 +117,10 @@ export const getAccountSetting = (req, res) => {
 export const postAccountSetting = async (req, res) => {
   const {
     session: {
-      user: { _id },
+      user: { _id, profilePicPath },
     },
     body: { password, password2 },
+    file,
   } = req;
 
   //change password
@@ -125,6 +129,7 @@ export const postAccountSetting = async (req, res) => {
       errorMessage: "비밀번호가 일치하지 않습니다.",
     });
   }
+
   const userBeforeUpdate = await User.findById(_id);
   if (!userBeforeUpdate || !userBeforeUpdate.password) {
     return res.status(400).render("user/account_setting", {
@@ -143,10 +148,29 @@ export const postAccountSetting = async (req, res) => {
     });
   }
 
-  userBeforeUpdate.password = password;
-  await userBeforeUpdate.save();
+  //change ProfilePicture
+  let isPicSame = true;
+  let newProfilePicPath = profilePicPath;
+  if (file) {
+    isPicSame = false;
+    newProfilePicPath = file.location;
+    console.log("file", file);
+  } else if (!profilePicPath) {
+    console.log("setting default profilepic");
+    newProfilePicPath = "/images/default_user_avatar.jpeg";
+    noAvatar = true;
+  }
 
-  return res.status(200).render("user/account_setting", {
-    successMessage: "비밀번호가 성공적으로 변경되었습니다.",
-  });
+  // Update the user with the new password and profile picture
+  const updatedUser = await User.findByIdAndUpdate(
+    _id,
+    {
+      password: hashedPassword,
+      profilePicPath: newProfilePicPath,
+    },
+    { new: true }
+  );
+  req.session.user = updatedUser;
+  console.log("user updated!!", updatedUser);
+  return res.redirect("/");
 };
