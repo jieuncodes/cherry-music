@@ -8,6 +8,7 @@ import {
   togglePlayPauseBtn,
 } from "./player.js";
 import { formatTime } from "./util/formatTime.js";
+import { paintTitleWithMarquee } from "./util/marquee.js";
 
 const playerBox = document.getElementById("player-box");
 const playerScreen = document.getElementById("player-screen");
@@ -20,11 +21,11 @@ export const paintPlayerScreen = () => {
   const { videoId, title, artist, albumImageUrl } =
     clientPlayList[currentTrackIndex];
   const albumCoverArea = playerScreen.querySelector(".album-img");
-  const titleArea = playerScreen.querySelector(".title");
+  const titleArea = playerScreen.querySelector(".track-title-area");
   const artistArea = playerScreen.querySelector(".artist");
 
   albumCoverArea.src = albumImageUrl;
-  titleArea.innerHTML = title;
+  titleArea.innerHTML = paintTitleWithMarquee(title);
   artistArea.innerHTML = artist;
 };
 

@@ -32,6 +32,10 @@ a {
 * {
   // outline: 1px solid rgba(255, 0, 0, 0.5);
 }
+*::-webkit-scrollbar {
+    display: none;
+  }          
+
 
 .errorMessage {
   margin-top: 4rem;
@@ -112,34 +116,38 @@ input {
 }
 
 // marquee
-.track-title-area {
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.marquee-container {
-  overflow: hidden;
+.marquee {
   width: 100%;
-}
-
-.marquee-animation {
-  display: inline-block;
+	display: flex;
+	overflow: hidden;
+	gap: 3rem;
+  position: relative;
+  user-select: none;
   white-space: nowrap;
-  animation: marquee 12s linear infinite;
-  margin-right: 25%;
+
 }
 
-@keyframes marquee {
-  0% {
+.marquee-content 
+{white-space: nowrap;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-around;
+  min-width: 100%;
+	gap: 3rem;
+}
+
+@keyframes scroll {
+  from {
     transform: translateX(0);
   }
-
-  100% {
-    transform: translateX(-150%);
+  to {
+    transform: translateX(calc(-100% - 1rem));
   }
 }
 
-
+.scroll {
+  animation: scroll 10s linear infinite;
+}
 
 
 body {

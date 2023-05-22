@@ -3,6 +3,7 @@ import {
   playerScreenPlayBtn,
   updateProgressBar,
 } from "./playerScreen.js";
+import { paintTitleWithMarquee } from "./util/marquee.js";
 
 export let player;
 let isVideoPlaying = false;
@@ -104,25 +105,9 @@ const paintPlayerWithTrackInfo = () => {
   albumImgArea.style.backgroundImage = `url(${track.albumImageUrl})`;
   artistArea.textContent = track.artist;
 
-  while (trackTitleArea.firstChild) {
-    trackTitleArea.firstChild.remove();
-  }
-
-  const trackTitle = document.createElement("span");
-  trackTitle.classList.add("track-title");
-  trackTitle.textContent = track.title;
-  trackTitleArea.appendChild(trackTitle);
-
-  //marquee
-  if (trackTitleArea.clientWidth > artistArea.offsetWidth * 0.95) {
-    const cloneTitle = trackTitle.cloneNode(true);
-
-    trackTitle.classList.add("marquee-animation");
-    cloneTitle.classList.add("marquee-animation");
-
-    trackTitleArea.appendChild(trackTitle);
-    trackTitleArea.appendChild(cloneTitle);
-  }
+  trackTitleArea.innerHTML = "";
+  console.log("track", track.title);
+  trackTitleArea.innerHTML = paintTitleWithMarquee(track.title);
 };
 
 const updateNextButtonStatus = () => {

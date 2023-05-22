@@ -64,14 +64,20 @@
                 align-items: center;
                 justify-content: center;
                 line-height: 5rem;
+                padding: 0 $default-padding;
+                width: 73%;
 
-                .title {
-                    font-weight: bold;
-                    font-size: 4rem;
+                .track-title-area{
+                    .track-title {
+                        font-weight: bold;
+                        font-size: 4rem;
+                    }
                 }
+                
 
                 .artist {
                     font-size: 3rem;
+                    text-overflow: ellipsis;
                     color: $fall-back-black;
                 }
             }

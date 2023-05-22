@@ -331,24 +331,11 @@ input:checked ~ div#sliding-menu {
   grid-area: track-title-area;
   display: flex;
   justify-content: flex-start;
-  white-space: nowrap;
-  align-self: center;
-  width: 95%;
-  height: 4rem;
+  box-sizing: border-box;
   overflow: hidden;
 }
-#music-card .track-title-area .track-title.marquee-animation {
-  width: fit-content;
+#music-card .track-title-area .track-title {
   white-space: nowrap;
-  animation: marquee 12s linear infinite;
-}
-@keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-150%);
-  }
 }
 #music-card .artist {
   grid-area: artist;
@@ -390,10 +377,10 @@ input:checked ~ div#sliding-menu {
   border-radius: 5px;
   background-size: auto 100%;
   background-position: center;
+  margin-right: 1rem;
 }
 #player-box .track-title-area {
   grid-area: track-title;
-  margin-left: 2rem;
   margin-top: 1rem;
   font-size: 3rem;
   align-self: center;
@@ -408,7 +395,6 @@ input:checked ~ div#sliding-menu {
 #player-box .artist {
   grid-area: artist;
   color: rgba(255, 255, 255, 0.625);
-  margin-left: 2rem;
 }
 #player-box .play-btn {
   padding: 2rem;
@@ -479,13 +465,16 @@ input:checked ~ div#sliding-menu {
   align-items: center;
   justify-content: center;
   line-height: 5rem;
+  padding: 0 3rem;
+  width: 73%;
 }
-#player-screen .player-screen__body .like-and-title .track-info .title {
+#player-screen .player-screen__body .like-and-title .track-info .track-title-area .track-title {
   font-weight: bold;
   font-size: 4rem;
 }
 #player-screen .player-screen__body .like-and-title .track-info .artist {
   font-size: 3rem;
+  text-overflow: ellipsis;
   color: rgba(255, 255, 255, 0.625);
 }
 #player-screen .player-screen__body .like-and-title .like {
@@ -887,6 +876,10 @@ a {
   text-decoration: none;
 }
 
+*::-webkit-scrollbar {
+  display: none;
+}
+
 .errorMessage {
   margin-top: 4rem;
   margin-bottom: -3rem;
@@ -962,31 +955,37 @@ input {
   color: rgba(255, 255, 255, 0.864);
 }
 
-.track-title-area {
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.marquee-container {
-  overflow: hidden;
+.marquee {
   width: 100%;
-}
-
-.marquee-animation {
-  display: inline-block;
+  display: flex;
+  overflow: hidden;
+  gap: 3rem;
+  position: relative;
+  user-select: none;
   white-space: nowrap;
-  animation: marquee 12s linear infinite;
-  margin-right: 25%;
 }
 
-@keyframes marquee {
-  0% {
+.marquee-content {
+  white-space: nowrap;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-around;
+  min-width: 100%;
+  gap: 3rem;
+}
+
+@keyframes scroll {
+  from {
     transform: translateX(0);
   }
-  100% {
-    transform: translateX(-150%);
+  to {
+    transform: translateX(calc(-100% - 1rem));
   }
 }
+.scroll {
+  animation: scroll 10s linear infinite;
+}
+
 body {
   z-index: 0;
   width: 100%;

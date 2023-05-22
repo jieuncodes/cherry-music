@@ -30,11 +30,11 @@
         border-radius: 5px;
         background-size: auto 100%;
         background-position: center;
+        margin-right: 1rem;
     }
 
     .track-title-area {
         grid-area: track-title;
-        margin-left: 2rem;
         margin-top: 1rem;
         font-size: 3rem;
         align-self: center;
@@ -53,7 +53,6 @@
     .artist {
         grid-area: artist;
         color: $fall-back-black;
-        margin-left: 2rem;
     }
 
     .play-btn {

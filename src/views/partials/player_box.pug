@@ -2,8 +2,10 @@
 
 #player-box 
     .album-cover(style=`background-image: url("/images/default_album_img.png")`)
-    .track-title-area
-      .track-title 곡 목록이 없습니다.
+    .track-title-area.marquee
+      .track-title.marquee-content.scroll 곡 목록이 없습니다.
+      .track-title.marquee-content.scroll 곡 목록이 없습니다.
+
     .artist=""
     button.play-btn(disabled)
       i.fa-solid.fa-play

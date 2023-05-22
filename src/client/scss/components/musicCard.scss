@@ -34,34 +34,14 @@
         grid-area: track-title-area;
         display: flex;
         justify-content: flex-start;
-        white-space: nowrap;
-
-        align-self: center;
-        width: 95%;
-        height: 4rem;
+        box-sizing: border-box;
         overflow: hidden;
 
-        .track-title.marquee-animation {
-            width: fit-content;
+        .track-title {
             white-space: nowrap;
-            animation: marquee 12s linear infinite;
-
         }
-
-        .track-title.marquee-animation:nth-child(2) {}
 
     }
-
-    @keyframes marquee {
-        0% {
-            transform: translateX(0)
-        }
-
-        100% {
-            transform: translateX(-150%)
-        }
-    }
-
     .artist {
         grid-area: artist;
         color: $fall-back-black;
