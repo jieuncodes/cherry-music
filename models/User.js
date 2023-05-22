@@ -7,6 +7,11 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   profilePicPath: { type: String },
   favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: "Track" }],
+  playingPlayListQueue: [
+    { type: mongoose.Schema.Types.ObjectId, ref: "Track" },
+  ],
+  generatedPlayLists: [{ type: String }],
+  // comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
 });
 
 userSchema.pre("save", async function () {

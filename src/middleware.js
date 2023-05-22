@@ -1,11 +1,12 @@
 import morgan from "morgan";
 import multer from "multer";
 
-
 export const localsMiddleware = (req, res, next) => {
-  res.locals.siteTitle = "🍒 Cherry Music";
+  res.locals.siteTitle = "Cherry Music";
   res.locals.loggedIn = Boolean(req.session.loggedIn);
   res.locals.loggedInUser = req.session.user;
+  // console.log("", res.locals.loggedInUser);
+  // console.log("**session**", req.session);
   next();
 };
 
@@ -29,6 +30,21 @@ export const publicOnlyMiddleware = (req, res, next) => {
   }
 };
 
-export const profilePicUpload = multer({
+export const profilePicUploadMiddleware = multer({
   dest: "uploads/profile_pic/",
-});
+  limits: { fileSize: 10000000 },
+}).single("profile_pic");
+
+export const profilePicErrorHandlerMiddleware = (err, req, res, next) => {
+  if (err instanceof multer.MulterError) {
+    if (err.code === "LIMIT_FILE_SIZE") {
+      req.multerError =
+        "파일의 용량이 너무 큽니다. 10MB이하의 이미지를 올려주세요.";
+    } else {
+      req.multerError = "An error occurred when uploading the file.";
+    }
+  } else if (err) {
+    req.multerError = err;
+  }
+  next();
+};

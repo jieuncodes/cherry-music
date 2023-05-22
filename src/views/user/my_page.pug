@@ -1,0 +1,26 @@
+extends ../base
+
+block content
+    #my-page 
+        .my-page__box.user-info
+            .my-page__box__header
+                .avatar 
+                    img(src=loggedInUser.profilePicPath)
+                span.user-welcome #{loggedInUser.username}님 환영합니다
+                span.user-email #{loggedInUser.email}
+            .my-page__box__body
+
+        .my-page__box.user-settings(onclick="location.href='/user/setting'")
+            .my-page__box__header 개인정보 관리
+            .my-page__box__body
+                span Cherry Music 닉네임, 비밀번호 등 </br> 개인정보를 확인하고 관리합니다 
+                a 바로가기 > 
+                i.fa-solid.fa-gear
+                
+        .my-page__box(onclick="location.href='/user/logout'")
+            .my-page__box__header 로그아웃
+            .my-page__box__body
+                span 다음에 또 오실거죠?
+                a 로그아웃 > 
+                i.fa-solid.fa-arrow-right-from-bracket
+                

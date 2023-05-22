@@ -1,15 +1,16 @@
 #music-card {
     display: grid;
-    grid-template-areas: 
-        "album-cover ranking track-title play-btn"
+    grid-template-areas:
+        "album-cover ranking track-title-area play-btn"
         "album-cover . artist play-btn"
     ;
-    grid-template-columns: 1.2fr 0.5fr 4fr 0.7fr;
+    grid-template-columns: 1.3fr 0.9fr 4fr 0.7fr;
     background-color: #4444444e;
     border-radius: 10px;
     margin-top: $default-gap;
-    height: 10rem;
-    font-size: 2.7rem;
+    height: 7rem;
+    font-size: 3rem;
+    padding: 3rem 3rem 4rem 3rem;
 
     .album-cover {
         grid-area: album-cover;
@@ -18,35 +19,58 @@
         width: 8rem;
         height: 8rem;
         background-color: rgba(100, 100, 100, 0.318);
-        border-radius: 5px;
+        border-radius: 1rem;
         background-size: auto 100%;
         background-position: center;
-      }
+    }
 
-
-    .ranking{
+    .ranking {
         grid-area: ranking;
-
         align-self: center;
         justify-self: center;
     }
 
-    .track-title {
-        grid-area: track-title ;
-        margin-right: 1rem;
+    .track-title-area {
+        grid-area: track-title-area;
+        display: flex;
+        justify-content: flex-start;
+        white-space: nowrap;
+
         align-self: center;
+        width: 95%;
+        height: 4rem;
+        overflow: hidden;
+
+        .track-title.marquee-animation {
+            width: fit-content;
+            white-space: nowrap;
+            animation: marquee 12s linear infinite;
+
+        }
+
+        .track-title.marquee-animation:nth-child(2) {}
+
+    }
+
+    @keyframes marquee {
+        0% {
+            transform: translateX(0)
+        }
+
+        100% {
+            transform: translateX(-150%)
+        }
     }
 
     .artist {
         grid-area: artist;
-        color:$fall-back-black;
+        color: $fall-back-black;
         margin-right: auto;
     }
 
     .play-btn {
-        grid-area:play-btn;
-        font-size: 3rem;
-
+        grid-area: play-btn;
+        font-size: 4rem;
         align-self: center;
         justify-self: center;
     }

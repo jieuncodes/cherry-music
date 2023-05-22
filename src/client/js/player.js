@@ -95,13 +95,34 @@ function handleTimeLineMouseUp() {
 // painters
 const paintPlayerWithTrackInfo = () => {
   togglePlayPauseBtn();
+
   const track = clientPlayList[currentTrackIndex];
   const albumImgArea = playerBox.querySelector(".album-cover");
-  const trackTitleArea = playerBox.querySelector(".track-title");
+  const trackTitleArea = playerBox.querySelector(".track-title-area");
   const artistArea = playerBox.querySelector(".artist");
+
   albumImgArea.style.backgroundImage = `url(${track.albumImageUrl})`;
-  trackTitleArea.innerHTML = track.title;
-  artistArea.innerHTML = track.artist;
+  artistArea.textContent = track.artist;
+
+  while (trackTitleArea.firstChild) {
+    trackTitleArea.firstChild.remove();
+  }
+
+  const trackTitle = document.createElement("span");
+  trackTitle.classList.add("track-title");
+  trackTitle.textContent = track.title;
+  trackTitleArea.appendChild(trackTitle);
+
+  //marquee
+  if (trackTitleArea.clientWidth > artistArea.offsetWidth * 0.95) {
+    const cloneTitle = trackTitle.cloneNode(true);
+
+    trackTitle.classList.add("marquee-animation");
+    cloneTitle.classList.add("marquee-animation");
+
+    trackTitleArea.appendChild(trackTitle);
+    trackTitleArea.appendChild(cloneTitle);
+  }
 };
 
 const updateNextButtonStatus = () => {
@@ -153,6 +174,7 @@ const onPlayerStateChange = (event) => {
   console.log("playerstate", event.data);
 
   if (event.data === YT.PlayerState.PLAYING) {
+    playerBoxPlayBtn.disabled = false;
     playerBoxPlayBtn.childNodes[0].classList.replace("fa-play", "fa-pause");
     playerScreenPlayBtn.childNodes[0].classList.replace("fa-play", "fa-pause");
     playerScreenPlayBtn.childNodes[0].style.fontSize = "4rem";

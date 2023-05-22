@@ -1,0 +1,81 @@
+#my-page {
+    margin-top: $default-padding;
+
+    .my-page__box {
+        box-sizing: border-box;
+        width: 100%;
+        background-color: $fall-back-black-darker;
+        padding: 6rem 6rem 0 6rem;
+        margin-bottom: $default-padding;
+        border-radius: 1.5rem;
+
+        a {
+            color: $highlight-cherry;
+        }
+
+        .my-page__box__header {
+            font-size: 3.5rem;
+            margin: $default-gap 0;
+
+        }
+
+        .my-page__box__body {
+            display: flex;
+            flex-direction: column;
+            color: $fall-back-black;
+
+            span {
+                line-height: 4rem;
+            }
+
+            i {
+                position: relative;
+                place-self: end;
+                bottom: 4rem;
+                font-size: 10rem;
+                color: $fall-back-black-dark;
+            }
+
+            a {
+                margin-top: 6rem;
+            }
+        }
+
+    }
+
+    .my-page__box.user-info {
+        padding: $default-padding 0;
+
+        .my-page__box__header {
+            display: grid;
+            grid-template-areas: "avatar welcome-msg"
+                "avatar email";
+
+            .avatar {
+                grid-area: avatar;
+                height: 10rem;
+                width: 10rem;
+                border-radius: 50%;
+                object-fit: cover;
+                overflow: hidden;
+                place-self: center;
+
+                img {
+                    height: 100%;
+                }
+            }
+
+            .user-welcome {
+                grid-area: welcome-msg;
+                font-size: 3.5rem;
+            }
+
+            .user-email {
+                grid-area: "email";
+                color: $fall-back-black-dark;
+            }
+        }
+    }
+
+
+}

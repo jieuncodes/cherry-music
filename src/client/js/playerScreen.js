@@ -14,6 +14,7 @@ const playerScreen = document.getElementById("player-screen");
 const chevron = document.querySelector(".fa-chevron-down");
 export const playerScreenNextBtn = playerScreen.querySelector(".next-btn");
 export const playerScreenPlayBtn = playerScreen.querySelector(".play-btn");
+export const checkBox = document.querySelector("#check_box");
 
 export const paintPlayerScreen = () => {
   const { videoId, title, artist, albumImageUrl } =
@@ -47,6 +48,19 @@ export const updateProgressBar = async () => {
   currentTimeDisplay.textContent = formatTime(currentTime);
   durationDisplay.textContent = formatTime(duration);
 };
+
+const hidePlayerBox = (event) => {
+  playerBox.style.transition = "bottom 0.3s ease-out";
+
+  if (event.target.checked) {
+    document.querySelector("#player-box").style.bottom = "-100%";
+  } else {
+    document.querySelector("#player-box").style.bottom = "0";
+  }
+};
+
+checkBox.addEventListener("change", hidePlayerBox);
+
 chevron.addEventListener("click", () => {
   playerScreen.classList.remove("active");
 });

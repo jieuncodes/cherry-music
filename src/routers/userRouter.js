@@ -5,19 +5,39 @@ import {
   getLogin,
   postLogin,
   logout,
-  getChangePassword,
-  postChangePassword,
+  checkUsername,
+  myPage,
+  getAccountSetting,
+  postAccountSetting,
 } from "../controllers/userControllers.js";
-import { publicOnlyMiddleware } from "../middleware.js";
+import {
+  loggedInOnlyMiddleware,
+  profilePicErrorHandlerMiddleware,
+  profilePicUploadMiddleware,
+  publicOnlyMiddleware,
+} from "../middleware.js";
 
 const userRouter = express.Router();
 
-userRouter.route("/join").get(publicOnlyMiddleware,getJoin).post(postJoin);
-userRouter.route("/login").get(publicOnlyMiddleware,getLogin).post(postLogin);
-userRouter.get("/logout", logout);
 userRouter
-  .route("/change_password")
-  .get(getChangePassword)
-  .post(postChangePassword);
+  .route("/join")
+  .all(publicOnlyMiddleware)
+  .get(getJoin)
+  .post(profilePicUploadMiddleware, profilePicErrorHandlerMiddleware, postJoin);
+userRouter.route("/login").get(publicOnlyMiddleware, getLogin).post(postLogin);
+userRouter.get("/logout", logout);
+
+userRouter.get("/checkUsername/:username", checkUsername);
+userRouter.get("/mypage", loggedInOnlyMiddleware, myPage);
+
+userRouter
+  .route("/setting")
+  .all(loggedInOnlyMiddleware)
+  .get(getAccountSetting)
+  .post(
+    profilePicUploadMiddleware,
+    profilePicErrorHandlerMiddleware,
+    postAccountSetting
+  );
 
 export default userRouter;

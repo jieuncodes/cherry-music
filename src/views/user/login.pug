@@ -1,9 +1,12 @@
 extends ../base
 
 block content
+
     .login-box 
         .login-box__header
             span Cherry Music에 오신걸 환영합니다!
+        if errorMessage 
+            span.errorMessage=errorMessage
         .login__form
             form.submit-form(method="POST")
                 div.input-box

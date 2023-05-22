@@ -12,7 +12,9 @@ const config = {
     main: BASE_JS + "main.js",
     player: BASE_JS + "player.js",
     playerScreen: BASE_JS + "playerScreen.js",
-    formatTime: BASE_JS + "util/formatTime.js",
+    "/util/formatTime": BASE_JS + "util/formatTime.js",
+    "/util/checkUcserId": BASE_JS + "util/checkUserId.js",
+    "/util/marquee": BASE_JS + "util/marquee.js",
   },
   plugins: [
     new MiniCssExtractPlugin({

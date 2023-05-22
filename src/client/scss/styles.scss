@@ -19,9 +19,9 @@
 // Screens
 @import "./screens/login.scss";
 @import "./screens/join.scss";
+@import "./screens/myPage.scss";
+@import "./screens/accountSetting.scss";
 
-
-.headerGradient {}
 
 // Defaults
 a {
@@ -30,7 +30,13 @@ a {
 }
 
 * {
-  outline: 1px solid rgba(255, 0, 0, 0.5);
+  // outline: 1px solid rgba(255, 0, 0, 0.5);
+}
+
+.errorMessage {
+  margin-top: 4rem;
+  margin-bottom: -3rem;
+  color: $highlight-cherry;
 }
 
 button {
@@ -76,7 +82,7 @@ input {
 }
 
 //button styles
-.check-btn{
+.check-btn {
   font-size: 2.5rem;
   text-align: center;
   width: 25%;
@@ -84,9 +90,13 @@ input {
   border-radius: 0.5rem;
   background-color: $cherry-dark;
 
-  :hover {
-      color: $cherry-darker;
+  &:hover {
+    color: $disabled-white;
   }
+}
+
+.valid {
+  color: $valid-blue;
 }
 
 .submit-btn {
@@ -96,8 +106,36 @@ input {
   border-radius: 1rem;
   background-color: $cherry-dark;
 
-  :hover {
-      color: $cherry-darker;
+  &:hover {
+    color: $disabled-white;
+  }
+}
+
+// marquee
+.track-title-area {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.marquee-container {
+  overflow: hidden;
+  width: 100%;
+}
+
+.marquee-animation {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee 12s linear infinite;
+  margin-right: 25%;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-150%);
   }
 }
 
