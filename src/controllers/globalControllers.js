@@ -31,8 +31,10 @@ export const home = async (req, res) => {
     })
   );
 
+  const homeBgImgUrl = "/images/main_background.png";
   return res.render("home", {
     trackDetails,
     pageTitle: "Home",
+    homeBgImgUrl,
   });
 };

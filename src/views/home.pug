@@ -2,9 +2,9 @@ extends base
 include mixin/music_card
 
 block content
+  .background-gradient(style=`background-image: url(${homeBgImgUrl})`)
   #section
     .section__header
-      span.section__update-time 오늘 23:00 기준
       span.section__title TOP Tracks
       div.show-all-btn
         span show all
@@ -18,4 +18,3 @@ block content
     script(src="/static/js/player.js")
     script(src="/static/js/playerScreen.js")
     script(src="/static/js/util/marquee.js")
-

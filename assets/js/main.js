@@ -26,7 +26,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extr
   \*******************************/
 /***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../scss/styles.scss */ \"./src/client/scss/styles.scss\");\n\nconsole.log(\"hi\");\n\n//# sourceURL=webpack://cherry-music/./src/client/js/main.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _scss_styles_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../scss/styles.scss */ \"./src/client/scss/styles.scss\");\n\nconsole.log(\"hi\");\nwindow.addEventListener(\"scroll\", function () {\n  const backgroundGradient = document.querySelector(\".background-gradient\");\n  if (window.pageYOffset > 0) {\n    backgroundGradient.classList.add(\"inactive\");\n  } else {\n    backgroundGradient.classList.remove(\"inactive\");\n  }\n});\n\n//# sourceURL=webpack://cherry-music/./src/client/js/main.js?");
 
 /***/ })
 

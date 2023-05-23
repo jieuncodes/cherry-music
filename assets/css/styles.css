@@ -161,11 +161,11 @@ header #search {
   right: 10rem;
 }
 header #logo span:first-child {
-  font-size: 5rem;
+  font-size: 5.5rem;
 }
 header #logo span:last-child {
   margin-left: 0.5rem;
-  font-size: 4rem;
+  font-size: 4.5rem;
   font-family: "Righteous";
   background: linear-gradient(to top, rgb(227, 36, 69), rgb(255, 74, 74));
   -webkit-background-clip: text;
@@ -394,7 +394,7 @@ input:checked ~ div#sliding-menu {
   display: grid;
   grid-template-areas: "album-cover ranking track-title-area play-btn" "album-cover . artist play-btn";
   grid-template-columns: 1.3fr 0.9fr 4fr 0.7fr;
-  background-color: rgba(127, 127, 127, 0.174);
+  background-color: rgb(34, 34, 34);
   border-radius: 10px;
   margin-top: 2rem;
   height: 5.5rem;
@@ -1090,6 +1090,10 @@ input:checked ~ div#sliding-menu {
   margin-top: 10rem;
 }
 
+.hidden {
+  display: none;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -1101,6 +1105,35 @@ a {
 
 *::-webkit-scrollbar {
   display: none;
+}
+
+.background-gradient {
+  width: 100%;
+  height: 23vh;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-size: cover;
+  z-index: -1;
+  transition: opacity 0.5s ease;
+  opacity: 0.5;
+}
+
+.background-gradient::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(to bottom, transparent, black);
+  opacity: 1;
+}
+
+.background-gradient.inactive {
+  opacity: 0;
+  background-image: none;
 }
 
 textarea {
@@ -1238,5 +1271,5 @@ body {
 body main {
   position: relative;
   height: 100%;
-  padding: 1rem 3rem;
+  padding: 2rem 3rem;
 }

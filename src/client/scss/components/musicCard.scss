@@ -6,7 +6,7 @@
         "album-cover . artist play-btn"
     ;
     grid-template-columns: 1.3fr 0.9fr 4fr 0.7fr;
-    background-color: $fall-back-black-darker;
+    background-color: rgb(34, 34, 34);
     border-radius: 10px;
     margin-top: $default-gap;
     height: 5.5rem;
