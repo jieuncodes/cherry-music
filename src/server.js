@@ -7,6 +7,7 @@ import { localsMiddleware, logger } from "./middleware.js";
 import rootRouter from "./routers/rootRouter.js";
 import { queueRouter } from "./routers/queueRouter.js";
 import userRouter from "./routers/userRouter.js";
+import playListRouter from "./routers/playListRouter.js";
 
 const app = express();
 
@@ -32,6 +33,8 @@ app.use(express.static("public"));
 
 app.use("/", rootRouter);
 app.use("/user", userRouter);
+app.use("/playlist", playListRouter);
+
 app.use("/queue", queueRouter);
 
 export default app;

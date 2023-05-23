@@ -21,21 +21,33 @@
 @import "./screens/join.scss";
 @import "./screens/myPage.scss";
 @import "./screens/accountSetting.scss";
+@import "./screens/playlist.scss";
+@import "./screens/addPlayList.scss";
+
+
 
 
 // Defaults
+
 a {
   color: inherit;
   text-decoration: none;
 }
 
 * {
-  // outline: 1px solid rgba(255, 0, 0, 0.5);
+  outline: 1px solid rgba(255, 0, 0, 0.5);
 }
-*::-webkit-scrollbar {
-    display: none;
-  }          
 
+*::-webkit-scrollbar {
+  display: none;
+}
+
+textarea {
+  all: unset;
+  padding: $default-padding;
+  color: $fall-back-black-dark;
+  font-size: 3rem;
+}
 
 .errorMessage {
   margin-top: 4rem;
@@ -43,13 +55,6 @@ a {
   color: $highlight-cherry;
 }
 
-button {
-  all: unset;
-}
-
-input {
-  all: unset;
-}
 
 :disabled {
   color: $disabled;
@@ -99,6 +104,23 @@ input {
   }
 }
 
+.href-btn {
+  font-size: 2.5rem;
+  display: flex;
+  height: 5rem;
+  border-radius: 3rem;
+  justify-content: center;
+  align-items: center;
+  border: solid 1px $fall-back-black;
+
+  &:hover {
+    color: $fall-back-black;
+    background-color: $fall-back-black-darker;
+    border: solid 1px $fall-back-black-darker;
+
+  }
+}
+
 .valid {
   color: $valid-blue;
 }
@@ -118,28 +140,29 @@ input {
 // marquee
 .marquee {
   width: 100%;
-	display: flex;
-	overflow: hidden;
-	gap: 3rem;
+  display: flex;
+  overflow: hidden;
+  gap: 3rem;
   position: relative;
   user-select: none;
   white-space: nowrap;
 
 }
 
-.marquee-content 
-{white-space: nowrap;
+.marquee-content {
+  white-space: nowrap;
   flex-shrink: 0;
   display: flex;
   justify-content: space-around;
   min-width: 100%;
-	gap: 3rem;
+  gap: 3rem;
 }
 
 @keyframes scroll {
   from {
     transform: translateX(0);
   }
+
   to {
     transform: translateX(calc(-100% - 1rem));
   }
@@ -152,7 +175,7 @@ input {
 
 body {
   z-index: 0;
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   bottom: 280px;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,

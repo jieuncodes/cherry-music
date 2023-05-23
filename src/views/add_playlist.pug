@@ -1,0 +1,25 @@
+extends base
+
+block content
+    .add-playlist-box
+        .add-playlist-box__header
+            span 플레이리스트 만들기
+        .add-playlist-box__body
+            form.submit-form(method="POST")
+                .add-playlist-cover-area
+                    .add-cover-box
+                        i.fa-solid.fa-camera
+                    input.add-playlist-cover(id="playlist_cover_input", type="file", name="playlist_cover", accept="image/*")
+                div.input-box.bolder
+                    input(placeholder="플레이리스트 제목", type="text", name="playlistTitle", required)
+                div.input-box
+                    textarea(name="playlistDescription", rows="5" cols="33") 소개글을 입력해주세요       
+
+                button.add-track 
+                    i.fa-solid.fa-plus 
+                    span 곡 추가
+
+                button.submit-btn(type="submit") 완료
+
+    block script 
+        script(src="/static/js/addPlaylist.js")

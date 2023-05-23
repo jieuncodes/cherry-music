@@ -1,0 +1,80 @@
+.add-playlist-box {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    margin: 3rem 0;
+
+    align-items: center;
+    flex-direction: column;
+
+    .add-playlist-box__header {
+        font-size: 3.5rem;
+        margin-bottom: 6rem;
+    }
+
+    .add-playlist-box__body {
+        width: 100%;
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            .add-cover-box {
+                width: 25rem;
+                height: 25rem;
+                background-color: $fall-back-black-darker;
+                border-radius: 2rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 5rem;
+
+                i {
+                    font-size: 5rem;
+                }
+            }
+
+            input.add-playlist-cover {
+                width: 3rem;
+                overflow: hidden;
+                display: none;
+            }
+
+            .input-box {
+                width: 100%;
+                font-size: 3rem;
+                border-bottom: solid 4px $fall-back-black-dark;
+
+                margin-top: $default-padding;
+
+                input {
+                    width: 100%;
+                    height: 10rem;
+                    padding-left: 3rem;
+                }
+            }
+
+            .input-box.bolder {
+                font-size: 3.5rem;
+                font-weight: bolder;
+            }
+
+            .input-box {
+                width: 100%;
+            }
+
+            button.add-track {
+                place-self: start;
+                font-size: 3.5rem;
+                color: $highlight-cherry;
+                margin-top: 5rem;
+            }
+
+            button.submit-btn {
+                margin-top: 10rem;
+            }
+        }
+    }
+}

@@ -10,7 +10,7 @@
             .avatar 
                 img(src=loggedInUser.profilePicPath)
             span.login-msg=loggedInUser.username
-            button.my-page-btn(onclick="location.href='/user/mypage'") 내 정보
+            button.my-page-btn.href-btn(onclick="location.href='/user/mypage'") 내 정보
 
     .sliding_menu__body
         ul 
@@ -19,9 +19,9 @@
                 span Popular
 
             if loggedInUser
-                li 
+                li(onclick="location.href='/playlist'")
                     i.fa-solid.fa-headphones
-                    span 내 플레이리스트
+                    span 플레이리스트
                 li 
                     i.fa-solid.fa-heart
                     span 좋아요한

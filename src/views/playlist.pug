@@ -1,0 +1,20 @@
+extends base
+
+block content
+    .playlist-box
+        .playlist-box__header
+            span 플레이리스트
+        .playlist-box__body 
+            .playlist-box__body__header
+                button.header__make-playlist-btn(onclick="location.href='/playlist/add'")
+                    i.fa-solid.fa-plus
+                    span 플레이리스트 만들기
+                button.order-btn
+                    i.fa-solid.fa-sort                   
+                    span 편집순
+            .playlist-box__body__body
+                .empty-playlist-instruction
+                    span 자주 듣는 곡을
+                    span 플레이리스트로 만들어 보세요!
+                    span 나만의 플레이리스트를 관리할 수 있어요 
+                    button.href-btn(onclick="location.href='/playlist/add'") 플레이리스트 만들기
