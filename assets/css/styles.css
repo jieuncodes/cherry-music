@@ -339,9 +339,10 @@ input:checked ~ div#sliding-menu {
 }
 
 #section {
+  position: relative;
   display: flex;
   flex-direction: column;
-  height: 50vh;
+  height: 48vh;
   width: 100%;
   overflow: scroll;
   margin-top: 3rem;
@@ -374,19 +375,32 @@ input:checked ~ div#sliding-menu {
 }
 #section .section__body {
   grid-area: section__body;
-  overflow: scroll;
+  white-space: nowrap;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+#section .scroll-container {
+  display: grid;
+  scroll-snap-type: x proximity;
+  grid-template-rows: repeat(5, 0.85fr);
+  gap: 0 3rem;
+  grid-auto-flow: column;
+  overflow-x: auto;
 }
 
 #music-card {
+  scroll-snap-align: start;
   display: grid;
   grid-template-areas: "album-cover ranking track-title-area play-btn" "album-cover . artist play-btn";
   grid-template-columns: 1.3fr 0.9fr 4fr 0.7fr;
-  background-color: rgba(68, 68, 68, 0.3058823529);
+  background-color: rgba(127, 127, 127, 0.174);
   border-radius: 10px;
   margin-top: 2rem;
-  height: 7rem;
+  height: 5.5rem;
+  width: 45rem;
   font-size: 3rem;
-  padding: 3rem 3rem 4rem 3rem;
+  padding: 2rem 1.5rem 4rem 1.5rem;
 }
 #music-card .album-cover {
   grid-area: album-cover;

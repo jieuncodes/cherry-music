@@ -1,16 +1,18 @@
 #music-card {
+    scroll-snap-align: start;
     display: grid;
     grid-template-areas:
         "album-cover ranking track-title-area play-btn"
         "album-cover . artist play-btn"
     ;
     grid-template-columns: 1.3fr 0.9fr 4fr 0.7fr;
-    background-color: #4444444e;
+    background-color: $fall-back-black-darker;
     border-radius: 10px;
     margin-top: $default-gap;
-    height: 7rem;
+    height: 5.5rem;
+    width: 45rem;
     font-size: 3rem;
-    padding: 3rem 3rem 4rem 3rem;
+    padding: 2rem 1.5rem 4rem 1.5rem;
 
     .album-cover {
         grid-area: album-cover;
@@ -42,6 +44,7 @@
         }
 
     }
+
     .artist {
         grid-area: artist;
         color: $fall-back-black;

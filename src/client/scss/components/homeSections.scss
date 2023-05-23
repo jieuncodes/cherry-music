@@ -1,7 +1,8 @@
 #section {
+    position: relative;
     display: flex;
     flex-direction: column;
-    height: 50vh;
+    height: 48vh;
     width: 100%;
     overflow: scroll;
     margin-top: 3rem;
@@ -40,6 +41,23 @@
 
     .section__body {
         grid-area: section__body;
-        overflow: scroll;
+        white-space: nowrap;
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
     }
+
+    .scroll-container {
+        display: grid;
+        scroll-snap-type: x proximity;
+        grid-template-rows: repeat(5, 0.85fr);
+        gap: 0 3rem;
+        grid-auto-flow: column;
+        overflow-x: auto;
+    }
+
+
+
+
+
 }
