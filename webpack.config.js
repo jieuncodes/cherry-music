@@ -8,11 +8,15 @@ const __dirname = dirname(__filename);
 const BASE_JS = "./src/client/js/";
 
 const config = {
+  watch: true,
+
   entry: {
     main: BASE_JS + "main.js",
     player: BASE_JS + "player.js",
     playerScreen: BASE_JS + "playerScreen.js",
     addPlaylist: BASE_JS + "addPlaylist.js",
+    playerScreenNav: BASE_JS + "playerScreenNav.js",
+
     "/util/formatTime": BASE_JS + "util/formatTime.js",
     "/util/checkUcserId": BASE_JS + "util/checkUserId.js",
     "/util/marquee": BASE_JS + "util/marquee.js",

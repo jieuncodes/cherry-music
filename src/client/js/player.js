@@ -3,6 +3,7 @@ import {
   playerScreenPlayBtn,
   updateProgressBar,
 } from "./playerScreen.js";
+import { paintCurrentPlaying } from "./playerScreenNav.js";
 import { paintTitleWithMarquee } from "./util/marquee.js";
 
 export let player;
@@ -41,7 +42,6 @@ export let playerReadyPromise = new Promise((resolve) => {
 
 // player commands
 export function togglePlayPauseBtn() {
-  console.log("click playbtn");
   if (player && player.getPlayerState() === YT.PlayerState.PLAYING) {
     player.pauseVideo();
   } else {
@@ -53,7 +53,6 @@ export function handleNextBtnClick() {
   if (currentTrackIndex < clientPlayList.length - 1) {
     currentTrackIndex++;
     const nextTrack = clientPlayList[currentTrackIndex];
-    console.log("currTrackIndex", currentTrackIndex);
     paintPlayerWithTrackInfo();
     paintPlayerScreen();
     player.loadVideoById(nextTrack.videoId);
@@ -106,7 +105,6 @@ const paintPlayerWithTrackInfo = () => {
   artistArea.textContent = track.artist;
 
   trackTitleArea.innerHTML = "";
-  console.log("track", track.title);
   trackTitleArea.innerHTML = paintTitleWithMarquee(track.title);
 };
 
@@ -144,6 +142,7 @@ const addMusicToQueue = async ({ videoId, title, artist, albumImageUrl }) => {
   } else {
     console.error("Player has not been initialized yet");
   }
+  paintCurrentPlaying();
 };
 
 const onMusicCardClick = ({ videoId, title, artist, albumImageUrl }) => {
@@ -157,6 +156,7 @@ const onMusicCardClick = ({ videoId, title, artist, albumImageUrl }) => {
 // iframe
 const onPlayerStateChange = (event) => {
   console.log("playerstate", event.data);
+  paintCurrentPlaying();
 
   if (event.data === YT.PlayerState.PLAYING) {
     playerBoxPlayBtn.disabled = false;

@@ -67,13 +67,13 @@
                 padding: 0 $default-padding;
                 width: 73%;
 
-                .track-title-area{
+                .track-title-area {
                     .track-title {
                         font-weight: bold;
                         font-size: 4rem;
                     }
                 }
-                
+
 
                 .artist {
                     font-size: 3rem;
@@ -188,33 +188,6 @@
 
     }
 
-    .player-screen__nav {
-        background-color: $fall-back-black-dark;
-        position: absolute;
-        bottom: 0;
 
-        width: 100vw;
-        height: 10vh;
-        display: grid;
-        grid-template-rows: 0.5fr 2fr;
-
-        .handle-bar {
-            place-self: center;
-            width: 5rem;
-            height: 0.5rem;
-            background-color: white;
-
-            span {
-                content: "";
-
-            }
-        }
-
-        .nav-items {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            place-items: center;
-        }
-    }
 
 }

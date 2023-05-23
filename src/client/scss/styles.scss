@@ -13,6 +13,8 @@
 @import "./components/musicCard.scss";
 @import "./components/player.scss";
 @import "./components/playerScreen.scss";
+@import "./components/playerScreenNav.scss";
+
 
 
 
@@ -38,7 +40,7 @@ a {
 }
 
 * {
-  outline: 1px solid rgba(255, 0, 0, 0.5);
+  // outline: 1px solid rgba(255, 0, 0, 0.5);
 }
 
 *::-webkit-scrollbar {
