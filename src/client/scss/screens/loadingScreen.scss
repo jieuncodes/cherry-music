@@ -1,0 +1,45 @@
+#loading-screen {
+    position: fixed;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30rem;
+    background-color: rgba(0, 0, 0, 0.778);
+
+    .cherry {
+        margin-top: -10rem;
+        place-self: center;
+        animation: heartbeat 1s infinite;
+    }
+}
+
+@keyframes heartbeat {
+    0% {
+        transform: scale(1);
+    }
+
+    10% {
+        transform: scale(1.1);
+    }
+
+    20% {
+        transform: scale(1);
+    }
+
+    30% {
+        transform: scale(1.1);
+    }
+
+    40% {
+        rotate: scale(1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}

@@ -1,3 +1,4 @@
+import { hideLoadingScreen } from "./loading.js";
 import {
   paintPlayerScreen,
   playerScreenPlayBtn,
@@ -34,6 +35,7 @@ export let playerReadyPromise = new Promise((resolve) => {
         },
       });
       setInterval(updateProgressBar, 100);
+      hideLoadingScreen();
     } else {
       console.error("Player element not found in the DOM");
     }

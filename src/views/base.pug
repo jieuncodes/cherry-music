@@ -3,10 +3,12 @@ html(lang="ko")
     head
         title Cherry Music
         script(src="https://kit.fontawesome.com/5f69680060.js" crossorigin="anonymous")
+        script(src="/static/js/loading.js")
         link(rel="stylesheet", href="/static/css/styles.css")
     body
         include partials/header
         include partials/player_screen
+        include partials/loading_screen
 
         main
             block content
@@ -15,3 +17,4 @@ html(lang="ko")
         script(src="/static/js/main.js") 
 
         block scripts
+

@@ -1,7 +1,6 @@
 import "../scss/styles.scss";
 
 console.log("hi");
-
 window.addEventListener("scroll", function () {
   const backgroundGradient = document.querySelector(".background-gradient");
   if (backgroundGradient) {
