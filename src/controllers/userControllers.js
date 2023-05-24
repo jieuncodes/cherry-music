@@ -73,9 +73,9 @@ export const getLogin = (req, res) => {
   return res.render("user/login", { pageTitle: "Login" });
 };
 export const postLogin = async (req, res) => {
-  const { userId, password } = req.body;
+  const { username, password } = req.body;
 
-  const user = await User.findOne({ userId });
+  const user = await User.findOne({ username });
   if (!user) {
     return res.status(400).render("user/login", {
       pageTitle: "Login",

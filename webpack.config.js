@@ -20,7 +20,7 @@ const config = {
     slidingSearch: BASE_JS + "slidingSearch.js",
 
     "/util/formatTime": BASE_JS + "util/formatTime.js",
-    "/util/checkUcserId": BASE_JS + "util/checkUserId.js",
+    "/util/checkUserId": BASE_JS + "util/checkUserId.js",
     "/util/marquee": BASE_JS + "util/marquee.js",
   },
   plugins: [

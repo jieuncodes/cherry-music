@@ -69,6 +69,7 @@ const mountPlayListTracks = () => {
     const emptyPlayListMsg = document.createElement("div");
     const msg = document.createElement("span");
     msg.innerHTML = "재생목록에 곡을 추가해주세요.";
+    emptyPlayListMsg.classList.add("empty-playlist-div");
     emptyPlayListMsg.appendChild(msg);
     navBody.appendChild(emptyPlayListMsg);
     return;
