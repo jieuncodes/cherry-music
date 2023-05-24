@@ -95,9 +95,7 @@
             grid-template-areas: "bar bar"
                 "current-time duration";
             align-self: center;
-
             gap: 1.5rem;
-
 
             #timeline {
                 grid-area: bar;

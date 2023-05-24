@@ -44,36 +44,36 @@ export const home = async (req, res) => {
   });
 };
 
+const performSearch = async (keyword) => {
+  if (keyword === "") {
+    return { noResult: true, searchedTracks: [] };
+  } else if (keyword) {
+    const searchedTracks = await Track.find({
+      $or: [
+        {
+          trackTitle: {
+            $regex: new RegExp(keyword, "i"),
+          },
+        },
+        {
+          artist: {
+            $regex: new RegExp(keyword, "i"),
+          },
+        },
+      ],
+    });
+    return { searchedTracks, keyword };
+  }
+};
+
 export const search = async (req, res) => {
   const keyword = req.query.search;
-  console.log("key", keyword);
-  let searchedTracks = [];
+  const results = await performSearch(keyword);
+  return res.render("search", results);
+};
 
-  try {
-    if (keyword === "") {
-      const noResult = true;
-      return res.render("search", { noResult, searchedTracks });
-    } else if (keyword) {
-      searchedTracks = await Track.find({
-        $or: [
-          {
-            trackTitle: {
-              $regex: new RegExp(keyword, "i"),
-            },
-          },
-          {
-            artist: {
-              $regex: new RegExp(keyword, "i"),
-            },
-          },
-        ],
-      });
-      return res.render("search", { searchedTracks, keyword });
-    }
-  } catch (error) {
-    console.log("error", error);
-    // return res.status(404).render("pages/error/404", {
-    //   pageTitle: `Something went wrong.`,
-    // });
-  }
+export const sendSearchResults = async (req, res) => {
+  const keyword = req.params.keyword;
+  const results = await performSearch(keyword);
+  return res.json(results);
 };

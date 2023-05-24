@@ -4,8 +4,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   checkButton.addEventListener("click", fetchUserNameData);
 
-  async function fetchUserNameData(e) {
-    e.preventDefault();
+  async function fetchUserNameData(event) {
+    event.preventDefault();
     const username = usernameInput.value;
 
     try {

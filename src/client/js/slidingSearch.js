@@ -1,7 +1,22 @@
+export const slidingSearchBox = document.querySelector(".sliding-search-area");
+
+export const showSlidingSearchBox = (event) => {
+  if (event) {
+    event.stopPropagation();
+  }
+  slidingSearchBox.style.right = "0";
+};
+
+export const hideSlidingSearchBox = (event) => {
+  if (event) {
+    event.stopPropagation();
+  }
+  slidingSearchBox.style.right = "-100%";
+};
+
 document.addEventListener("DOMContentLoaded", () => {
   const searchIcon = document.getElementById("search");
   const backIcon = document.querySelector(".close-search ");
-  const slidingSearchBox = document.querySelector(".sliding-search-area");
   const micIcon = document.querySelector(".mic");
   const searchInput = document.querySelector(".typing-area");
 
@@ -37,16 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
     event.preventDefault();
     recognition.start();
     recognition.addEventListener("end", recognition.onresult);
-  };
-
-  const showSlidingSearchBox = (event) => {
-    event.stopPropagation();
-    slidingSearchBox.style.right = "0";
-  };
-
-  const hideSlidingSearchBox = (event) => {
-    event.stopPropagation();
-    slidingSearchBox.style.right = "-100%";
   };
 
   searchIcon.addEventListener("click", showSlidingSearchBox);

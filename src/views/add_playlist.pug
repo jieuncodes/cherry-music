@@ -21,5 +21,13 @@ block content
 
                 button.submit-btn(type="submit") 완료
 
+        .search-modal.hidden
+            .search-modal__header 
+                form.search-input.modal
+                    input.typing-area(type="text", placeholder="노래, 아티스트 검색", name="search")
+                    input.search-submit(type="submit") 
+                
+            .search-modal__body
+
     block script 
         script(src="/static/js/addPlaylist.js")
