@@ -51,7 +51,8 @@ export const search = async (req, res) => {
 
   try {
     if (keyword === "") {
-      return res.render("search");
+      const noResult = true;
+      return res.render("search", { noResult, searchedTracks });
     } else if (keyword) {
       searchedTracks = await Track.find({
         $or: [
@@ -69,7 +70,7 @@ export const search = async (req, res) => {
       });
       return res.render("search", { searchedTracks, keyword });
     }
-  } catch (e) {
+  } catch (error) {
     console.log("error", error);
     // return res.status(404).render("pages/error/404", {
     //   pageTitle: `Something went wrong.`,
