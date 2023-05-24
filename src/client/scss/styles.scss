@@ -9,6 +9,8 @@
 @import "./components/header.scss";
 @import "./components/footer.scss";
 @import "./components/slidingMenu.scss";
+@import "./components/slidingSearch.scss";
+
 @import "./components/homeSections.scss";
 @import "./components/musicCard.scss";
 @import "./components/player.scss";
@@ -26,6 +28,7 @@
 @import "./screens/playlist.scss";
 @import "./screens/addPlayList.scss";
 @import "./screens/loadingScreen.scss";
+@import "./screens/search.scss";
 
 
 
@@ -41,7 +44,7 @@ a {
 }
 
 * {
-  // outline: 1px solid rgba(255, 0, 0, 0.5);
+  outline: 1px solid rgba(255, 0, 0, 0.5);
 }
 
 *::-webkit-scrollbar {

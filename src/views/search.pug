@@ -1,0 +1,17 @@
+
+extends base
+include mixin/music_card
+
+block content
+    .search-area
+        .search-result-header
+            span "#{keyword}" 검색결과...
+        .music-cards-container
+            each track, index in searchedTracks 
+                +musicCard(index + 1, track.trackTitle, track.artist, track.albumImageUrl, track.youtubeVideoId, true)
+
+block scripts
+    script(src="/static/js/slidingSearch.js")
+
+            
+            

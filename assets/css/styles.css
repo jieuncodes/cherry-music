@@ -158,7 +158,9 @@ header #search {
   color: white;
   font-size: 3.5rem;
   position: absolute;
-  right: 10rem;
+  right: 9rem;
+  box-sizing: border-box;
+  padding: 1.5rem;
 }
 header #logo span:first-child {
   font-size: 5.5rem;
@@ -337,6 +339,64 @@ input:checked ~ div#sliding-menu {
 .sliding_menu_area .sliding_menu__body ul li:hover i,
 .sliding_menu_area .sliding_menu__body ul li:hover span {
   color: rgba(255, 255, 255, 0.581);
+}
+
+.sliding-search-area {
+  z-index: 40;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  right: -100%;
+  background-color: #0e1117;
+  top: 0;
+  font-size: 3.5rem;
+  transition: right 0.3s ease;
+}
+.sliding-search-area .sliding-search__header {
+  width: 100%;
+  top: 0;
+  margin-top: 6rem;
+  display: grid;
+  place-content: center;
+  align-items: center;
+  grid-template-columns: 0.8fr auto 0.8fr;
+  place-content: center;
+}
+.sliding-search-area .sliding-search__header .close-search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sliding-search-area .sliding-search__header .close-search i {
+  font-size: 6rem;
+}
+.sliding-search-area .sliding-search__header .search-input {
+  background-color: rgba(25, 25, 25, 0.861);
+  color: white;
+  font-size: 4rem;
+  border-radius: 6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sliding-search-area .sliding-search__header .search-input input {
+  height: 8rem;
+  width: 95%;
+  border-radius: 2rem;
+  padding: 0 3rem;
+}
+.sliding-search-area .sliding-search__header .mic {
+  font-size: 4.7rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sliding-search-area .sliding-search__header .search-submit {
+  display: none;
+}
+.sliding-search-area .sliding-search__body {
+  padding: 3rem;
+  margin-top: 10rem;
 }
 
 #section {
@@ -729,6 +789,9 @@ input:checked ~ div#sliding-menu {
   grid-template-columns: 1.6fr 0 4fr 1fr;
   margin-top: 1rem;
 }
+.music-cards-container #music-card.playlist-music-card .ranking {
+  display: none;
+}
 
 .login-box {
   display: flex;
@@ -1065,7 +1128,7 @@ input:checked ~ div#sliding-menu {
   align-items: center;
 }
 .playlist-box .playlist-box__body .empty-playlist-instruction {
-  margin-top: -150%;
+  margin-top: -100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1085,6 +1148,7 @@ input:checked ~ div#sliding-menu {
   height: 5rem;
   font-size: 3rem;
   border-radius: 4rem;
+  margin-top: 6rem;
 }
 
 .add-playlist-box {
@@ -1193,6 +1257,13 @@ input:checked ~ div#sliding-menu {
     transform: scale(1);
   }
 }
+.search-area .search-result-header {
+  margin: 3rem 0;
+}
+.search-area .search-result-header span {
+  font-size: 4rem;
+}
+
 .hidden {
   display: none;
 }
@@ -1200,6 +1271,10 @@ input:checked ~ div#sliding-menu {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+* {
+  outline: 1px solid rgba(255, 0, 0, 0.5);
 }
 
 *::-webkit-scrollbar {

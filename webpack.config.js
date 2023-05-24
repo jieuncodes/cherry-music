@@ -17,6 +17,7 @@ const config = {
     addPlaylist: BASE_JS + "addPlaylist.js",
     playerScreenNav: BASE_JS + "playerScreenNav.js",
     loading: BASE_JS + "loading.js",
+    slidingSearch: BASE_JS + "slidingSearch.js",
 
     "/util/formatTime": BASE_JS + "util/formatTime.js",
     "/util/checkUcserId": BASE_JS + "util/checkUserId.js",

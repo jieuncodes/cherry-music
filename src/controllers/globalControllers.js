@@ -20,14 +20,19 @@ export const home = async (req, res) => {
 
       const youtubeVideoId = await getYoutubeVideoId({ trackTitle, artist });
 
-      const newTrack = await Track.create({
-        trackTitle,
-        artist,
-        albumImageUrl,
-        youtubeVideoId,
-      });
+      const existingTrack = await Track.findOne({ youtubeVideoId });
 
-      return newTrack;
+      if (existingTrack) {
+        return existingTrack;
+      } else {
+        const newTrack = await Track.create({
+          trackTitle,
+          artist,
+          albumImageUrl,
+          youtubeVideoId,
+        });
+        return newTrack;
+      }
     })
   );
 
@@ -37,4 +42,37 @@ export const home = async (req, res) => {
     pageTitle: "Home",
     homeBgImgUrl,
   });
+};
+
+export const search = async (req, res) => {
+  const keyword = req.query.search;
+  console.log("key", keyword);
+  let searchedTracks = [];
+
+  try {
+    if (keyword === "") {
+      return res.render("search");
+    } else if (keyword) {
+      searchedTracks = await Track.find({
+        $or: [
+          {
+            trackTitle: {
+              $regex: new RegExp(keyword, "i"),
+            },
+          },
+          {
+            artist: {
+              $regex: new RegExp(keyword, "i"),
+            },
+          },
+        ],
+      });
+      return res.render("search", { searchedTracks, keyword });
+    }
+  } catch (e) {
+    console.log("error", error);
+    // return res.status(404).render("pages/error/404", {
+    //   pageTitle: `Something went wrong.`,
+    // });
+  }
 };

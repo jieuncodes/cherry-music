@@ -45,7 +45,7 @@
         }
 
         .empty-playlist-instruction {
-            margin-top: -150%;
+            margin-top: -100%;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -68,6 +68,7 @@
                 height: 5rem;
                 font-size: 3rem;
                 border-radius: 4rem;
+                margin-top: 6rem;
 
             }
         }

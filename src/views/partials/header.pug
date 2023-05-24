@@ -2,8 +2,10 @@ header
     #logo(onclick="location.href='/'")
         span 🍒
         span Cherry 
-    #search 
+    #search
         i.fa-solid.fa-magnifying-glass
+        include sliding_search
+    
     #hamburger_menu
         input#check_box(type="checkbox")
         label.hamburger(for="check_box") 
@@ -14,3 +16,5 @@ header
             label.exit(for="check_box") 
                     span
             include sliding_menu
+    script(src="/static/js/slidingSearch.js")
+

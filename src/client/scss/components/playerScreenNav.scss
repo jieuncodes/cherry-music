@@ -80,5 +80,8 @@
         grid-template-columns: 1.6fr 0 4fr 1fr;
         margin-top: 1rem;
 
+        .ranking {
+            display: none;
+        }
     }
 }
