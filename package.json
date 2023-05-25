@@ -40,9 +40,10 @@
     "sass-loader": "^13.2.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.5",
+    "@babel/core": "^7.21.8",
     "@babel/node": "^7.20.7",
     "@babel/preset-env": "^7.21.5",
+    "@flydotio/dockerfile": "^0.2.7",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.22",
     "pug": "^3.0.2",

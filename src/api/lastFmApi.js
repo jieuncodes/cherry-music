@@ -47,12 +47,22 @@ export const getLastFmTrackInfo = async ({ artist, trackTitle }) => {
       const lasfFmTrackInfo = new LastFmTrack({
         artist: data.track.artist.name,
         trackTitle: data.track.name,
-        album: data.track.album?.name || "None",
-        albumImg: data.track.album?.image[2]["#text"],
+        album:
+          data.track.album && data.track.album.name
+            ? data.track.album.name
+            : "None",
+        albumImg:
+          data.track.album &&
+          data.track.album.image &&
+          data.track.album.image[2]
+            ? data.track.album.image[2]["#text"]
+            : undefined,
         duration: data.track.duration,
         playcount: data.track.playcount,
         trackId,
-        tags: data.track.toptags.tag.map((t) => t.name) || [],
+        tags: data.track.toptags.tag
+          ? data.track.toptags.tag.map((t) => t.name)
+          : [],
       });
 
       await lasfFmTrackInfo.save();
