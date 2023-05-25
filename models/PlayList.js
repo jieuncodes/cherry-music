@@ -1,22 +1,14 @@
 import mongoose from "mongoose";
 
 const playListSchema = new mongoose.Schema({
-  queue: [
-    {
-      videoId: {
-        type: String,
-        required: true,
-      },
-      title: {
-        type: String,
-      },
-      artist: {
-        type: String,
-      },
-    },
-  ],
+  title: { type: String, required: true },
+  tracks: [{ type: mongoose.Schema.Types.ObjectId, ref: "Track" }],
+  description: String,
+  coverImageUrl: { type: String, required: true },
+  creator: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  createdAt: { type: Date, default: Date.now },
 });
 
 const PlayList = mongoose.model("PlayList", playListSchema);
 
-export default playListSchema;
+export default PlayList;

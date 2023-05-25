@@ -4,7 +4,10 @@ import {
   playListMain,
   postAddPlayList,
 } from "../controllers/playlistControllers.js";
-import { loggedInOnlyMiddleware } from "../middleware.js";
+import {
+  coverImageUploadMiddleware,
+  loggedInOnlyMiddleware,
+} from "../middleware.js";
 import { search, sendSearchResults } from "../controllers/globalControllers.js";
 
 const playListRouter = express.Router();
@@ -14,7 +17,7 @@ playListRouter
   .route("/add")
   .all(loggedInOnlyMiddleware)
   .get(getAddPlayList)
-  .post(postAddPlayList);
+  .post(coverImageUploadMiddleware, postAddPlayList);
 playListRouter.get("/add/search-results/:keyword", sendSearchResults);
 playListRouter.get("/search/:keyword", search);
 

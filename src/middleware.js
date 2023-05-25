@@ -5,7 +5,7 @@ export const localsMiddleware = (req, res, next) => {
   res.locals.siteTitle = "Cherry Music";
   res.locals.loggedIn = Boolean(req.session.loggedIn);
   res.locals.loggedInUser = req.session.user;
-  // console.log("", res.locals.loggedInUser);
+  // console.log("res.locals.loggedInUser", res.locals.loggedInUser);
   // console.log("**session**", req.session);
   next();
 };
@@ -48,3 +48,8 @@ export const profilePicErrorHandlerMiddleware = (err, req, res, next) => {
   }
   next();
 };
+
+export const coverImageUploadMiddleware = multer({
+  dest: "uploads/cover_images/",
+  limits: { fileSize: 10000000 },
+}).single("coverImage");

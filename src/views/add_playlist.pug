@@ -5,7 +5,7 @@ block content
         .add-playlist-box__header
             span 플레이리스트 만들기
         .add-playlist-box__body
-            form.submit-form(method="POST")
+            form.submit-form(method="POST", enctype="multipart/form-data")
                 .add-playlist-cover-area
                     .add-cover-box
                         i.fa-solid.fa-camera

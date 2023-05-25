@@ -67,7 +67,6 @@ const removeFromCart = (index) => {
 };
 
 export const addToCart = (event) => {
-  console.log(" event.currentTarget.dataset", event.currentTarget.dataset);
   const { videoid, title, artist, albumimageurl } = event.currentTarget.dataset;
   addPlaylistCart.push({
     videoId: videoid,
@@ -77,19 +76,16 @@ export const addToCart = (event) => {
   });
   hideSearchModal();
   displayAddedCartOnScreen();
-  console.log("cart", addPlaylistCart);
 };
 
 //search modal
 const openSearchModal = (event) => {
   event.stopPropagation();
-  console.log("add");
   searchModal.classList.remove("hidden");
   window.addEventListener("click", hideSearchModal);
 };
 
 const hideSearchModal = (event) => {
-  console.log("hide Modal");
   if (event && !searchModal.contains(event.target)) {
     searchModal.classList.add("hidden");
     window.removeEventListener("click", hideSearchModal);
@@ -103,12 +99,10 @@ const searchTracks = async (event) => {
   event.preventDefault();
   const keyword = event.target.elements.search.value;
   const res = await fetchSearchData(keyword);
-  console.log("", typeof res);
   paintModalBody(res);
 };
 
 export const paintMusicCard = (track) => {
-  console.log("track", track);
   const musicCard = document.createElement("div");
   musicCard.classList.add("playlist-music-card");
   musicCard.id = "music-card";
@@ -116,7 +110,6 @@ export const paintMusicCard = (track) => {
   musicCard.setAttribute("data-title", track.trackTitle);
   musicCard.setAttribute("data-artist", track.artist);
   musicCard.setAttribute("data-albumimageurl", track.albumImageUrl);
-  console.log("musicCard", musicCard);
   musicCard.innerHTML = `
         <div class="album-cover" style="background-image: url(${track.albumImageUrl})"></div>
         <div class="track-title-area">
@@ -158,7 +151,41 @@ const paintModalBody = (data) => {
   searchModalBody.appendChild(musicCardsContainer);
 };
 
+//handle form submit
+const handleFormSubmit = async (event) => {
+  event.preventDefault();
+  const title = event.target.elements.playlistTitle.value;
+  const description = event.target.elements.playlistDescription.value;
+  const coverFile = coverInput.files[0];
+  console.log("", title, description, coverFile);
+  debugger;
+  const formData = new FormData();
+  formData.append("title", title);
+  formData.append("description", description);
+  formData.append("coverImage", coverFile);
+  formData.append("tracks", JSON.stringify(addPlaylistCart));
+
+  for (let pair of formData.entries()) {
+    console.log(pair[0] + ", " + pair[1]);
+  }
+
+  try {
+    const response = await fetch("/playlist/add", {
+      method: "POST",
+      body: formData,
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error!! status: ${response.status}`);
+    } else {
+      window.location.href = "/";
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
 addCoverBox.addEventListener("click", clickUploadInput);
 addTrackBtn.addEventListener("click", openSearchModal);
 searchModalInput.addEventListener("submit", searchTracks);
 coverInput.addEventListener("change", showUploadedImgOnScreen);
+addPlaylistForm.addEventListener("submit", handleFormSubmit);
