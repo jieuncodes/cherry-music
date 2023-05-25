@@ -15,7 +15,7 @@
     .add-playlist-box__body {
         width: 90%;
         overflow: scroll;
-        
+
         form {
             display: flex;
             flex-direction: column;
@@ -74,16 +74,31 @@
                 margin-top: 5rem;
             }
 
+            button.remove-btn {
+                position: relative;
+                top: 45%;
+                left: 550%;
+                color: rgba(255, 255, 255, 0.67);
+                font-size: 3.5rem;
+            }
+
             button.submit-btn {
                 margin-top: 10rem;
             }
-           
+
+        }
+
+        .cart {
+            .playlist-music-card {
+                background-color: $bg;
+            }
         }
     }
+
     .search-modal__body {
-        height: 90%; 
-        overflow-y: auto; 
-        position: relative; 
-      }
-      
+        height: 90%;
+        overflow-y: auto;
+        position: relative;
+    }
+
 }

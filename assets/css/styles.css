@@ -807,6 +807,12 @@ input:checked ~ div#sliding-menu {
   transition: right 0.3s ease;
   top: 15rem;
 }
+.search-modal .empty-res-msg {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  translate: -50%;
+}
 .search-modal .search-modal__header {
   width: 100%;
   top: 0;
@@ -828,6 +834,18 @@ input:checked ~ div#sliding-menu {
 .search-modal .search-modal__header form .search-submit {
   display: none;
 }
+.search-modal .search-modal__body .playlist-music-card {
+  position: relative;
+}
+.search-modal .search-modal__body .playlist-music-card button.add-btn {
+  position: absolute;
+  top: 50%;
+  right: 5rem;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.67);
+  font-size: 3.5rem;
+}
+
 .login-box {
   display: flex;
   width: 100%;
@@ -1260,8 +1278,18 @@ input:checked ~ div#sliding-menu {
   color: rgb(255, 28, 96);
   margin-top: 5rem;
 }
+.add-playlist-box .add-playlist-box__body form button.remove-btn {
+  position: relative;
+  top: 45%;
+  left: 550%;
+  color: rgba(255, 255, 255, 0.67);
+  font-size: 3.5rem;
+}
 .add-playlist-box .add-playlist-box__body form button.submit-btn {
   margin-top: 10rem;
+}
+.add-playlist-box .add-playlist-box__body .cart .playlist-music-card {
+  background-color: #0e1117;
 }
 .add-playlist-box .search-modal__body {
   height: 90%;

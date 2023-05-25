@@ -64,7 +64,6 @@ export const paintCurrentPlaying = async () => {
 
 const mountPlayListTracks = () => {
   navBody.innerHTML = "";
-  console.log("cli", clientPlayList);
   if (clientPlayList.length == 0) {
     const emptyPlayListMsg = document.createElement("div");
     const msg = document.createElement("span");
