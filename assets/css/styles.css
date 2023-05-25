@@ -1151,36 +1151,45 @@ input:checked ~ div#sliding-menu {
   flex-direction: column;
   margin-top: 3rem;
 }
-.playlist-box .playlist-box__header {
+
+.playlist-box__header {
   font-size: 3.5rem;
   margin-bottom: 5rem;
 }
-.playlist-box .playlist-box__body {
+
+.playlist-box__body {
   height: 100%;
+  width: 100%;
 }
-.playlist-box .playlist-box__body .playlist-box__body__header {
+
+.playlist-box__body__header {
   display: flex;
   justify-content: space-between;
   font-size: 3.6rem;
+  margin-bottom: 3rem;
 }
-.playlist-box .playlist-box__body .playlist-box__body__header .header__make-playlist-btn {
+
+.header__make-playlist-btn {
   color: rgb(255, 28, 96);
   font-size: 3.3rem;
 }
-.playlist-box .playlist-box__body .playlist-box__body__header .order-btn {
+
+.order-btn {
   color: rgba(255, 255, 255, 0.625);
   font-size: 3rem;
 }
-.playlist-box .playlist-box__body .playlist-box__body__header .order-btn i {
+
+.order-btn i {
   margin-right: 1rem;
 }
-.playlist-box .playlist-box__body .playlist-box__body__body {
-  height: 100%;
-  display: flex;
-  justify-self: center;
-  align-items: center;
+
+.playlist-box__body__body {
+  height: auto;
+  width: 100%;
+  overflow: auto;
 }
-.playlist-box .playlist-box__body .empty-playlist-instruction {
+
+.empty-playlist-instruction {
   margin-top: -100%;
   display: flex;
   flex-direction: column;
@@ -1188,15 +1197,18 @@ input:checked ~ div#sliding-menu {
   justify-content: center;
   line-height: 5rem;
 }
-.playlist-box .playlist-box__body .empty-playlist-instruction span {
+
+.empty-playlist-instruction span {
   color: rgba(255, 255, 255, 0.625);
 }
-.playlist-box .playlist-box__body .empty-playlist-instruction span:nth-child(3) {
+
+.empty-playlist-instruction span:nth-child(3) {
   margin-top: 3rem;
   color: rgba(127, 127, 127, 0.472);
   margin-bottom: 4rem;
 }
-.playlist-box .playlist-box__body .empty-playlist-instruction .href-btn {
+
+.empty-playlist-instruction .href-btn {
   padding: 1rem 3rem;
   height: 5rem;
   font-size: 3rem;
@@ -1211,6 +1223,56 @@ input:checked ~ div#sliding-menu {
   align-items: center;
   justify-content: center;
   font-size: 3.5rem;
+}
+
+.playlist-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(23rem, 1fr));
+  justify-content: center;
+  width: 100%;
+  row-gap: 6rem;
+}
+
+#playlist-card {
+  width: 23rem;
+  height: 30rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.cover-img {
+  width: 23rem;
+  height: 23rem;
+  background-color: rgba(32, 32, 32, 0.666);
+  margin-bottom: 2rem;
+  object-fit: cover;
+}
+
+.cover-img {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cover-img img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.playlist-info {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  flex-direction: column;
+}
+
+.playlist-info span.playlist-title {
+  text-overflow: ellipsis;
+}
+
+.playlist-info span.creator {
+  color: rgba(127, 127, 127, 0.472);
 }
 
 .add-playlist-box {

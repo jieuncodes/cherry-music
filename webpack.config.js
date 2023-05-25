@@ -18,6 +18,7 @@ const config = {
     playerScreenNav: BASE_JS + "playerScreenNav.js",
     loading: BASE_JS + "loading.js",
     slidingSearch: BASE_JS + "slidingSearch.js",
+    playlist: BASE_JS + "playlist.js",
 
     "/util/formatTime": BASE_JS + "util/formatTime.js",
     "/util/checkUserId": BASE_JS + "util/checkUserId.js",

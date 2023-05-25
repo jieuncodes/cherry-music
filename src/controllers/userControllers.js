@@ -14,7 +14,6 @@ export const checkUsername = async (req, res) => {
 export const postJoin = async (req, res) => {
   const pageTitle = "Join Cherry Music!";
   const { email, username, password, password2 } = req.body;
-  console.log("req.body", req.body);
   let picFile = req.file;
   let noAvatar = false;
   if (!picFile) {

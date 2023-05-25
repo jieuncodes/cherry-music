@@ -1,0 +1,7 @@
+mixin playListCard(playlistTitle, coverImgUrl, creatorUserName)
+  #playlist-card(data-title=playlistTitle, data-creator=creatorUserName, data-coverImgUrl=coverImgUrl)
+    .cover-img
+        img(src=`${coverImgUrl}`)
+    .playlist-info
+        span.playlist-title #{playlistTitle}
+        span.creator #{creatorUserName}

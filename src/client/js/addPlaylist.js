@@ -157,17 +157,17 @@ const handleFormSubmit = async (event) => {
   const title = event.target.elements.playlistTitle.value;
   const description = event.target.elements.playlistDescription.value;
   const coverFile = coverInput.files[0];
-  console.log("", title, description, coverFile);
-  debugger;
+
   const formData = new FormData();
   formData.append("title", title);
   formData.append("description", description);
   formData.append("coverImage", coverFile);
   formData.append("tracks", JSON.stringify(addPlaylistCart));
 
-  for (let pair of formData.entries()) {
-    console.log(pair[0] + ", " + pair[1]);
-  }
+  // for (let pair of formData.entries()) {
+  //   console.log(pair[0] + ", " + pair[1]);
+  // }
+  // debugger;
 
   try {
     const response = await fetch("/playlist/add", {
@@ -175,12 +175,13 @@ const handleFormSubmit = async (event) => {
       body: formData,
     });
     if (!response.ok) {
+      const text = await response.text();
       throw new Error(`HTTP error!! status: ${response.status}`);
     } else {
-      window.location.href = "/";
+      window.location.href = "/playlist";
     }
   } catch (error) {
-    console.error("Error:", error);
+    console.error("*** Error:", error);
   }
 };
 

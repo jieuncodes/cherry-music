@@ -6,6 +6,7 @@ const playListSchema = new mongoose.Schema({
   description: String,
   coverImageUrl: { type: String, required: true },
   creator: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  creatorUserName: String,
   createdAt: { type: Date, default: Date.now },
 });
 
