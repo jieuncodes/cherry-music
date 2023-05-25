@@ -35,21 +35,31 @@ const clickUploadInput = (event) => {
 
 const paintModalBody = (data) => {
   const searchModalBody = document.querySelector(".search-modal__body");
+  const musicCardsContainer = document.createElement("div");
+  musicCardsContainer.classList.add("music-cards-container");
   searchModalBody.innerHTML = "";
+
   data.searchedTracks.forEach((track) => {
     const div = document.createElement("div");
-    div.classList.add("search-item");
+    div.classList.add("playlist-music-card");
+    div.id = "music-card";
+    div.setAttribute("data-videoid", track.youtubeVideoId);
+    div.setAttribute("data-title", track.trackTitle);
+    div.setAttribute("data-artist", track.artist);
+    div.setAttribute("data-albumimageurl", track.albumImageUrl);
     div.innerHTML = `
-      <div class="search-item__info">
-        <div class="info__title">${track.trackTitle}</div>
-        <div class="info__artist">${track.artist}</div>
-      </div>
-      <div class="search-item__add">
-        <i class="fas fa-plus"></i>
-      </div>
+        <div class="album-cover" style="background-image: url(${track.albumImageUrl}"></div>
+        <div class="track-title-area">
+          <div class="track-title">${track.trackTitle}</div>
+        </div>
+        <div class="artist">${track.artist}</div>
+        <button class="add-btn">
+          <i class="fa-solid fa-plus"></i>
+        </button>
     `;
-    searchModalBody.appendChild(div);
+    musicCardsContainer.appendChild(div);
   });
+  searchModalBody.appendChild(musicCardsContainer);
 };
 
 

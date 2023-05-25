@@ -13,8 +13,9 @@
     }
 
     .add-playlist-box__body {
-        width: 100%;
-
+        width: 90%;
+        overflow: scroll;
+        
         form {
             display: flex;
             flex-direction: column;
@@ -76,6 +77,13 @@
             button.submit-btn {
                 margin-top: 10rem;
             }
+           
         }
     }
+    .search-modal__body {
+        height: 90%; 
+        overflow-y: auto; 
+        position: relative; 
+      }
+      
 }

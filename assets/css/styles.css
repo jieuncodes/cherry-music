@@ -150,6 +150,7 @@ header {
   justify-content: space-between;
   padding: 3rem;
   z-index: 20;
+  height: 6.5rem;
 }
 header:hover {
   cursor: pointer;
@@ -792,6 +793,9 @@ input:checked ~ div#sliding-menu {
 .music-cards-container #music-card.playlist-music-card .ranking {
   display: none;
 }
+.music-cards-container #music-card.playlist-music-card button.add-btn {
+  color: rgba(255, 255, 255, 0.6705882353);
+}
 
 .search-modal {
   position: fixed;
@@ -1204,7 +1208,8 @@ input:checked ~ div#sliding-menu {
   margin-bottom: 6rem;
 }
 .add-playlist-box .add-playlist-box__body {
-  width: 100%;
+  width: 90%;
+  overflow: scroll;
 }
 .add-playlist-box .add-playlist-box__body form {
   display: flex;
@@ -1257,6 +1262,11 @@ input:checked ~ div#sliding-menu {
 }
 .add-playlist-box .add-playlist-box__body form button.submit-btn {
   margin-top: 10rem;
+}
+.add-playlist-box .search-modal__body {
+  height: 90%;
+  overflow-y: auto;
+  position: relative;
 }
 
 #loading-screen {
@@ -1485,6 +1495,6 @@ body {
 }
 body main {
   position: relative;
-  height: 100%;
+  height: calc(100vh - 17rem);
   padding: 2rem 3rem;
 }
