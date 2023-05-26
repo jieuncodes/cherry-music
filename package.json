@@ -8,7 +8,7 @@
     "start": "node build/init.js",
     "build": "npm run build:server && npm run build:assets",
     "build:server": "babel src -d build",
-    "build:assets": "webpack --mode=development",
+    "build:assets": "webpack --mode=production",
     "dev:server": "nodemon",
     "dev:assets": "webpack --mode=development",
     "test": "npm run build && npm run dev:server"
@@ -20,7 +20,6 @@
     "url": "https://github.com/jieuncodes/cherry-music.git"
   },
   "dependencies": {
-    "babel-cli": "^6.26.0",
     "babel-loader": "^9.1.2",
     "bcrypt": "^5.1.0",
     "connect-mongo": "^5.0.0",
@@ -40,8 +39,8 @@
     "sass-loader": "^13.2.2"
   },
   "devDependencies": {
+    "@babel/cli": "^7.21.5",
     "@babel/core": "^7.21.8",
-    "@babel/node": "^7.20.7",
     "@babel/preset-env": "^7.21.5",
     "@flydotio/dockerfile": "^0.2.7",
     "morgan": "^1.10.0",
