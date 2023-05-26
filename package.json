@@ -19,6 +19,10 @@
     "type": "git",
     "url": "https://github.com/jieuncodes/cherry-music.git"
   },
+  "engines": {
+    "node": "16.17.1",
+    "npm": "9.6.1"
+  },
   "dependencies": {
     "babel-loader": "^9.1.2",
     "bcrypt": "^5.1.0",
