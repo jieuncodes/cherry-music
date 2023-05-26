@@ -66,8 +66,7 @@ export function handleNextBtnClick() {
   updateNextButtonStatus();
   updatePrevButtonStatus();
 }
-
-export function handlePrevBtnClick() {
+export const handlePrevBtnClick = () => {
   if (currentTrackIndex > 0) {
     currentTrackIndex--;
   } else {
@@ -79,7 +78,7 @@ export function handlePrevBtnClick() {
   paintPlayerScreen();
 
   player.loadVideoById(clientPlayList[currentTrackIndex].videoId);
-}
+};
 
 function handleTimeLineChange(event) {
   const {

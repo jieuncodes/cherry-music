@@ -46,7 +46,7 @@ a {
 }
 
 * {
-  // outline: 1px solid rgba(255, 0, 0, 0.5);
+  outline: 1px solid rgba(255, 0, 0, 0.5);
 }
 
 *::-webkit-scrollbar {
@@ -249,7 +249,7 @@ body {
 
   main {
     position: relative;
-    height: calc(100vh);
+    height: calc(100vh - 17rem);
     padding: 2rem $default-padding;
   }
 }

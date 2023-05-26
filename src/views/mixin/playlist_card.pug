@@ -1,7 +1,7 @@
 mixin playListCard(playlistId, playlistTitle, coverImgUrl, creatorUserName)
   #playlist-card(data-title=playlistTitle, data-creator=creatorUserName, data-coverImgUrl=coverImgUrl)
     .cover-img(onclick=`location.href='/playlist/${playlistId}'`)
-        img(src=`${coverImgUrl}`, crossorigin="anonymous")
+        img(src=`${coverImgUrl}`)
     .playlist-info(onclick=`location.href='/playlist/${playlistId}'`)
         span.playlist-title #{playlistTitle}
         span.creator #{creatorUserName}

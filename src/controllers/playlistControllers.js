@@ -68,7 +68,6 @@ export const postAddPlayList = async (req, res) => {
     });
   }
 };
-
 export const getPlayListDetails = async (req, res) => {
   const { playlistId } = req.params;
   const playlist = await PlayList.findById(playlistId).populate("tracks");
