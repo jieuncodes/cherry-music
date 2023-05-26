@@ -14,26 +14,26 @@
 
     .sliding_menu__body
         ul 
-            li 
-                i.fa-solid.fa-fire
-                span Popular
+            //- li 
+            //-     i.fa-solid.fa-fire
+            //-     span Popular
 
             if loggedInUser
                 li(onclick="location.href='/playlist'")
                     i.fa-solid.fa-headphones
                     span 플레이리스트
-                li 
-                    i.fa-solid.fa-heart
-                    span 좋아요한
-                li 
-                    i.fa-solid.fa-compact-disc
-                    span 많이 들은
-                li 
-                    i.fa-solid.fa-star
-                    span 팬맺은
-                li 
-                    i.fa-solid.fa-pencil
-                        span 내가 쓴 댓글
+                //- li 
+                //-     i.fa-solid.fa-heart
+                //-     span 좋아요한
+                //- li 
+                //-     i.fa-solid.fa-compact-disc
+                //-     span 많이 들은
+                //- li 
+                //-     i.fa-solid.fa-star
+                //-     span 팬맺은
+                //- li 
+                //-     i.fa-solid.fa-pencil
+                //-         span 내가 쓴 댓글
             
             if !loggedInUser
                 li 

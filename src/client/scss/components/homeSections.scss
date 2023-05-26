@@ -2,10 +2,10 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    height: 48vh;
+    height: auto;
     width: 100%;
     overflow: scroll;
-    margin-top: 3rem;
+    margin-bottom: 4rem;
 
     .section__header {
         display: grid;
@@ -56,8 +56,20 @@
         overflow-x: auto;
     }
 
+    .scroll_playlist {
+
+        display: grid;
+        scroll-snap-type: x proximity;
+        grid-template-rows: repeat(1, 0.85fr);
+        gap: 0 3rem;
+        grid-auto-flow: column;
+        overflow-x: scroll;
+    }
 
 
 
+}
 
+.playlists-section {
+    z-index: 1;
 }

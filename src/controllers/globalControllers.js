@@ -1,8 +1,10 @@
+import PlayList from "../../models/PlayList.js";
 import Track from "../../models/Track.js";
 import { getLastFmTopTracks, getLastFmTrackInfo } from "../api/lastFmApi.js";
 import { getYoutubeVideoId } from "../api/youtubeApi.js";
 
 export const home = async (req, res) => {
+  //top tracks section
   const lastFmTopTracks = await getLastFmTopTracks();
   const topTracks = lastFmTopTracks.tracks.track;
 
@@ -35,12 +37,15 @@ export const home = async (req, res) => {
       }
     })
   );
+  const allPlaylists = await PlayList.find({}).limit(8);
 
   const homeBgImgUrl = "/images/main_background.png";
+
   return res.render("home", {
     trackDetails,
     pageTitle: "Home",
     homeBgImgUrl,
+    allPlaylists,
   });
 };
 
