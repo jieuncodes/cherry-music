@@ -79,6 +79,7 @@ export function handlePrevBtnClick() {
   }
   updateNextButtonStatus();
   updatePrevButtonStatus();
+  paintCurrentPlaying();
 }
 
 function handleTimeLineChange(event) {
@@ -173,7 +174,6 @@ const addMusicToQueue = async ({ videoId, title, artist, albumImageUrl }) => {
   } else {
     console.error("Player has not been initialized yet");
   }
-  paintCurrentPlaying();
 };
 
 const onMusicCardClick = ({ videoId, title, artist, albumImageUrl }) => {

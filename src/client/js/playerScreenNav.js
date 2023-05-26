@@ -11,7 +11,6 @@ const navBody = document.querySelector(".nav__body");
 
 const pullUpNav = (event) => {
   if (event.target !== handle) return;
-
   navArea.classList.add("nav-active");
   const playerBox = document.getElementById("player-box");
   playerBox.classList.add("top-player");
@@ -38,6 +37,7 @@ const handleNavBtnClick = (event) => {
   });
   if (event.target.classList.value == "next-track") {
     mountPlayListTracks();
+    paintCurrentPlaying();
   }
   event.target.classList.add("clicked");
 };
@@ -48,6 +48,7 @@ export const paintCurrentPlaying = async () => {
   const listMusicCards = document.querySelectorAll(".playlist-music-card");
 
   if (listMusicCards) {
+    console.log("listMusiccards exists");
     listMusicCards.forEach((card, index) => {
       if (index == currentPlayingIndex) {
         card.style.backgroundColor = "#1c1c1cb0";
