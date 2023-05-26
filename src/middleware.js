@@ -1,4 +1,4 @@
-import morgan from "morgan";
+// import morgan from "morgan";
 import multer from "multer";
 
 export const localsMiddleware = (req, res, next) => {
@@ -8,7 +8,7 @@ export const localsMiddleware = (req, res, next) => {
   next();
 };
 
-export const logger = morgan("dev");
+// export const logger = morgan("dev");
 
 export const loggedInOnlyMiddleware = (req, res, next) => {
   if (req.session.loggedIn) {
