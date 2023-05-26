@@ -1,5 +1,5 @@
 import { fetchSearchData } from "../../api/searchApi.js";
-import { paintMusicCard } from "./trackPainters.js";
+
 const addCoverBox = document.querySelector(".add-cover-box");
 const addTrackBtn = document.querySelector("button.add-track");
 const searchModal = document.querySelector(".search-modal");
@@ -102,6 +102,25 @@ const searchTracks = async (event) => {
   paintModalBody(res);
 };
 
+export const paintMusicCard = (track) => {
+  const musicCard = document.createElement("div");
+  musicCard.classList.add("playlist-music-card");
+  musicCard.id = "music-card";
+  musicCard.setAttribute("data-videoid", track.youtubeVideoId);
+  musicCard.setAttribute("data-title", track.trackTitle);
+  musicCard.setAttribute("data-artist", track.artist);
+  musicCard.setAttribute("data-albumimageurl", track.albumImageUrl);
+  musicCard.innerHTML = `
+        <div class="album-cover" style="background-image: url(${track.albumImageUrl})"></div>
+        <div class="track-title-area">
+          <div class="track-title">${track.trackTitle}</div>
+        </div>
+        <div class="artist">${track.artist}</div>
+    `;
+  musicCard.addEventListener("click", addToCart);
+  return musicCard;
+};
+
 const paintModalBody = (data) => {
   const searchModalBody = document.querySelector(".search-modal__body");
   searchModalBody.innerHTML = "";
@@ -118,7 +137,6 @@ const paintModalBody = (data) => {
 
   data.searchedTracks.forEach((track) => {
     const musicCard = paintMusicCard(track);
-    musicCard.addEventListener("click", addToCart);
 
     const plusBtn = document.createElement("button");
     plusBtn.classList.add("add-btn");

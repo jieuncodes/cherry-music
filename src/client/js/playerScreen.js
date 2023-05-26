@@ -2,6 +2,7 @@ import {
   clientPlayList,
   currentTrackIndex,
   handleNextBtnClick,
+  handlePrevBtnClick,
   player,
   playerReadyPromise,
   timeline,
@@ -13,9 +14,14 @@ import { paintTitleWithMarquee } from "./util/marquee.js";
 const playerBox = document.getElementById("player-box");
 const playerScreen = document.getElementById("player-screen");
 const chevron = document.querySelector(".fa-chevron-down");
+export const playerScreenPrevBtn = document.querySelector(".prev-btn");
 export const playerScreenNextBtn = playerScreen.querySelector(".next-btn");
 export const playerScreenPlayBtn = playerScreen.querySelector(".play-btn");
 export const checkBox = document.querySelector("#check_box");
+
+const suffleBtn = document.querySelector(".shuffle");
+const repeatBtn = document.querySelector(".repeat-btn");
+const prevBtn = document.querySelector(".prev-btn");
 
 export const paintPlayerScreen = () => {
   const { videoId, title, artist, albumImageUrl } =
@@ -60,6 +66,30 @@ const hidePlayerBox = (event) => {
   }
 };
 
+//player commands
+export let isShuffleOn = false;
+export let isRepeatOn = false;
+
+export const handleShuffleBtnClick = () => {
+  console.log("shuffle");
+  isShuffleOn = !isShuffleOn;
+  if (isShuffleOn) {
+    clientPlayList = clientPlayList.sort(() => Math.random() - 0.5);
+  }
+};
+
+export const handleRepeatBtnClick = () => {
+  isRepeatOn = !isRepeatOn;
+  if (isRepeatOn) {
+    repeatBtn.style.color = "rgba(216, 35, 65, 0.78)";
+  } else {
+    repeatBtn.style.color = "inherit";
+  }
+};
+
+suffleBtn.addEventListener("click", handleShuffleBtnClick);
+repeatBtn.addEventListener("click", handleRepeatBtnClick);
+prevBtn.addEventListener("click", handlePrevBtnClick);
 checkBox.addEventListener("change", hidePlayerBox);
 
 chevron.addEventListener("click", () => {
@@ -68,7 +98,7 @@ chevron.addEventListener("click", () => {
 
 playerScreenPlayBtn.addEventListener("click", togglePlayPauseBtn);
 playerScreenNextBtn.addEventListener("click", handleNextBtnClick);
-
+playerScreenPrevBtn.addEventListener("click", handlePrevBtnClick);
 playerBox.addEventListener("click", (event) => {
   if (
     event.target.tagName === "I" ||

@@ -1,7 +1,6 @@
 import express from "express";
 import {
   getAddPlayList,
-  getPlayListDetails,
   playListMain,
   postAddPlayList,
 } from "../controllers/playlistControllers.js";
@@ -21,6 +20,5 @@ playListRouter
   .post(coverImageUploadMiddleware, postAddPlayList);
 playListRouter.get("/add/search-results/:keyword", sendSearchResults);
 playListRouter.get("/search/:keyword", search);
-playListRouter.get("/:playlistId", getPlayListDetails);
 
 export default playListRouter;

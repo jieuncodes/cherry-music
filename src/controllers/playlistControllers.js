@@ -11,13 +11,6 @@ export const playListMain = async (req, res) => {
   return res.render("playlist", { userPlaylists, hasPlaylists });
 };
 
-export const getPlayListDetails = async (req, res) => {
-  const { playlistId } = req.params;
-  const playlist = await PlayList.findById(playlistId).populate("tracks");
-  console.log("detail page of ", playlist);
-  return res.render("playlist_detail", { playlist });
-};
-
 export const getAddPlayList = (req, res) => {
   return res.render("add_playlist");
 };

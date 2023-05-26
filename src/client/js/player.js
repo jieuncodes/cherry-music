@@ -1,6 +1,5 @@
 import { hideLoadingScreen } from "./loading.js";
 import {
-  isRepeatOn,
   paintPlayerScreen,
   playerScreenNextBtn,
   playerScreenPlayBtn,
@@ -67,20 +66,19 @@ export function handleNextBtnClick() {
   updateNextButtonStatus();
   updatePrevButtonStatus();
 }
-export function handlePrevBtnClick() {
+export const handlePrevBtnClick = () => {
   if (currentTrackIndex > 0) {
     currentTrackIndex--;
-    const prevTrack = clientPlayList[currentTrackIndex];
-    paintPlayerWithTrackInfo();
-    paintPlayerScreen();
-    player.loadVideoById(prevTrack.videoId);
   } else {
-    console.log("Start of playlist reached");
+    prevBtn.disabled = true;
+    currentTrackIndex = clientPlayList.length - 1;
   }
-  updateNextButtonStatus();
-  updatePrevButtonStatus();
-  paintCurrentPlaying();
-}
+
+  paintPlayerWithTrackInfo();
+  paintPlayerScreen();
+
+  player.loadVideoById(clientPlayList[currentTrackIndex].videoId);
+};
 
 function handleTimeLineChange(event) {
   const {
@@ -174,6 +172,7 @@ const addMusicToQueue = async ({ videoId, title, artist, albumImageUrl }) => {
   } else {
     console.error("Player has not been initialized yet");
   }
+  paintCurrentPlaying();
 };
 
 const onMusicCardClick = ({ videoId, title, artist, albumImageUrl }) => {
@@ -198,11 +197,7 @@ const onPlayerStateChange = (event) => {
     playerBoxPlayBtn.childNodes[0].classList.replace("fa-pause", "fa-play");
     playerScreenPlayBtn.childNodes[0].classList.replace("fa-pause", "fa-play");
   } else if (event.data === YT.PlayerState.ENDED) {
-    if (isRepeatOn) {
-      player.playVideo();
-    } else {
-      handleNextBtnClick();
-    }
+    handleNextBtnClick();
   }
 };
 
@@ -223,7 +218,6 @@ musicCards.forEach((musicCard) => {
 });
 playerBoxPlayBtn.addEventListener("click", togglePlayPauseBtn);
 playerBoxNextBtn.addEventListener("click", handleNextBtnClick);
-playerScreenPrevBtn.addEventListener("click", handlePrevBtnClick);
 document.addEventListener("DOMContentLoaded", () => {
   const tag = document.createElement("script");
   tag.src = "https://www.youtube.com/iframe_api";
