@@ -20,11 +20,8 @@
     "url": "https://github.com/jieuncodes/cherry-music.git"
   },
   "dependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-loader": "^9.1.2",
     "bcrypt": "^5.1.0",
     "connect-mongo": "^5.0.0",
-    "cross-env": "^7.0.3",
     "css-loader": "^6.7.3",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
@@ -32,23 +29,25 @@
     "express-session": "^1.17.3",
     "flash": "^1.1.0",
     "googleapis": "^118.0.0",
-    "mini-css-extract-plugin": "^2.7.5",
     "mongoose": "^7.1.0",
     "multer": "^1.4.5-lts.1",
     "node-fetch": "^3.3.1",
-    "parcel": "^2.8.3",
-    "sass-loader": "^13.2.2"
+    "sass-loader": "^13.2.2",
+    "pug": "^3.0.2",
+    "morgan": "^1.10.0",
+    "webpack-cli": "^5.0.2"
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
+    "mini-css-extract-plugin": "^2.7.5",
+    "babel-cli": "^6.26.0",
+    "babel-loader": "^9.1.2",
     "@babel/core": "^7.21.8",
     "@babel/node": "^7.20.7",
     "@babel/preset-env": "^7.21.5",
     "@flydotio/dockerfile": "^0.2.7",
-    "morgan": "^1.10.0",
     "nodemon": "^2.0.22",
-    "pug": "^3.0.2",
     "sass": "^1.62.1",
-    "webpack": "^5.82.0",
-    "webpack-cli": "^5.0.2"
+    "webpack": "^5.82.0"
   }
 }
