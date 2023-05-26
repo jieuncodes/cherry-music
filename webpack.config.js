@@ -8,8 +8,6 @@ const __dirname = dirname(__filename);
 const BASE_JS = "./src/client/js/";
 
 const config = {
-  watch: true,
-
   entry: {
     main: BASE_JS + "main.js",
     player: BASE_JS + "player.js",
