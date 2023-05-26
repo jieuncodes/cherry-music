@@ -1,5 +1,5 @@
 import { fetchSearchData } from "../../api/searchApi.js";
-
+import { paintMusicCard } from "./trackPainters.js";
 const addCoverBox = document.querySelector(".add-cover-box");
 const addTrackBtn = document.querySelector("button.add-track");
 const searchModal = document.querySelector(".search-modal");

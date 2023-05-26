@@ -10,6 +10,7 @@ const BASE_JS = "./src/client/js/";
 const config = {
   //delete watch when deploy
   watch: true,
+
   entry: {
     main: BASE_JS + "main.js",
     player: BASE_JS + "player.js",
@@ -19,7 +20,7 @@ const config = {
     loading: BASE_JS + "loading.js",
     slidingSearch: BASE_JS + "slidingSearch.js",
     playlist: BASE_JS + "playlist.js",
-    musicCard: BASE_JS + "musicCard.js",
+    trackPainters: BASE_JS + "trackPainters.js",
 
     "/util/formatTime": BASE_JS + "util/formatTime.js",
     "/util/checkUserId": BASE_JS + "util/checkUserId.js",
