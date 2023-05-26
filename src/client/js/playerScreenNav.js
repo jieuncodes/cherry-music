@@ -117,6 +117,7 @@ const mountPlayListTracks = () => {
     musicCardsContainer.appendChild(musicCard);
   });
   navBody.appendChild(musicCardsContainer);
+  paintCurrentPlaying();
 };
 
 handle.addEventListener("click", pullUpNav);

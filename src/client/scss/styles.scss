@@ -30,6 +30,7 @@
 @import "./screens/addPlayList.scss";
 @import "./screens/loadingScreen.scss";
 @import "./screens/search.scss";
+@import "./screens/playlistDetail.scss";
 
 
 
@@ -140,6 +141,25 @@ textarea {
 
   &:hover {
     color: $disabled-white;
+  }
+}
+
+.normal-btn {
+  margin-top: 3.5rem;
+  font-size: 3.2rem;
+  display: flex;
+  height: 7rem;
+  border-radius: 3rem;
+  justify-content: center;
+  align-items: center;
+
+  border: solid 1px $fall-back-black;
+
+  &:hover {
+    color: whtie;
+    background-color: $fall-back-black-darker;
+    border: solid 1px $fall-back-black-darker;
+
   }
 }
 

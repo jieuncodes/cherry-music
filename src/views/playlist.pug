@@ -17,7 +17,7 @@ block content
                 if hasPlaylists
                     .playlist-cards-container
                         each playlist in userPlaylists
-                            +playListCard(playlist.title, playlist.coverImageUrl, playlist.creatorUserName)
+                            +playListCard(playlist._id,playlist.title, playlist.coverImageUrl, playlist.creatorUserName)                
                 else
                     .empty-playlist-instruction
                         span 자주 듣는 곡을
