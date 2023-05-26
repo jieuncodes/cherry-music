@@ -21,8 +21,13 @@ export const postAddPlayList = async (req, res) => {
     session: {
       user: { _id: userId, username },
     },
-    file: { filename },
   } = req;
+  const fileLocation = req.file ? req.file.location : null;
+
+  console.log("req.file********", req.file);
+  if (!fileLocation) {
+    console.error("File upload failed. fileLocation is undefined.");
+  }
   const parsedTracks = JSON.parse(req.body.tracks);
   const trackVideoIds = parsedTracks.map((track) => track.videoId);
 
@@ -41,7 +46,7 @@ export const postAddPlayList = async (req, res) => {
       title,
       tracks: tracksFoundInDB,
       description,
-      coverImageUrl: `/uploads/cover_images/${filename}`,
+      coverImageUrl: `${fileLocation}`,
       creator: userId,
       creatorUserName: username,
     });
@@ -63,6 +68,7 @@ export const postAddPlayList = async (req, res) => {
     });
   }
 };
+
 export const getPlayListDetails = async (req, res) => {
   const { playlistId } = req.params;
   const playlist = await PlayList.findById(playlistId).populate("tracks");

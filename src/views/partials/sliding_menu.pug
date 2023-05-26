@@ -2,13 +2,13 @@
     .sliding_menu__header 
         if !loggedInUser
             .avatar 
-                img(src="/images/default_user_avatar.jpeg")
+                img(src="/images/default_user_avatar.jpeg", crossorigin="anonymous")
             span.login-msg 로그인 해주세요 
             button.login-btn(onclick="location.href='/user/login'") 로그인
 
         if loggedInUser
             .avatar 
-                img(src=loggedInUser.profilePicPath)
+                img(src=loggedInUser.profilePicPath, crossorigin="anonymous")
             span.login-msg=loggedInUser.username
             button.my-page-btn.href-btn(onclick="location.href='/user/mypage'") 내 정보
 

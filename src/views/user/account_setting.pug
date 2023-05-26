@@ -4,7 +4,7 @@ block content
     .account-setting-box 
         .account-setting-box__header
             div.user-avatar
-                img(src=loggedInUser.profilePicPath)
+                img(src=loggedInUser.profilePicPath, crossorigin="anonymous")
             span=loggedInUser.username
 
         if errorMessage 

@@ -1,5 +1,15 @@
 // import morgan from "morgan";
 import multer from "multer";
+import multerS3 from "multer-s3";
+import { S3Client } from "@aws-sdk/client-s3";
+
+const s3 = new S3Client({
+  credentials: {
+    accessKeyId: process.env.AWS_ID,
+    secretAccessKey: process.env.AWS_SECRET,
+    region: "ap-northeast-2",
+  },
+});
 
 export const localsMiddleware = (req, res, next) => {
   res.locals.siteTitle = "Cherry Music";
@@ -29,8 +39,11 @@ export const publicOnlyMiddleware = (req, res, next) => {
 };
 
 export const profilePicUploadMiddleware = multer({
-  dest: "uploads/profile_pic/",
-  limits: { fileSize: 10000000 },
+  storage: multerS3({
+    s3,
+    bucket: "cherrymusic",
+    acl: "public-read",
+  }),
 }).single("profile_pic");
 
 export const profilePicErrorHandlerMiddleware = (err, req, res, next) => {
@@ -47,20 +60,19 @@ export const profilePicErrorHandlerMiddleware = (err, req, res, next) => {
   next();
 };
 
-export const coverImageUploadMiddleware = (req, res, next) => {
-  const upload = multer({
-    dest: "uploads/cover_images/",
-    limits: { fileSize: 10000000 },
-  }).single("coverImage");
+export const coverImageUploadMiddleware = multer({
+  storage: multerS3({
+    s3,
+    bucket: "cherrymusic",
+    acl: "public-read",
+  }),
+}).single("coverImage");
 
-  upload(req, res, function (err) {
-    if (err instanceof multer.MulterError) {
-      console.log("A Multer error occurred when uploading.", err);
-    } else if (err) {
-      console.log("An unknown error occurred when uploading.", err);
-    }
-
-    console.log("Upload successful. Proceeding...");
-    next();
-  });
+export const coverImageErrorHandlerMiddleware = (err, req, res, next) => {
+  if (err instanceof multer.MulterError) {
+    console.log("A Multer error occurred when uploading.", err);
+  } else if (err) {
+    console.log("An unknown error occurred when uploading.", err);
+  }
+  next();
 };

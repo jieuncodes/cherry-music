@@ -5,7 +5,7 @@ block content
         .my-page__box.user-info
             .my-page__box__header
                 .avatar 
-                    img(src=loggedInUser.profilePicPath)
+                    img(src=loggedInUser.profilePicPath, crossorigin="anonymous")
                 span.user-welcome #{loggedInUser.username}님 환영합니다
                 span.user-email #{loggedInUser.email}
             .my-page__box__body
