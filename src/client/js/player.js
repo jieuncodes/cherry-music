@@ -1,7 +1,10 @@
 import { hideLoadingScreen } from "./loading.js";
 import {
+  isRepeatOn,
   paintPlayerScreen,
+  playerScreenNextBtn,
   playerScreenPlayBtn,
+  playerScreenPrevBtn,
   updateProgressBar,
 } from "./playerScreen.js";
 import { paintCurrentPlaying } from "./playerScreenNav.js";
@@ -62,6 +65,20 @@ export function handleNextBtnClick() {
     console.log("End of playlist reached");
   }
   updateNextButtonStatus();
+  updatePrevButtonStatus();
+}
+export function handlePrevBtnClick() {
+  if (currentTrackIndex > 0) {
+    currentTrackIndex--;
+    const prevTrack = clientPlayList[currentTrackIndex];
+    paintPlayerWithTrackInfo();
+    paintPlayerScreen();
+    player.loadVideoById(prevTrack.videoId);
+  } else {
+    console.log("Start of playlist reached");
+  }
+  updateNextButtonStatus();
+  updatePrevButtonStatus();
 }
 
 function handleTimeLineChange(event) {
@@ -111,13 +128,24 @@ const paintPlayerWithTrackInfo = () => {
 };
 
 const updateNextButtonStatus = () => {
+  console.log("updateNextButtonStatus");
   if (
     clientPlayList.length <= 1 ||
     currentTrackIndex == clientPlayList.length - 1
   ) {
     playerBoxNextBtn.disabled = true;
+    playerScreenNextBtn.disabled = true;
   } else {
     playerBoxNextBtn.disabled = false;
+    playerScreenNextBtn.disabled = false;
+  }
+};
+const updatePrevButtonStatus = () => {
+  console.log(" update prev btn");
+  if (currentTrackIndex == 0) {
+    playerScreenPrevBtn.disabled = true;
+  } else {
+    playerScreenPrevBtn.disabled = false;
   }
 };
 
@@ -131,6 +159,7 @@ const addMusicToQueue = async ({ videoId, title, artist, albumImageUrl }) => {
   });
   currentTrackIndex = 0;
   updateNextButtonStatus();
+  updatePrevButtonStatus();
 
   if (player) {
     player.stopVideo();
@@ -169,7 +198,11 @@ const onPlayerStateChange = (event) => {
     playerBoxPlayBtn.childNodes[0].classList.replace("fa-pause", "fa-play");
     playerScreenPlayBtn.childNodes[0].classList.replace("fa-pause", "fa-play");
   } else if (event.data === YT.PlayerState.ENDED) {
-    handleNextBtnClick();
+    if (isRepeatOn) {
+      player.playVideo();
+    } else {
+      handleNextBtnClick();
+    }
   }
 };
 
@@ -190,6 +223,7 @@ musicCards.forEach((musicCard) => {
 });
 playerBoxPlayBtn.addEventListener("click", togglePlayPauseBtn);
 playerBoxNextBtn.addEventListener("click", handleNextBtnClick);
+playerScreenPrevBtn.addEventListener("click", handlePrevBtnClick);
 document.addEventListener("DOMContentLoaded", () => {
   const tag = document.createElement("script");
   tag.src = "https://www.youtube.com/iframe_api";
