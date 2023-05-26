@@ -1,0 +1,14 @@
+extends base
+include mixin/music_card
+
+block content
+    .playlist-detail
+        .playlist-detail__header(style=`background-image: url(${playlist.coverImageUrl})`)
+            span.playlist-title=playlist.title
+        button.play-page-list.normal-btn 모두 재생
+
+        .playlist-detail__body
+            each track, index in playlist.tracks
+                +musicCard(null, track.trackTitle, track.artist, track.albumImageUrl, track.youtubeVideoId, true)
+
+                
