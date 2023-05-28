@@ -10,6 +10,7 @@ import { paintCurrentPlaying } from "./playerScreenNav.js";
 import { paintTitleWithMarquee } from "./util/marquee.js";
 
 export let player;
+
 let isVideoPlaying = false;
 
 const musicCards = document.querySelectorAll("#music-card");
@@ -201,7 +202,6 @@ const onPlayerStateChange = (event) => {
   }
 };
 
-//eventListeners
 musicCards.forEach((musicCard) => {
   const videoId = musicCard.dataset.videoid;
   const title = musicCard.dataset.title;

@@ -18,10 +18,11 @@ const config = {
     loading: BASE_JS + "loading.js",
     slidingSearch: BASE_JS + "slidingSearch.js",
     playlist: BASE_JS + "playlist.js",
-
+   
     "/util/formatTime": BASE_JS + "util/formatTime.js",
     "/util/checkUserId": BASE_JS + "util/checkUserId.js",
-    "/util/marquee": BASE_JS + "util/marquee.js",
+    "/util/marquee": BASE_JS + "util/marquee.js", 
+    "controllers/timeline" : BASE_JS + "controllers/timeline.js",
   },
   plugins: [
     new MiniCssExtractPlugin({

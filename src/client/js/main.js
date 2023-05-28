@@ -1,7 +1,6 @@
 import "../scss/styles.scss";
 
-console.log("hi");
-window.addEventListener("scroll", function () {
+const paintMainScreenBg = () => {
   const backgroundGradient = document.querySelector(".background-gradient");
   if (backgroundGradient) {
     if (window.pageYOffset > 0) {
@@ -9,5 +8,6 @@ window.addEventListener("scroll", function () {
     } else {
       backgroundGradient.classList.remove("inactive");
     }
-  }
-});
+  }};
+
+window.addEventListener("scroll", paintMainScreenBg);
