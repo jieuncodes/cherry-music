@@ -1470,10 +1470,6 @@ a {
   text-decoration: none;
 }
 
-* {
-  outline: 1px solid rgba(255, 0, 0, 0.5);
-}
-
 *::-webkit-scrollbar {
   display: none;
 }
