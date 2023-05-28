@@ -1,22 +1,20 @@
 import { hideLoadingScreen } from "./loading.js";
 import {
-  paintPlayerScreen,
-  playerScreenNextBtn,
-  playerScreenPlayBtn,
-  playerScreenPrevBtn,
-  updateProgressBar,
-} from "./playerScreen.js";
+  paintPlayerWithTrackInfo,
+  paintToPauseBtn,
+  paintToPlayBtn,
+  updateNextButtonStatus,
+  updatePrevButtonStatus,
+} from "./painters.js";
+import { paintPlayerScreen, updateProgressBar } from "./playerScreen.js";
 import { paintCurrentPlaying } from "./playerScreenNav.js";
-import { paintTitleWithMarquee } from "./util/marquee.js";
 
 export let player;
-let isVideoPlaying = false;
 
 const musicCards = document.querySelectorAll("#music-card");
 export const playerBox = document.getElementById("player-box");
 export const playerBoxPlayBtn = playerBox.querySelector(".play-btn");
 export const playerBoxNextBtn = playerBox.querySelector(".next-btn");
-export const timeline = document.getElementById("timeline");
 
 export let clientPlayList = [];
 export let currentTrackIndex = 0;
@@ -70,7 +68,9 @@ export function handlePrevBtnClick() {
   if (currentTrackIndex > 0) {
     currentTrackIndex--;
   } else {
-    prevBtn.disabled = true;
+    if (prevBtn) {
+      prevBtn.disabled = true;
+    }
     currentTrackIndex = clientPlayList.length - 1;
   }
 
@@ -80,73 +80,7 @@ export function handlePrevBtnClick() {
   player.loadVideoById(clientPlayList[currentTrackIndex].videoId);
 }
 
-function handleTimeLineChange(event) {
-  const {
-    target: { value },
-  } = event;
-  if (player && player.getDuration) {
-    const videoDuration = player.getDuration();
-    const seekToSeconds = (value / 100) * videoDuration;
-    player.seekTo(seekToSeconds, true);
-  } else {
-    console.error("Player is not ready");
-  }
-}
-
-function handleTimeLineMouseDown() {
-  isVideoPlaying = player.getPlayerState() === YT.PlayerState.PLAYING;
-  if (isVideoPlaying) {
-    player.pauseVideo();
-    playerBoxPlayBtn.childNodes[0].classList.replace("fa-pause", "fa-play");
-    playerScreenPlayBtn.childNodes[0].classList.replace("fa-pause", "fa-play");
-  }
-}
-
-function handleTimeLineMouseUp() {
-  if (isVideoPlaying) {
-    player.playVideo();
-    playerBoxPlayBtn.childNodes[0].classList.replace("fa-play", "fa-pause");
-    playerScreenPlayBtn.childNodes[0].classList.replace("fa-play", "fa-pause");
-  }
-}
-
 // painters
-const paintPlayerWithTrackInfo = () => {
-  togglePlayPauseBtn();
-
-  const track = clientPlayList[currentTrackIndex];
-  const albumImgArea = playerBox.querySelector(".album-cover");
-  const trackTitleArea = playerBox.querySelector(".track-title-area");
-  const artistArea = playerBox.querySelector(".artist");
-
-  albumImgArea.style.backgroundImage = `url(${track.albumImageUrl})`;
-  artistArea.textContent = track.artist;
-
-  trackTitleArea.innerHTML = "";
-  trackTitleArea.innerHTML = paintTitleWithMarquee(track.title);
-};
-
-const updateNextButtonStatus = () => {
-  console.log("updateNextButtonStatus");
-  if (
-    clientPlayList.length <= 1 ||
-    currentTrackIndex == clientPlayList.length - 1
-  ) {
-    playerBoxNextBtn.disabled = true;
-    playerScreenNextBtn.disabled = true;
-  } else {
-    playerBoxNextBtn.disabled = false;
-    playerScreenNextBtn.disabled = false;
-  }
-};
-const updatePrevButtonStatus = () => {
-  console.log(" update prev btn");
-  if (currentTrackIndex == 0) {
-    playerScreenPrevBtn.disabled = true;
-  } else {
-    playerScreenPrevBtn.disabled = false;
-  }
-};
 
 // queue functions
 const addMusicToQueue = async ({ videoId, title, artist, albumImageUrl }) => {
@@ -190,18 +124,14 @@ const onPlayerStateChange = (event) => {
 
   if (event.data === YT.PlayerState.PLAYING) {
     playerBoxPlayBtn.disabled = false;
-    playerBoxPlayBtn.childNodes[0].classList.replace("fa-play", "fa-pause");
-    playerScreenPlayBtn.childNodes[0].classList.replace("fa-play", "fa-pause");
-    playerScreenPlayBtn.childNodes[0].style.fontSize = "4rem";
+    paintToPauseBtn();
   } else if (event.data === YT.PlayerState.PAUSED) {
-    playerBoxPlayBtn.childNodes[0].classList.replace("fa-pause", "fa-play");
-    playerScreenPlayBtn.childNodes[0].classList.replace("fa-pause", "fa-play");
+    paintToPlayBtn();
   } else if (event.data === YT.PlayerState.ENDED) {
     handleNextBtnClick();
   }
 };
 
-//eventListeners
 musicCards.forEach((musicCard) => {
   const videoId = musicCard.dataset.videoid;
   const title = musicCard.dataset.title;
@@ -223,7 +153,3 @@ document.addEventListener("DOMContentLoaded", () => {
   tag.src = "https://www.youtube.com/iframe_api";
   document.body.appendChild(tag);
 });
-
-timeline.addEventListener("input", handleTimeLineChange);
-timeline.addEventListener("mousedown", handleTimeLineMouseDown);
-timeline.addEventListener("mouseup", handleTimeLineMouseUp);

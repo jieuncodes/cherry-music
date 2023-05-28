@@ -164,11 +164,6 @@ const handleFormSubmit = async (event) => {
   formData.append("coverImage", coverFile);
   formData.append("tracks", JSON.stringify(addPlaylistCart));
 
-  // for (let pair of formData.entries()) {
-  //   console.log(pair[0] + ", " + pair[1]);
-  // }
-  // debugger;
-
   try {
     const response = await fetch("/playlist/add", {
       method: "POST",
