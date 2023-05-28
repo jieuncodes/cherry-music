@@ -1,13 +1,10 @@
 import { hideLoadingScreen } from "./loading.js";
+import { paintPlayerWithTrackInfo, paintToPauseBtn, paintToPlayBtn, updateNextButtonStatus, updatePrevButtonStatus } from "./painters.js";
 import {
   paintPlayerScreen,
-  playerScreenNextBtn,
-  playerScreenPlayBtn,
-  playerScreenPrevBtn,
   updateProgressBar,
 } from "./playerScreen.js";
 import { paintCurrentPlaying } from "./playerScreenNav.js";
-import { paintTitleWithMarquee } from "./util/marquee.js";
 
 export let player;
 
@@ -82,42 +79,6 @@ export function handlePrevBtnClick(){
 
 
 // painters
-const paintPlayerWithTrackInfo = () => {
-  togglePlayPauseBtn();
-
-  const track = clientPlayList[currentTrackIndex];
-  const albumImgArea = playerBox.querySelector(".album-cover");
-  const trackTitleArea = playerBox.querySelector(".track-title-area");
-  const artistArea = playerBox.querySelector(".artist");
-
-  albumImgArea.style.backgroundImage = `url(${track.albumImageUrl})`;
-  artistArea.textContent = track.artist;
-
-  trackTitleArea.innerHTML = "";
-  trackTitleArea.innerHTML = paintTitleWithMarquee(track.title);
-};
-
-const updateNextButtonStatus = () => {
-  console.log("updateNextButtonStatus");
-  if (
-    clientPlayList.length <= 1 ||
-    currentTrackIndex == clientPlayList.length - 1
-  ) {
-    playerBoxNextBtn.disabled = true;
-    playerScreenNextBtn.disabled = true;
-  } else {
-    playerBoxNextBtn.disabled = false;
-    playerScreenNextBtn.disabled = false;
-  }
-};
-const updatePrevButtonStatus = () => {
-  console.log(" update prev btn");
-  if (currentTrackIndex == 0) {
-    playerScreenPrevBtn.disabled = true;
-  } else {
-    playerScreenPrevBtn.disabled = false;
-  }
-};
 
 // queue functions
 const addMusicToQueue = async ({ videoId, title, artist, albumImageUrl }) => {
@@ -154,6 +115,7 @@ const onMusicCardClick = ({ videoId, title, artist, albumImageUrl }) => {
   }
 };
 
+
 // iframe
 const onPlayerStateChange = (event) => {
   console.log("playerstate", event.data);
@@ -161,12 +123,9 @@ const onPlayerStateChange = (event) => {
 
   if (event.data === YT.PlayerState.PLAYING) {
     playerBoxPlayBtn.disabled = false;
-    playerBoxPlayBtn.childNodes[0].classList.replace("fa-play", "fa-pause");
-    playerScreenPlayBtn.childNodes[0].classList.replace("fa-play", "fa-pause");
-    playerScreenPlayBtn.childNodes[0].style.fontSize = "4rem";
+    paintToPauseBtn();
   } else if (event.data === YT.PlayerState.PAUSED) {
-    playerBoxPlayBtn.childNodes[0].classList.replace("fa-pause", "fa-play");
-    playerScreenPlayBtn.childNodes[0].classList.replace("fa-pause", "fa-play");
+    paintToPlayBtn();
   } else if (event.data === YT.PlayerState.ENDED) {
     handleNextBtnClick();
   }

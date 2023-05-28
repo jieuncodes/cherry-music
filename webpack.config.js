@@ -18,6 +18,8 @@ const config = {
     loading: BASE_JS + "loading.js",
     slidingSearch: BASE_JS + "slidingSearch.js",
     playlist: BASE_JS + "playlist.js",
+    painters: BASE_JS + "painters.js",
+
    
     "/util/formatTime": BASE_JS + "util/formatTime.js",
     "/util/checkUserId": BASE_JS + "util/checkUserId.js",
