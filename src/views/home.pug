@@ -21,7 +21,6 @@ block content
         .scroll-container.scroll_playlist
             each playlist, index in allPlaylists
                 +playListCard(playlist._id, playlist.title, playlist.coverImageUrl, playlist.creatorUserName)
-  include partials/player_box
 
   block scripts
     script(src="/static/js/player.js")

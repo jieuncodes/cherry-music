@@ -1,5 +1,5 @@
 import { addMusicToQueue } from "./controllers/queue.js";
-import { iframe } from "./main.js";
+import { iframe, playerReadyPromise } from "./main.js";
 import {
   paintPlayerWithTrackInfo,
   updateNextButtonStatus,
@@ -22,7 +22,8 @@ export let currentTrackState = {
 export const isPlayerPlaying = () =>
   iframe.player && iframe.player.getPlayerState() === YT.PlayerState.PLAYING;
 
-export function togglePlayPauseBtn() {
+export async function togglePlayPauseBtn() {
+  await playerReadyPromise;
   return isPlayerPlaying()
     ? iframe.player.pauseVideo()
     : iframe.player.playVideo();
@@ -58,7 +59,9 @@ export function handlePrevBtnClick() {
   iframe.player.loadVideoById(clientPlayList[currentTrackState.index].videoId);
 }
 
-const onMusicCardClick = ({ videoId, title, artist, albumImageUrl }) => {
+const onMusicCardClick = async ({ videoId, title, artist, albumImageUrl }) => {
+  await playerReadyPromise;
+
   if (iframe.player) {
     addMusicToQueue({ videoId, title, artist, albumImageUrl });
   } else {

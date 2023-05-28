@@ -38,7 +38,7 @@ export const paintPlayerScreen = () => {
 export const updateProgressBar = async () => {
   await playerReadyPromise;
 
-  if (!player) {
+  if (!iframe.player) {
     return;
   }
 
@@ -98,6 +98,7 @@ chevron.addEventListener("click", () => {
 playerScreenPlayBtn.addEventListener("click", togglePlayPauseBtn);
 playerScreenNextBtn.addEventListener("click", handleNextBtnClick);
 playerScreenPrevBtn.addEventListener("click", handlePrevBtnClick);
+
 playerBox.addEventListener("click", (event) => {
   if (
     event.target.tagName === "I" ||

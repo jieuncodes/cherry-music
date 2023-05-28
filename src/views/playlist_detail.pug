@@ -10,5 +10,7 @@ block content
         .playlist-detail__body
             each track, index in playlist.tracks
                 +musicCard(null, track.trackTitle, track.artist, track.albumImageUrl, track.youtubeVideoId, true)
+    block script 
+        script(src="/static/js/player.js")
 
                 
