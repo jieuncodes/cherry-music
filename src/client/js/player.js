@@ -10,13 +10,12 @@ import { paintCurrentPlaying } from "./playerScreenNav.js";
 import { paintTitleWithMarquee } from "./util/marquee.js";
 
 export let player;
-let isVideoPlaying = false;
+
 
 const musicCards = document.querySelectorAll("#music-card");
 export const playerBox = document.getElementById("player-box");
 export const playerBoxPlayBtn = playerBox.querySelector(".play-btn");
 export const playerBoxNextBtn = playerBox.querySelector(".next-btn");
-export const timeline = document.getElementById("timeline");
 
 export let clientPlayList = [];
 export let currentTrackIndex = 0;
@@ -66,7 +65,7 @@ export function handleNextBtnClick() {
   updateNextButtonStatus();
   updatePrevButtonStatus();
 }
-export const handlePrevBtnClick = () => {
+export function handlePrevBtnClick(){
   if (currentTrackIndex > 0) {
     currentTrackIndex--;
   } else {
@@ -80,35 +79,7 @@ export const handlePrevBtnClick = () => {
   player.loadVideoById(clientPlayList[currentTrackIndex].videoId);
 };
 
-function handleTimeLineChange(event) {
-  const {
-    target: { value },
-  } = event;
-  if (player && player.getDuration) {
-    const videoDuration = player.getDuration();
-    const seekToSeconds = (value / 100) * videoDuration;
-    player.seekTo(seekToSeconds, true);
-  } else {
-    console.error("Player is not ready");
-  }
-}
 
-function handleTimeLineMouseDown() {
-  isVideoPlaying = player.getPlayerState() === YT.PlayerState.PLAYING;
-  if (isVideoPlaying) {
-    player.pauseVideo();
-    playerBoxPlayBtn.childNodes[0].classList.replace("fa-pause", "fa-play");
-    playerScreenPlayBtn.childNodes[0].classList.replace("fa-pause", "fa-play");
-  }
-}
-
-function handleTimeLineMouseUp() {
-  if (isVideoPlaying) {
-    player.playVideo();
-    playerBoxPlayBtn.childNodes[0].classList.replace("fa-play", "fa-pause");
-    playerScreenPlayBtn.childNodes[0].classList.replace("fa-play", "fa-pause");
-  }
-}
 
 // painters
 const paintPlayerWithTrackInfo = () => {
@@ -201,7 +172,6 @@ const onPlayerStateChange = (event) => {
   }
 };
 
-//eventListeners
 musicCards.forEach((musicCard) => {
   const videoId = musicCard.dataset.videoid;
   const title = musicCard.dataset.title;
@@ -224,6 +194,3 @@ document.addEventListener("DOMContentLoaded", () => {
   document.body.appendChild(tag);
 });
 
-timeline.addEventListener("input", handleTimeLineChange);
-timeline.addEventListener("mousedown", handleTimeLineMouseDown);
-timeline.addEventListener("mouseup", handleTimeLineMouseUp);

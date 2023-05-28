@@ -1,3 +1,4 @@
+import { timeline } from "./controllers/timeline.js";
 import {
   clientPlayList,
   currentTrackIndex,
@@ -5,7 +6,6 @@ import {
   handlePrevBtnClick,
   player,
   playerReadyPromise,
-  timeline,
   togglePlayPauseBtn,
 } from "./player.js";
 import { formatTime } from "./util/formatTime.js";
