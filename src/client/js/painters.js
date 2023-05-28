@@ -1,6 +1,6 @@
 import {
   clientPlayList,
-  currentTrackIndex,
+  currentTrackState,
   playerBox,
   playerBoxNextBtn,
   playerBoxPlayBtn,
@@ -31,7 +31,7 @@ export const paintToPlayBtn = () => {
 export const paintPlayerWithTrackInfo = () => {
   togglePlayPauseBtn();
 
-  const track = clientPlayList[currentTrackIndex];
+  const track = clientPlayList[currentTrackState.index];
   const albumImgArea = playerBox.querySelector(".album-cover");
   const trackTitleArea = playerBox.querySelector(".track-title-area");
   const artistArea = playerBox.querySelector(".artist");
@@ -39,7 +39,6 @@ export const paintPlayerWithTrackInfo = () => {
   albumImgArea.style.backgroundImage = `url(${track.albumImageUrl})`;
   artistArea.textContent = track.artist;
 
-  // trackTitleArea.innerHTML = "";
   trackTitleArea.innerHTML = paintTitleWithMarquee(track.title);
 };
 
@@ -54,12 +53,12 @@ const disableButtonConditionally = (button, deadEnd) => {
 export const updateNextButtonStatus = () => {
   const deadEnd =
     clientPlayList.length <= 1 ||
-    currentTrackIndex === clientPlayList.length - 1;
+    currentTrackState.index === clientPlayList.length - 1;
   disableButtonConditionally(playerBoxNextBtn, deadEnd);
   disableButtonConditionally(playerScreenNextBtn, deadEnd);
 };
 
 export const updatePrevButtonStatus = () => {
-  const deadEnd = currentTrackIndex === 0;
+  const deadEnd = currentTrackState.index === 0;
   disableButtonConditionally(playerScreenPrevBtn, deadEnd);
 };

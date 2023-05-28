@@ -1,7 +1,7 @@
 import { timeline } from "./controllers/timeline.js";
 import {
   clientPlayList,
-  currentTrackIndex,
+  currentTrackState,
   handleNextBtnClick,
   handlePrevBtnClick,
   player,
@@ -25,7 +25,7 @@ const prevBtn = document.querySelector(".prev-btn");
 
 export const paintPlayerScreen = () => {
   const { videoId, title, artist, albumImageUrl } =
-    clientPlayList[currentTrackIndex];
+    clientPlayList[currentTrackState.index];
   const albumCoverArea = playerScreen.querySelector(".album-img");
   const titleArea = playerScreen.querySelector(".track-title-area");
   const artistArea = playerScreen.querySelector(".artist");

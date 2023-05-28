@@ -1,3 +1,4 @@
+import { addMusicToQueue } from "./controllers/queue.js";
 import { hideLoadingScreen } from "./loading.js";
 import {
   paintPlayerWithTrackInfo,
@@ -17,7 +18,9 @@ export const playerBoxPlayBtn = playerBox.querySelector(".play-btn");
 export const playerBoxNextBtn = playerBox.querySelector(".next-btn");
 
 export let clientPlayList = [];
-export let currentTrackIndex = 0;
+export let currentTrackState = {
+  index: 0,
+};
 
 export let playerReadyPromise = new Promise((resolve) => {
   window.onYouTubeIframeAPIReady = () => {
@@ -52,9 +55,9 @@ export function togglePlayPauseBtn() {
 }
 
 export function handleNextBtnClick() {
-  if (currentTrackIndex < clientPlayList.length - 1) {
-    currentTrackIndex++;
-    const nextTrack = clientPlayList[currentTrackIndex];
+  if (currentTrackState.index < clientPlayList.length - 1) {
+    currentTrackState.index++;
+    const nextTrack = clientPlayList[currentTrackState.index];
     paintPlayerWithTrackInfo();
     paintPlayerScreen();
     player.loadVideoById(nextTrack.videoId);
@@ -65,48 +68,21 @@ export function handleNextBtnClick() {
   updatePrevButtonStatus();
 }
 export function handlePrevBtnClick() {
-  if (currentTrackIndex > 0) {
-    currentTrackIndex--;
+  if (currentTrackState.index > 0) {
+    currentTrackState.index--;
   } else {
     if (prevBtn) {
       prevBtn.disabled = true;
     }
-    currentTrackIndex = clientPlayList.length - 1;
+    currentTrackState.index = clientPlayList.length - 1;
   }
 
   paintPlayerWithTrackInfo();
   paintPlayerScreen();
   updateNextButtonStatus();
   updatePrevButtonStatus();
-  player.loadVideoById(clientPlayList[currentTrackIndex].videoId);
+  player.loadVideoById(clientPlayList[currentTrackState.index].videoId);
 }
-
-// queue functions
-const addMusicToQueue = async ({ videoId, title, artist, albumImageUrl }) => {
-  clientPlayList.unshift({
-    videoId,
-    title,
-    artist,
-    albumImageUrl,
-  });
-  currentTrackIndex = 0;
-  updateNextButtonStatus();
-  updatePrevButtonStatus();
-
-  if (player) {
-    player.stopVideo();
-    const firstTrack = clientPlayList[0];
-    if (firstTrack) {
-      paintPlayerWithTrackInfo();
-      paintPlayerScreen();
-
-      player.loadVideoById(firstTrack.videoId);
-    }
-  } else {
-    console.error("Player has not been initialized yet");
-  }
-  paintCurrentPlaying();
-};
 
 const onMusicCardClick = ({ videoId, title, artist, albumImageUrl }) => {
   if (player) {

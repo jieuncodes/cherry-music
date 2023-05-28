@@ -1,6 +1,6 @@
 import {
   clientPlayList,
-  currentTrackIndex,
+  currentTrackState,
   playerReadyPromise,
 } from "./player.js";
 
@@ -44,7 +44,7 @@ const handleNavBtnClick = (event) => {
 
 export const paintCurrentPlaying = async () => {
   await playerReadyPromise;
-  const currentPlayingIndex = currentTrackIndex;
+  const currentPlayingIndex = currentTrackState.index;
   const listMusicCards = document.querySelectorAll(".playlist-music-card");
 
   if (listMusicCards) {
