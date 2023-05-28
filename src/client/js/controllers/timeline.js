@@ -8,19 +8,20 @@ const handleTimeLineChange = (event) => {
   const {
     target: { value },
   } = event;
-  if (iframe.player && iframe.player.getDuration) {
-    const videoDuration = iframe.player.getDuration();
+  if (state.iframe.player && state.iframe.player.getDuration) {
+    const videoDuration = state.iframe.player.getDuration();
     const seekToSeconds = (value / 100) * videoDuration;
-    iframe.player.seekTo(seekToSeconds, true);
+    state.iframe.player.seekTo(seekToSeconds, true);
   } else {
     console.error("Player is not ready");
   }
 };
 
 const handleTimeLineMouseDown = () => {
-  isVideoPlaying = iframe.player.getPlayerState() === YT.PlayerState.PLAYING;
+  isVideoPlaying =
+    state.iframe.player.getPlayerState() === YT.PlayerState.PLAYING;
   if (isVideoPlaying) {
-    iframe.player.pauseVideo();
+    state.iframe.player.pauseVideo();
     playerBoxPlayBtn.childNodes[0].classList.replace("fa-pause", "fa-play");
     playerScreenPlayBtn.childNodes[0].classList.replace("fa-pause", "fa-play");
   }

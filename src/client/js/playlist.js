@@ -1,12 +1,13 @@
 import { stopAndPlayFirst } from "./controllers/queue.js";
 import { state } from "./main.js";
+import { updateNextButtonStatus } from "./painters.js";
 
 export const playAllBtn = document.querySelector(".play-page-list");
 export const currListTracks = document.querySelectorAll("#music-card");
 
 document.addEventListener("DOMContentLoaded", function () {
   const addAllListTracksInQueue = async () => {
-    state.currentTrackState.index = 0;
+    state.currQueue.index = 0;
 
     const allPlaylistTracks = [];
     currListTracks.forEach((track) => {
@@ -21,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     state.client.playlist = [...allPlaylistTracks, ...state.client.playlist];
     stopAndPlayFirst();
+    updateNextButtonStatus();
   };
 
   playAllBtn.addEventListener("click", addAllListTracksInQueue);

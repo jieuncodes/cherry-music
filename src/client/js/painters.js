@@ -41,7 +41,7 @@ export const paintToPlayBtn = () => {
 export const paintPlayerWithTrackInfo = () => {
   togglePlayPauseBtn();
 
-  const track = state.client.playlist[state.currentTrackState.index];
+  const track = state.client.playlist[state.currQueue.index];
   const albumImgArea = playerBox.querySelector(".album-cover");
   const trackTitleArea = playerBox.querySelector(".track-title-area");
   const artistArea = playerBox.querySelector(".artist");
@@ -61,14 +61,15 @@ const disableButtonConditionally = (button, deadEnd) => {
 };
 
 export const updateNextButtonStatus = () => {
+  console.log("state.client.playlist", state.client.playlist);
   const deadEnd =
     state.client.playlist.length <= 1 ||
-    state.currentTrackState.index === state.client.playlist.length - 1;
+    state.currQueue.index === state.client.playlist.length - 1;
   disableButtonConditionally(playerBoxNextBtn, deadEnd);
   disableButtonConditionally(playerScreenNextBtn, deadEnd);
 };
 
 export const updatePrevButtonStatus = () => {
-  const deadEnd = state.currentTrackState.index === 0;
+  const deadEnd = state.currQueue.index === 0;
   disableButtonConditionally(playerScreenPrevBtn, deadEnd);
 };

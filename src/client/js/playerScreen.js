@@ -22,7 +22,7 @@ const prevBtn = document.querySelector(".prev-btn");
 
 export const paintPlayerScreen = () => {
   const { videoId, title, artist, albumImageUrl } =
-    state.client.playlist[state.currentTrackState.index];
+    state.client.playlist[state.currQueue.index];
   const albumCoverArea = playerScreen.querySelector(".album-img");
   const titleArea = playerScreen.querySelector(".track-title-area");
   const artistArea = playerScreen.querySelector(".artist");
@@ -35,12 +35,12 @@ export const paintPlayerScreen = () => {
 export const updateProgressBar = async () => {
   await playerReadyPromise;
 
-  if (!iframe.player) {
+  if (!state.iframe.player) {
     return;
   }
 
-  const currentTime = iframe.player.getCurrentTime();
-  const duration = iframe.player.getDuration();
+  const currentTime = state.iframe.player.getCurrentTime();
+  const duration = state.iframe.player.getDuration();
 
   const progress = (currentTime / duration) * 100;
 

@@ -6,7 +6,6 @@ import {
   updatePrevButtonStatus,
 } from "./painters.js";
 import { paintPlayerScreen } from "./playerScreen.js";
-import { currListTracks, playAllBtn } from "./playlist.js";
 
 const musicCards = document.querySelectorAll("#music-card");
 export const playerBox = document.getElementById("player-box");
@@ -15,33 +14,34 @@ export const playerBoxNextBtn = playerBox.querySelector(".next-btn");
 
 //todo: put the client pl in the localStroage
 export const isPlayerPlaying = () =>
-  iframe.player && iframe.player.getPlayerState() === YT.PlayerState.PLAYING;
+  state.iframe.player &&
+  state.iframe.player.getPlayerState() === YT.PlayerState.PLAYING;
 
 export async function togglePlayPauseBtn() {
   await playerReadyPromise;
   return isPlayerPlaying()
-    ? iframe.player.pauseVideo()
-    : iframe.player.playVideo();
+    ? state.iframe.player.pauseVideo()
+    : state.iframe.player.playVideo();
 }
 
 export const updateTrackIndex = (direction) => {
   if (
     direction === "next" &&
-    state.currentTrackState.index < state.client.playlist.length - 1
+    state.currQueue.index < state.client.playlist.length - 1
   ) {
-    state.currentTrackState.index++;
-  } else if (direction === "prev" && state.currentTrackState.index > 0) {
-    state.currentTrackState.index--;
+    state.currQueue.index++;
+  } else if (direction === "prev" && state.currQueue.index > 0) {
+    state.currQueue.index--;
   }
 };
 
 export function handleNextBtnClick() {
   updateTrackIndex("next");
-  const nextTrack = state.client.playlist[state.currentTrackState.index];
+  const nextTrack = state.client.playlist[state.currQueue.index];
   paintPlayerWithTrackInfo();
   paintPlayerScreen();
 
-  iframe.player.loadVideoById(nextTrack.videoId);
+  state.iframe.player.loadVideoById(nextTrack.videoId);
   updateNextButtonStatus();
   updatePrevButtonStatus();
 }
@@ -53,15 +53,15 @@ export function handlePrevBtnClick() {
   updateNextButtonStatus();
   updatePrevButtonStatus();
 
-  iframe.player.loadVideoById(
-    state.client.playlist[state.currentTrackState.index].videoId
+  state.iframe.player.loadVideoById(
+    state.client.playlist[state.currQueue.index].videoId
   );
 }
 
 const onMusicCardClick = async ({ videoId, title, artist, albumImageUrl }) => {
   await playerReadyPromise;
 
-  if (iframe.player) {
+  if (state.iframe.player) {
     addMusicToQueue({ videoId, title, artist, albumImageUrl });
   } else {
     console.error("Player has not been initialized yet");

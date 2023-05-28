@@ -18,21 +18,21 @@ export let state = {
   client: {
     playlist: [],
   },
-  currentTrackState: {
+  currQueue: {
     index: 0,
+  },
+  iframe: {
+    player: null,
   },
 };
 
 //iframe
-export let iframe = {
-  player: null,
-};
 
 export let playerReadyPromise = new Promise((resolve) => {
   window.onYouTubeIframeAPIReady = () => {
     const playerElement = document.getElementById("youtube-player");
     if (playerElement) {
-      iframe.player = new YT.Player(playerElement, {
+      state.iframe.player = new YT.Player(playerElement, {
         videoId: "",
         events: {
           onReady: (event) => {

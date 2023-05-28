@@ -40,7 +40,7 @@ const handleNavBtnClick = (event) => {
 
 export const paintCurrentPlaying = async () => {
   await playerReadyPromise;
-  const currentPlayingIndex = state.currentTrackState.index;
+  const currentPlayingIndex = state.currQueue.index;
   const listMusicCards = document.querySelectorAll(".playlist-music-card");
 
   if (listMusicCards) {
