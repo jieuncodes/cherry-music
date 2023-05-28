@@ -66,7 +66,9 @@ export function handlePrevBtnClick(){
   if (currentTrackIndex > 0) {
     currentTrackIndex--;
   } else {
-    prevBtn.disabled = true;
+    if (prevBtn) {
+      prevBtn.disabled = true;
+    }    
     currentTrackIndex = clientPlayList.length - 1;
   }
 

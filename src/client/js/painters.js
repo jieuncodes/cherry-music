@@ -36,7 +36,6 @@ export const paintPlayerWithTrackInfo = () => {
 };
 
 export const updateNextButtonStatus = () => {
-  console.log("updateNextButtonStatus");
   if (
     clientPlayList.length <= 1 ||
     currentTrackIndex == clientPlayList.length - 1
@@ -50,7 +49,6 @@ export const updateNextButtonStatus = () => {
 };
 
 export const updatePrevButtonStatus = () => {
-  console.log(" update prev btn");
   if (currentTrackIndex == 0) {
     playerScreenPrevBtn.disabled = true;
   } else {
