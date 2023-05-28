@@ -1,11 +1,11 @@
 import { timeline } from "./controllers/timeline.js";
+import { iframe, playerReadyPromise } from "./main.js";
 import {
   clientPlayList,
   currentTrackState,
   handleNextBtnClick,
   handlePrevBtnClick,
   player,
-  playerReadyPromise,
   togglePlayPauseBtn,
 } from "./player.js";
 import { formatTime } from "./util/formatTime.js";
@@ -42,8 +42,8 @@ export const updateProgressBar = async () => {
     return;
   }
 
-  const currentTime = player.getCurrentTime();
-  const duration = player.getDuration();
+  const currentTime = iframe.player.getCurrentTime();
+  const duration = iframe.player.getDuration();
 
   const progress = (currentTime / duration) * 100;
 

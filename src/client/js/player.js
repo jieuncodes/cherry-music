@@ -1,16 +1,13 @@
 import { addMusicToQueue } from "./controllers/queue.js";
-import { hideLoadingScreen } from "./loading.js";
+import { iframe } from "./main.js";
 import {
   paintPlayerWithTrackInfo,
-  paintToPauseBtn,
-  paintToPlayBtn,
   updateNextButtonStatus,
   updatePrevButtonStatus,
 } from "./painters.js";
-import { paintPlayerScreen, updateProgressBar } from "./playerScreen.js";
-import { paintCurrentPlaying } from "./playerScreenNav.js";
+import { paintPlayerScreen } from "./playerScreen.js";
 
-export let player;
+console.log("Script loaded");
 
 const musicCards = document.querySelectorAll("#music-card");
 export const playerBox = document.getElementById("player-box");
@@ -22,35 +19,18 @@ export let currentTrackState = {
   index: 0,
 };
 
-export let playerReadyPromise = new Promise((resolve) => {
-  window.onYouTubeIframeAPIReady = () => {
-    const playerElement = document.getElementById("youtube-player");
-    if (playerElement) {
-      player = new YT.Player(playerElement, {
-        videoId: "",
-        events: {
-          onReady: (event) => {
-            event.target.playVideo();
-            togglePlayPauseBtn();
-            resolve();
-          },
-          onStateChange: onPlayerStateChange,
-        },
-      });
-      setInterval(updateProgressBar, 100);
-      hideLoadingScreen();
-    } else {
-      console.error("Player element not found in the DOM");
-    }
-  };
-});
-
 // player commands
 export function togglePlayPauseBtn() {
-  if (player && player.getPlayerState() === YT.PlayerState.PLAYING) {
-    player.pauseVideo();
-  } else {
-    player.playVideo();
+  if (
+    iframe.player &&
+    iframe.player.getPlayerState() === YT.PlayerState.PLAYING
+  ) {
+    iframe.player.pauseVideo();
+  } else if (
+    iframe.player &&
+    iframe.player.getPlayerState() !== YT.PlayerState.PLAYING
+  ) {
+    iframe.player.playVideo();
   }
 }
 
@@ -60,7 +40,7 @@ export function handleNextBtnClick() {
     const nextTrack = clientPlayList[currentTrackState.index];
     paintPlayerWithTrackInfo();
     paintPlayerScreen();
-    player.loadVideoById(nextTrack.videoId);
+    iframe.player.loadVideoById(nextTrack.videoId);
   } else {
     console.log("End of playlist reached");
   }
@@ -81,29 +61,14 @@ export function handlePrevBtnClick() {
   paintPlayerScreen();
   updateNextButtonStatus();
   updatePrevButtonStatus();
-  player.loadVideoById(clientPlayList[currentTrackState.index].videoId);
+  iframe.player.loadVideoById(clientPlayList[currentTrackState.index].videoId);
 }
-
 const onMusicCardClick = ({ videoId, title, artist, albumImageUrl }) => {
-  if (player) {
+  if (iframe.player) {
     addMusicToQueue({ videoId, title, artist, albumImageUrl });
   } else {
+    console.log("clicked music title", title);
     console.error("Player has not been initialized yet");
-  }
-};
-
-// iframe
-const onPlayerStateChange = (event) => {
-  console.log("playerstate", event.data);
-  paintCurrentPlaying();
-
-  if (event.data === YT.PlayerState.PLAYING) {
-    playerBoxPlayBtn.disabled = false;
-    paintToPauseBtn();
-  } else if (event.data === YT.PlayerState.PAUSED) {
-    paintToPlayBtn();
-  } else if (event.data === YT.PlayerState.ENDED) {
-    handleNextBtnClick();
   }
 };
 
@@ -114,13 +79,14 @@ musicCards.forEach((musicCard) => {
   const albumImageUrl = musicCard.dataset.albumimageurl;
 
   if (videoId) {
-    musicCard.addEventListener("click", () =>
-      onMusicCardClick({ videoId, title, artist, albumImageUrl })
-    );
+    musicCard.addEventListener("click", (event) => {
+      onMusicCardClick({ videoId, title, artist, albumImageUrl });
+    });
   } else {
     console.error("Music card does not have a data-videoid attribute");
   }
 });
+
 playerBoxPlayBtn.addEventListener("click", togglePlayPauseBtn);
 playerBoxNextBtn.addEventListener("click", handleNextBtnClick);
 document.addEventListener("DOMContentLoaded", () => {

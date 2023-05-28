@@ -13,7 +13,7 @@ import {
 } from "./playerScreen.js";
 import { paintTitleWithMarquee } from "./util/marquee.js";
 
-const replaceClassForButton = (button, oldClass, newClass) => {
+export const replaceClassForButton = (button, oldClass, newClass) => {
   button.childNodes[0].classList.replace(oldClass, newClass);
 };
 

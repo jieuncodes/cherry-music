@@ -1,8 +1,5 @@
-import {
-  clientPlayList,
-  currentTrackState,
-  playerReadyPromise,
-} from "./player.js";
+import { playerReadyPromise } from "./main.js";
+import { clientPlayList, currentTrackState } from "./player.js";
 
 const navArea = document.querySelector(".player-screen__nav");
 const handle = navArea.querySelector(".handle-bar");

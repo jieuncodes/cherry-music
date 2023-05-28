@@ -1,9 +1,10 @@
+import { iframe } from "../main.js";
 import {
   paintPlayerWithTrackInfo,
   updateNextButtonStatus,
   updatePrevButtonStatus,
 } from "../painters.js";
-import { clientPlayList, currentTrackState, player } from "../player.js";
+import { clientPlayList, currentTrackState } from "../player.js";
 import { paintPlayerScreen } from "../playerScreen.js";
 import { paintCurrentPlaying } from "../playerScreenNav.js";
 
@@ -23,14 +24,14 @@ export const addMusicToQueue = async ({
   updateNextButtonStatus();
   updatePrevButtonStatus();
 
-  if (player) {
-    player.stopVideo();
+  if (iframe.player) {
+    iframe.player.stopVideo();
     const firstTrack = clientPlayList[0];
     if (firstTrack) {
       paintPlayerWithTrackInfo();
       paintPlayerScreen();
 
-      player.loadVideoById(firstTrack.videoId);
+      iframe.player.loadVideoById(firstTrack.videoId);
     }
   } else {
     console.error("Player has not been initialized yet");

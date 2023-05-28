@@ -1,4 +1,13 @@
 import "../scss/styles.scss";
+import { hideLoadingScreen } from "./loading.js";
+import { paintToPauseBtn, paintToPlayBtn } from "./painters.js";
+import {
+  handleNextBtnClick,
+  playerBoxPlayBtn,
+  togglePlayPauseBtn,
+} from "./player.js";
+import { updateProgressBar } from "./playerScreen.js";
+import { paintCurrentPlaying } from "./playerScreenNav.js";
 
 const paintMainScreenBg = () => {
   const backgroundGradient = document.querySelector(".background-gradient");
@@ -8,6 +17,50 @@ const paintMainScreenBg = () => {
     } else {
       backgroundGradient.classList.remove("inactive");
     }
-  }};
+  }
+};
+
+//iframe
+
+export let iframe = {
+  player: null,
+};
+
+export let playerReadyPromise = new Promise((resolve) => {
+  window.onYouTubeIframeAPIReady = () => {
+    const playerElement = document.getElementById("youtube-player");
+    if (playerElement) {
+      iframe.player = new YT.Player(playerElement, {
+        videoId: "",
+        events: {
+          onReady: (event) => {
+            event.target.playVideo();
+            togglePlayPauseBtn();
+            resolve();
+          },
+          onStateChange: onPlayerStateChange,
+        },
+      });
+      setInterval(updateProgressBar, 100);
+      hideLoadingScreen();
+    } else {
+      console.error("Player element not found in the DOM");
+    }
+  };
+});
+
+export const onPlayerStateChange = (event) => {
+  // console.log("playerstate", event.data);
+  paintCurrentPlaying();
+
+  if (event.data === YT.PlayerState.PLAYING) {
+    playerBoxPlayBtn.disabled = false;
+    paintToPauseBtn();
+  } else if (event.data === YT.PlayerState.PAUSED) {
+    paintToPlayBtn();
+  } else if (event.data === YT.PlayerState.ENDED) {
+    handleNextBtnClick();
+  }
+};
 
 window.addEventListener("scroll", paintMainScreenBg);
