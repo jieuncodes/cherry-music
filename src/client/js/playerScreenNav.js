@@ -1,5 +1,4 @@
-import { playerReadyPromise } from "./main.js";
-import { clientPlayList, currentTrackState } from "./player.js";
+import { playerReadyPromise, state } from "./main.js";
 
 const navArea = document.querySelector(".player-screen__nav");
 const handle = navArea.querySelector(".handle-bar");
@@ -41,7 +40,7 @@ const handleNavBtnClick = (event) => {
 
 export const paintCurrentPlaying = async () => {
   await playerReadyPromise;
-  const currentPlayingIndex = currentTrackState.index;
+  const currentPlayingIndex = state.currentTrackState.index;
   const listMusicCards = document.querySelectorAll(".playlist-music-card");
 
   if (listMusicCards) {
@@ -61,7 +60,7 @@ export const paintCurrentPlaying = async () => {
 
 const mountPlayListTracks = () => {
   navBody.innerHTML = "";
-  if (clientPlayList.length == 0) {
+  if (state.client.playlist.length == 0) {
     const emptyPlayListMsg = document.createElement("div");
     const msg = document.createElement("span");
     msg.innerHTML = "재생목록에 곡을 추가해주세요.";
@@ -73,7 +72,7 @@ const mountPlayListTracks = () => {
   const musicCardsContainer = document.createElement("div");
   musicCardsContainer.classList.add("music-cards-container");
 
-  clientPlayList.forEach((track, index) => {
+  state.client.playlist.forEach((track, index) => {
     let musicCard = document.createElement("div");
     musicCard.id = "music-card";
     musicCard.classList.add("playlist-music-card");

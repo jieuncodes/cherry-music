@@ -1,6 +1,5 @@
+import { state } from "./main.js";
 import {
-  clientPlayList,
-  currentTrackState,
   playerBox,
   playerBoxNextBtn,
   playerBoxPlayBtn,
@@ -12,6 +11,17 @@ import {
   playerScreenPrevBtn,
 } from "./playerScreen.js";
 import { paintTitleWithMarquee } from "./util/marquee.js";
+
+export const paintMainScreenBg = () => {
+  const backgroundGradient = document.querySelector(".background-gradient");
+  if (backgroundGradient) {
+    if (window.pageYOffset > 0) {
+      backgroundGradient.classList.add("inactive");
+    } else {
+      backgroundGradient.classList.remove("inactive");
+    }
+  }
+};
 
 export const replaceClassForButton = (button, oldClass, newClass) => {
   button.childNodes[0].classList.replace(oldClass, newClass);
@@ -31,7 +41,7 @@ export const paintToPlayBtn = () => {
 export const paintPlayerWithTrackInfo = () => {
   togglePlayPauseBtn();
 
-  const track = clientPlayList[currentTrackState.index];
+  const track = state.client.playlist[state.currentTrackState.index];
   const albumImgArea = playerBox.querySelector(".album-cover");
   const trackTitleArea = playerBox.querySelector(".track-title-area");
   const artistArea = playerBox.querySelector(".artist");
@@ -52,13 +62,13 @@ const disableButtonConditionally = (button, deadEnd) => {
 
 export const updateNextButtonStatus = () => {
   const deadEnd =
-    clientPlayList.length <= 1 ||
-    currentTrackState.index === clientPlayList.length - 1;
+    state.client.playlist.length <= 1 ||
+    state.currentTrackState.index === state.client.playlist.length - 1;
   disableButtonConditionally(playerBoxNextBtn, deadEnd);
   disableButtonConditionally(playerScreenNextBtn, deadEnd);
 };
 
 export const updatePrevButtonStatus = () => {
-  const deadEnd = currentTrackState.index === 0;
+  const deadEnd = state.currentTrackState.index === 0;
   disableButtonConditionally(playerScreenPrevBtn, deadEnd);
 };

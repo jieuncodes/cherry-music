@@ -1,31 +1,27 @@
-import {
-  clientPlayList,
-  currentTrackState,
-  togglePlayPauseBtn,
-} from "./player.js";
+import { stopAndPlayFirst } from "./controllers/queue.js";
+import { state } from "./main.js";
 
-console.log("pl");
+export const playAllBtn = document.querySelector(".play-page-list");
+export const currListTracks = document.querySelectorAll("#music-card");
 
-const playAllBtn = document.querySelector(".play-page-list");
-console.log("");
-const allListTracks = document.querySelectorAll("#music-card");
+document.addEventListener("DOMContentLoaded", function () {
+  const addAllListTracksInQueue = async () => {
+    state.currentTrackState.index = 0;
 
-const addAllListTracksInQueue = () => {
-  currentTrackState.index = 0;
+    const allPlaylistTracks = [];
+    currListTracks.forEach((track) => {
+      const {
+        videoid: videoId,
+        title,
+        artist,
+        albumimageurl: albumImageUrl,
+      } = track.dataset;
+      allPlaylistTracks.push({ videoId, title, artist, albumImageUrl });
+    });
 
-  allListTracks.forEach((track) => {
-    const {
-      videoid: videoId,
-      title,
-      artist,
-      albumimageurl: albumImageUrl,
-    } = track.dataset;
+    state.client.playlist = [...allPlaylistTracks, ...state.client.playlist];
+    stopAndPlayFirst();
+  };
 
-    clientPlayList.unshift({ videoId, title, artist, albumImageUrl });
-    console.log("cli", clientPlayList);
-  });
-
-  togglePlayPauseBtn();
-};
-
-playAllBtn.addEventListener("click", addAllListTracksInQueue);
+  playAllBtn.addEventListener("click", addAllListTracksInQueue);
+});

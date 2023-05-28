@@ -1,11 +1,8 @@
 import { timeline } from "./controllers/timeline.js";
-import { iframe, playerReadyPromise } from "./main.js";
+import { iframe, playerReadyPromise, state } from "./main.js";
 import {
-  clientPlayList,
-  currentTrackState,
   handleNextBtnClick,
   handlePrevBtnClick,
-  player,
   togglePlayPauseBtn,
 } from "./player.js";
 import { formatTime } from "./util/formatTime.js";
@@ -25,7 +22,7 @@ const prevBtn = document.querySelector(".prev-btn");
 
 export const paintPlayerScreen = () => {
   const { videoId, title, artist, albumImageUrl } =
-    clientPlayList[currentTrackState.index];
+    state.client.playlist[state.currentTrackState.index];
   const albumCoverArea = playerScreen.querySelector(".album-img");
   const titleArea = playerScreen.querySelector(".track-title-area");
   const artistArea = playerScreen.querySelector(".artist");
@@ -74,7 +71,9 @@ export const handleShuffleBtnClick = () => {
   console.log("shuffle");
   isShuffleOn = !isShuffleOn;
   if (isShuffleOn) {
-    clientPlayList = clientPlayList.sort(() => Math.random() - 0.5);
+    state.client.playlist = state.client.playlist.sort(
+      () => Math.random() - 0.5
+    );
   }
 };
 

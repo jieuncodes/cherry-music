@@ -1,6 +1,10 @@
 import "../scss/styles.scss";
 import { hideLoadingScreen } from "./loading.js";
-import { paintToPauseBtn, paintToPlayBtn } from "./painters.js";
+import {
+  paintMainScreenBg,
+  paintToPauseBtn,
+  paintToPlayBtn,
+} from "./painters.js";
 import {
   bindMusicCardEvents,
   handleNextBtnClick,
@@ -10,15 +14,13 @@ import {
 import { updateProgressBar } from "./playerScreen.js";
 import { paintCurrentPlaying } from "./playerScreenNav.js";
 
-const paintMainScreenBg = () => {
-  const backgroundGradient = document.querySelector(".background-gradient");
-  if (backgroundGradient) {
-    if (window.pageYOffset > 0) {
-      backgroundGradient.classList.add("inactive");
-    } else {
-      backgroundGradient.classList.remove("inactive");
-    }
-  }
+export let state = {
+  client: {
+    playlist: [],
+  },
+  currentTrackState: {
+    index: 0,
+  },
 };
 
 //iframe
@@ -50,7 +52,6 @@ export let playerReadyPromise = new Promise((resolve) => {
 });
 
 export const onPlayerStateChange = (event) => {
-  // console.log("playerstate", event.data);
   paintCurrentPlaying();
 
   if (event.data === YT.PlayerState.PLAYING) {
