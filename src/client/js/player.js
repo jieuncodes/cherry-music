@@ -76,11 +76,10 @@ export function handlePrevBtnClick() {
 
   paintPlayerWithTrackInfo();
   paintPlayerScreen();
-
+  updateNextButtonStatus();
+  updatePrevButtonStatus();
   player.loadVideoById(clientPlayList[currentTrackIndex].videoId);
 }
-
-// painters
 
 // queue functions
 const addMusicToQueue = async ({ videoId, title, artist, albumImageUrl }) => {

@@ -6,18 +6,26 @@ import {
   playerBoxPlayBtn,
   togglePlayPauseBtn,
 } from "./player.js";
-import { playerScreenNextBtn, playerScreenPlayBtn, playerScreenPrevBtn } from "./playerScreen.js";
+import {
+  playerScreenNextBtn,
+  playerScreenPlayBtn,
+  playerScreenPrevBtn,
+} from "./playerScreen.js";
 import { paintTitleWithMarquee } from "./util/marquee.js";
 
+const replaceClassForButton = (button, oldClass, newClass) => {
+  button.childNodes[0].classList.replace(oldClass, newClass);
+};
+
 export const paintToPauseBtn = () => {
-  playerBoxPlayBtn.childNodes[0].classList.replace("fa-play", "fa-pause");
-  playerScreenPlayBtn.childNodes[0].classList.replace("fa-play", "fa-pause");
+  replaceClassForButton(playerBoxPlayBtn, "fa-play", "fa-pause");
+  replaceClassForButton(playerScreenPlayBtn, "fa-play", "fa-pause");
   playerScreenPlayBtn.childNodes[0].style.fontSize = "4rem";
 };
 
 export const paintToPlayBtn = () => {
-  playerBoxPlayBtn.childNodes[0].classList.replace("fa-pause", "fa-play");
-  playerScreenPlayBtn.childNodes[0].classList.replace("fa-pause", "fa-play");
+  replaceClassForButton(playerBoxPlayBtn, "fa-pause", "fa-play");
+  replaceClassForButton(playerScreenPlayBtn, "fa-pause", "fa-play");
 };
 
 export const paintPlayerWithTrackInfo = () => {
@@ -31,27 +39,27 @@ export const paintPlayerWithTrackInfo = () => {
   albumImgArea.style.backgroundImage = `url(${track.albumImageUrl})`;
   artistArea.textContent = track.artist;
 
-  trackTitleArea.innerHTML = "";
+  // trackTitleArea.innerHTML = "";
   trackTitleArea.innerHTML = paintTitleWithMarquee(track.title);
 };
 
-export const updateNextButtonStatus = () => {
-  if (
-    clientPlayList.length <= 1 ||
-    currentTrackIndex == clientPlayList.length - 1
-  ) {
-    playerBoxNextBtn.disabled = true;
-    playerScreenNextBtn.disabled = true;
+const disableButtonConditionally = (button, deadEnd) => {
+  if (deadEnd) {
+    button.disabled = true;
   } else {
-    playerBoxNextBtn.disabled = false;
-    playerScreenNextBtn.disabled = false;
+    button.disabled = false;
   }
 };
 
+export const updateNextButtonStatus = () => {
+  const deadEnd =
+    clientPlayList.length <= 1 ||
+    currentTrackIndex === clientPlayList.length - 1;
+  disableButtonConditionally(playerBoxNextBtn, deadEnd);
+  disableButtonConditionally(playerScreenNextBtn, deadEnd);
+};
+
 export const updatePrevButtonStatus = () => {
-  if (currentTrackIndex == 0) {
-    playerScreenPrevBtn.disabled = true;
-  } else {
-    playerScreenPrevBtn.disabled = false;
-  }
+  const deadEnd = currentTrackIndex === 0;
+  disableButtonConditionally(playerScreenPrevBtn, deadEnd);
 };

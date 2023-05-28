@@ -8,7 +8,7 @@ const __dirname = dirname(__filename);
 const BASE_JS = "./src/client/js/";
 
 const config = {
-  // watch: true,
+  watch: true,
   entry: {
     main: BASE_JS + "main.js",
     player: BASE_JS + "player.js",
@@ -20,11 +20,10 @@ const config = {
     playlist: BASE_JS + "playlist.js",
     painters: BASE_JS + "painters.js",
 
-   
     "/util/formatTime": BASE_JS + "util/formatTime.js",
     "/util/checkUserId": BASE_JS + "util/checkUserId.js",
-    "/util/marquee": BASE_JS + "util/marquee.js", 
-    "controllers/timeline" : BASE_JS + "controllers/timeline.js",
+    "/util/marquee": BASE_JS + "util/marquee.js",
+    "controllers/timeline": BASE_JS + "controllers/timeline.js",
   },
   plugins: [
     new MiniCssExtractPlugin({
