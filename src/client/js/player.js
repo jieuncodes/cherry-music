@@ -19,50 +19,45 @@ export let currentTrackState = {
   index: 0,
 };
 
-// player commands
+export const isPlayerPlaying = () =>
+  iframe.player && iframe.player.getPlayerState() === YT.PlayerState.PLAYING;
+
 export function togglePlayPauseBtn() {
-  if (
-    iframe.player &&
-    iframe.player.getPlayerState() === YT.PlayerState.PLAYING
-  ) {
-    iframe.player.pauseVideo();
-  } else if (
-    iframe.player &&
-    iframe.player.getPlayerState() !== YT.PlayerState.PLAYING
-  ) {
-    iframe.player.playVideo();
-  }
+  return isPlayerPlaying()
+    ? iframe.player.pauseVideo()
+    : iframe.player.playVideo();
 }
 
-export function handleNextBtnClick() {
-  if (currentTrackState.index < clientPlayList.length - 1) {
+export const updateTrackIndex = (direction) => {
+  if (
+    direction === "next" &&
+    currentTrackState.index < clientPlayList.length - 1
+  ) {
     currentTrackState.index++;
-    const nextTrack = clientPlayList[currentTrackState.index];
-    paintPlayerWithTrackInfo();
-    paintPlayerScreen();
-    iframe.player.loadVideoById(nextTrack.videoId);
-  } else {
-    console.log("End of playlist reached");
+  } else if (direction === "prev" && currentTrackState.index > 0) {
+    currentTrackState.index--;
   }
+};
+
+export function handleNextBtnClick() {
+  updateTrackIndex("next");
+  const nextTrack = clientPlayList[currentTrackState.index];
+  paintPlayerWithTrackInfo();
+  paintPlayerScreen();
+  iframe.player.loadVideoById(nextTrack.videoId);
   updateNextButtonStatus();
   updatePrevButtonStatus();
 }
-export function handlePrevBtnClick() {
-  if (currentTrackState.index > 0) {
-    currentTrackState.index--;
-  } else {
-    if (prevBtn) {
-      prevBtn.disabled = true;
-    }
-    currentTrackState.index = clientPlayList.length - 1;
-  }
 
+export function handlePrevBtnClick() {
+  updateTrackIndex("prev");
   paintPlayerWithTrackInfo();
   paintPlayerScreen();
   updateNextButtonStatus();
   updatePrevButtonStatus();
   iframe.player.loadVideoById(clientPlayList[currentTrackState.index].videoId);
 }
+
 const onMusicCardClick = ({ videoId, title, artist, albumImageUrl }) => {
   if (iframe.player) {
     addMusicToQueue({ videoId, title, artist, albumImageUrl });
@@ -72,25 +67,24 @@ const onMusicCardClick = ({ videoId, title, artist, albumImageUrl }) => {
   }
 };
 
-musicCards.forEach((musicCard) => {
-  const videoId = musicCard.dataset.videoid;
-  const title = musicCard.dataset.title;
-  const artist = musicCard.dataset.artist;
-  const albumImageUrl = musicCard.dataset.albumimageurl;
+export const bindMusicCardEvents = () => {
+  musicCards.forEach((musicCard) => {
+    const {
+      videoid: videoId,
+      title,
+      artist,
+      albumimageurl: albumImageUrl,
+    } = musicCard.dataset;
 
-  if (videoId) {
-    musicCard.addEventListener("click", (event) => {
-      onMusicCardClick({ videoId, title, artist, albumImageUrl });
-    });
-  } else {
-    console.error("Music card does not have a data-videoid attribute");
-  }
-});
+    if (videoId) {
+      musicCard.addEventListener("click", () =>
+        onMusicCardClick({ videoId, title, artist, albumImageUrl })
+      );
+    } else {
+      console.error("Music card does not have a data-videoid attribute");
+    }
+  });
+};
 
 playerBoxPlayBtn.addEventListener("click", togglePlayPauseBtn);
 playerBoxNextBtn.addEventListener("click", handleNextBtnClick);
-document.addEventListener("DOMContentLoaded", () => {
-  const tag = document.createElement("script");
-  tag.src = "https://www.youtube.com/iframe_api";
-  document.body.appendChild(tag);
-});

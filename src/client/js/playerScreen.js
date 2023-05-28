@@ -95,7 +95,6 @@ checkBox.addEventListener("change", hidePlayerBox);
 chevron.addEventListener("click", () => {
   playerScreen.classList.remove("active");
 });
-
 playerScreenPlayBtn.addEventListener("click", togglePlayPauseBtn);
 playerScreenNextBtn.addEventListener("click", handleNextBtnClick);
 playerScreenPrevBtn.addEventListener("click", handlePrevBtnClick);

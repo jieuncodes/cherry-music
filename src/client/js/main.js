@@ -2,6 +2,7 @@ import "../scss/styles.scss";
 import { hideLoadingScreen } from "./loading.js";
 import { paintToPauseBtn, paintToPlayBtn } from "./painters.js";
 import {
+  bindMusicCardEvents,
   handleNextBtnClick,
   playerBoxPlayBtn,
   togglePlayPauseBtn,
@@ -21,7 +22,6 @@ const paintMainScreenBg = () => {
 };
 
 //iframe
-
 export let iframe = {
   player: null,
 };
@@ -62,5 +62,12 @@ export const onPlayerStateChange = (event) => {
     handleNextBtnClick();
   }
 };
+
+document.addEventListener("DOMContentLoaded", () => {
+  const tag = document.createElement("script");
+  tag.src = "https://www.youtube.com/iframe_api";
+  document.body.appendChild(tag);
+  bindMusicCardEvents();
+});
 
 window.addEventListener("scroll", paintMainScreenBg);
