@@ -1,12 +1,14 @@
 import "../scss/styles.scss";
+import { stopAndPlayFirst } from "./controllers/queue.js";
 import { hideLoadingScreen } from "./loading.js";
 import {
+  bindMusicCardEvents,
   paintMainScreenBg,
   paintToPauseBtn,
   paintToPlayBtn,
+  updateNextButtonStatus,
 } from "./painters.js";
 import {
-  bindMusicCardEvents,
   handleNextBtnClick,
   playerBoxPlayBtn,
   togglePlayPauseBtn,
@@ -14,30 +16,29 @@ import {
 import { updateProgressBar } from "./playerScreen.js";
 import { paintCurrentPlaying } from "./playerScreenNav.js";
 
+export const playAllBtn = document.querySelector(".play-page-list");
+
 export let state = {
-  client: {
-    playlist: [],
-  },
-  currQueue: {
-    index: 0,
-  },
-  iframe: {
-    player: null,
-  },
+  clientPlaylist: [],
+  currQueueIndex: 0,
+  iframePlayer: null,
+};
+
+export const setState = (nextState) => {
+  state = { ...state, ...nextState };
 };
 
 //iframe
-
 export let playerReadyPromise = new Promise((resolve) => {
   window.onYouTubeIframeAPIReady = () => {
     const playerElement = document.getElementById("youtube-player");
     if (playerElement) {
-      state.iframe.player = new YT.Player(playerElement, {
+      state.iframePlayer = new YT.Player(playerElement, {
         videoId: "",
         events: {
           onReady: (event) => {
-            event.target.playVideo();
             togglePlayPauseBtn();
+
             resolve();
           },
           onStateChange: onPlayerStateChange,
@@ -53,7 +54,6 @@ export let playerReadyPromise = new Promise((resolve) => {
 
 export const onPlayerStateChange = (event) => {
   paintCurrentPlaying();
-
   if (event.data === YT.PlayerState.PLAYING) {
     playerBoxPlayBtn.disabled = false;
     paintToPauseBtn();
@@ -63,12 +63,47 @@ export const onPlayerStateChange = (event) => {
     handleNextBtnClick();
   }
 };
-
-document.addEventListener("DOMContentLoaded", () => {
+export const insertIframeScript = () => {
   const tag = document.createElement("script");
   tag.src = "https://www.youtube.com/iframe_api";
   document.body.appendChild(tag);
+};
+
+document.addEventListener("DOMContentLoaded", () => {
+  insertIframeScript();
   bindMusicCardEvents();
 });
 
 window.addEventListener("scroll", paintMainScreenBg);
+
+/*
+ * Playlist controller - Currently, this code must reside in the same file due to an issue
+ * with the timing of state initialization and the readiness of the YouTube Iframe API.
+ * Separating this into a different module file caused state synchronization problems.
+ */
+
+const handlePlayAllBtnClick = async () => {
+  const currListTracks = document.querySelectorAll("#music-card");
+
+  state.currQueueIndex = 0;
+  const allPlaylistTracks = [];
+  currListTracks.forEach((track) => {
+    const {
+      videoid: videoId,
+      title,
+      artist,
+      albumimageurl: albumImageUrl,
+    } = track.dataset;
+    allPlaylistTracks.push({ videoId, title, artist, albumImageUrl });
+  });
+
+  const newClientPlaylist = [...allPlaylistTracks, ...state.clientPlaylist];
+  setState({ ...state, clientPlaylist: newClientPlaylist, currQueueIndex: 0 });
+
+  updateNextButtonStatus();
+  stopAndPlayFirst();
+};
+
+if (playAllBtn) {
+  playAllBtn.addEventListener("click", handlePlayAllBtnClick);
+}

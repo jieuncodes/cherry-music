@@ -1,5 +1,6 @@
 import { state } from "./main.js";
 import {
+  handleMusicCardClick,
   playerBox,
   playerBoxNextBtn,
   playerBoxPlayBtn,
@@ -12,6 +13,7 @@ import {
 } from "./playerScreen.js";
 import { paintTitleWithMarquee } from "./util/marquee.js";
 
+//bg painters
 export const paintMainScreenBg = () => {
   const backgroundGradient = document.querySelector(".background-gradient");
   if (backgroundGradient) {
@@ -23,6 +25,22 @@ export const paintMainScreenBg = () => {
   }
 };
 
+//player painters
+export const paintPlayerWithTrackInfo = () => {
+  togglePlayPauseBtn();
+
+  const track = state.clientPlaylist[state.currQueueIndex];
+  const albumImgArea = playerBox.querySelector(".album-cover");
+  const trackTitleArea = playerBox.querySelector(".track-title-area");
+  const artistArea = playerBox.querySelector(".artist");
+
+  albumImgArea.style.backgroundImage = `url(${track.albumImageUrl})`;
+  artistArea.textContent = track.artist;
+
+  trackTitleArea.innerHTML = paintTitleWithMarquee(track.title);
+};
+
+//button painters
 export const replaceClassForButton = (button, oldClass, newClass) => {
   button.childNodes[0].classList.replace(oldClass, newClass);
 };
@@ -38,20 +56,6 @@ export const paintToPlayBtn = () => {
   replaceClassForButton(playerScreenPlayBtn, "fa-pause", "fa-play");
 };
 
-export const paintPlayerWithTrackInfo = () => {
-  togglePlayPauseBtn();
-
-  const track = state.client.playlist[state.currQueue.index];
-  const albumImgArea = playerBox.querySelector(".album-cover");
-  const trackTitleArea = playerBox.querySelector(".track-title-area");
-  const artistArea = playerBox.querySelector(".artist");
-
-  albumImgArea.style.backgroundImage = `url(${track.albumImageUrl})`;
-  artistArea.textContent = track.artist;
-
-  trackTitleArea.innerHTML = paintTitleWithMarquee(track.title);
-};
-
 const disableButtonConditionally = (button, deadEnd) => {
   if (deadEnd) {
     button.disabled = true;
@@ -61,15 +65,36 @@ const disableButtonConditionally = (button, deadEnd) => {
 };
 
 export const updateNextButtonStatus = () => {
-  console.log("state.client.playlist", state.client.playlist);
   const deadEnd =
-    state.client.playlist.length <= 1 ||
-    state.currQueue.index === state.client.playlist.length - 1;
+    state.clientPlaylist.length <= 1 ||
+    state.currQueueIndex === state.clientPlaylist.length - 1;
   disableButtonConditionally(playerBoxNextBtn, deadEnd);
   disableButtonConditionally(playerScreenNextBtn, deadEnd);
 };
 
 export const updatePrevButtonStatus = () => {
-  const deadEnd = state.currQueue.index === 0;
+  const deadEnd = state.currQueueIndex === 0;
   disableButtonConditionally(playerScreenPrevBtn, deadEnd);
+};
+
+//eventListener binders
+export const bindMusicCardEvents = () => {
+  const musicCards = document.querySelectorAll("#music-card");
+
+  musicCards.forEach((musicCard) => {
+    const {
+      videoid: videoId,
+      title,
+      artist,
+      albumimageurl: albumImageUrl,
+    } = musicCard.dataset;
+
+    if (videoId) {
+      musicCard.addEventListener("click", () =>
+        handleMusicCardClick({ videoId, title, artist, albumImageUrl })
+      );
+    } else {
+      console.error("Music card does not have a data-videoid attribute");
+    }
+  });
 };

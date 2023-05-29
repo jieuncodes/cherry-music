@@ -1,4 +1,4 @@
-import { iframe } from "../main.js";
+import { iframe, setState, state } from "../main.js";
 
 export const timeline = document.getElementById("timeline");
 
@@ -8,10 +8,10 @@ const handleTimeLineChange = (event) => {
   const {
     target: { value },
   } = event;
-  if (state.iframe.player && state.iframe.player.getDuration) {
-    const videoDuration = state.iframe.player.getDuration();
+  if (state.iframePlayer && state.iframePlayer.getDuration) {
+    const videoDuration = state.iframePlayer.getDuration();
     const seekToSeconds = (value / 100) * videoDuration;
-    state.iframe.player.seekTo(seekToSeconds, true);
+    state.iframePlayer.seekTo(seekToSeconds, true);
   } else {
     console.error("Player is not ready");
   }
@@ -19,9 +19,10 @@ const handleTimeLineChange = (event) => {
 
 const handleTimeLineMouseDown = () => {
   isVideoPlaying =
-    state.iframe.player.getPlayerState() === YT.PlayerState.PLAYING;
+    state.iframePlayer.getPlayerState() === YT.PlayerState.PLAYING;
   if (isVideoPlaying) {
-    state.iframe.player.pauseVideo();
+    const newIframeState = state.iframePlayer.pauseVideo();
+    setState({ iframePlayer: newIframeState });
     playerBoxPlayBtn.childNodes[0].classList.replace("fa-pause", "fa-play");
     playerScreenPlayBtn.childNodes[0].classList.replace("fa-pause", "fa-play");
   }

@@ -1,5 +1,5 @@
 import { timeline } from "./controllers/timeline.js";
-import { iframe, playerReadyPromise, state } from "./main.js";
+import { playerReadyPromise, setState, state } from "./main.js";
 import {
   handleNextBtnClick,
   handlePrevBtnClick,
@@ -22,7 +22,7 @@ const prevBtn = document.querySelector(".prev-btn");
 
 export const paintPlayerScreen = () => {
   const { videoId, title, artist, albumImageUrl } =
-    state.client.playlist[state.currQueue.index];
+    state.clientPlaylist[state.currQueueIndex];
   const albumCoverArea = playerScreen.querySelector(".album-img");
   const titleArea = playerScreen.querySelector(".track-title-area");
   const artistArea = playerScreen.querySelector(".artist");
@@ -35,12 +35,12 @@ export const paintPlayerScreen = () => {
 export const updateProgressBar = async () => {
   await playerReadyPromise;
 
-  if (!state.iframe.player) {
+  if (!state.iframePlayer) {
     return;
   }
 
-  const currentTime = state.iframe.player.getCurrentTime();
-  const duration = state.iframe.player.getDuration();
+  const currentTime = state.iframePlayer.getCurrentTime();
+  const duration = state.iframePlayer.getDuration();
 
   const progress = (currentTime / duration) * 100;
 
@@ -71,9 +71,10 @@ export const handleShuffleBtnClick = () => {
   console.log("shuffle");
   isShuffleOn = !isShuffleOn;
   if (isShuffleOn) {
-    state.client.playlist = state.client.playlist.sort(
+    const shuffledPlaylist = state.clientPlaylist.sort(
       () => Math.random() - 0.5
     );
+    setState({ clientPlaylist: shuffledPlaylist });
   }
 };
 

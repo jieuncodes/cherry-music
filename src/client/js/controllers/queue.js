@@ -1,4 +1,4 @@
-import { iframe, playerReadyPromise, state } from "../main.js";
+import { playerReadyPromise, setState, state } from "../main.js";
 import {
   paintPlayerWithTrackInfo,
   updateNextButtonStatus,
@@ -7,19 +7,26 @@ import {
 import { paintPlayerScreen } from "../playerScreen.js";
 import { paintCurrentPlaying } from "../playerScreenNav.js";
 
-export const stopAndPlayFirst = () => {
+export const stopAndPlayFirst = async () => {
   console.log("sap");
-  console.log("cl", state.client.playlist);
-  console.log("play the first music. id : ", state.client.playlist[0].videoId);
-  if (state.iframe.player) {
-    state.iframe.player.stopVideo();
-    const firstTrack = state.client.playlist[0];
+  console.log("from sap clientPlaylist", state.clientPlaylist);
+  await playerReadyPromise;
+  if (state.iframePlayer) {
+    const iframeNewState = state.iframePlayer.stopVideo();
+    setState({ iframePlayer: iframeNewState }); //?
+    const firstTrack = state.clientPlaylist[0];
+
+    console.log("firstTrack", firstTrack);
     if (firstTrack) {
+      console.log("firstTrack exist the id=", firstTrack.videoId);
       paintPlayerWithTrackInfo();
       paintPlayerScreen();
-
-      state.iframe.player.loadVideoById(firstTrack.videoId);
+      state.iframePlayer.loadVideoById(firstTrack.videoId);
+    } else {
+      console.log("Fail get the first track");
     }
+  } else {
+    console.log("no state.iframePlayer yet");
   }
 };
 
@@ -29,20 +36,10 @@ export const addMusicToQueue = async ({
   artist,
   albumImageUrl,
 }) => {
-  console.log("Before unshift in addMusicToQueue", state.client.playlist);
+  const newTrack = { videoId, title, artist, albumImageUrl };
+  const newClientPlaylist = [newTrack, ...state.clientPlaylist];
+  setState({ clientPlaylist: newClientPlaylist, currQueueIndex: 0 });
 
-  state.client.playlist = [
-    {
-      videoId,
-      title,
-      artist,
-      albumImageUrl,
-    },
-    ...state.client.playlist,
-  ];
-  console.log("After unshift in addMusicToQueue", state.client.playlist);
-
-  state.currQueue.index = 0;
   updateNextButtonStatus();
   updatePrevButtonStatus();
 
@@ -51,5 +48,6 @@ export const addMusicToQueue = async ({
   } catch (error) {
     console.error("Player has not been initialized yet", error);
   }
+
   paintCurrentPlaying();
 };
