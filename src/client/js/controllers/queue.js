@@ -8,17 +8,13 @@ import { paintPlayerScreen } from "../playerScreen.js";
 import { paintCurrentPlaying } from "../playerScreenNav.js";
 
 export const stopAndPlayFirst = async () => {
-  console.log("sap");
-  console.log("from sap clientPlaylist", state.clientPlaylist);
   await playerReadyPromise;
   if (state.iframePlayer) {
     const iframeNewState = state.iframePlayer.stopVideo();
     setState({ iframePlayer: iframeNewState }); //?
     const firstTrack = state.clientPlaylist[0];
 
-    console.log("firstTrack", firstTrack);
     if (firstTrack) {
-      console.log("firstTrack exist the id=", firstTrack.videoId);
       paintPlayerWithTrackInfo();
       paintPlayerScreen();
       state.iframePlayer.loadVideoById(firstTrack.videoId);

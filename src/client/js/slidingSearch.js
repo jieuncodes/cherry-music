@@ -36,8 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
-    console.log("Final transcript:", finalTranscript);
-
     searchInput.value = finalTranscript;
   };
 

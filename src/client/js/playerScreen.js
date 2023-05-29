@@ -20,7 +20,8 @@ const suffleBtn = document.querySelector(".shuffle");
 const repeatBtn = document.querySelector(".repeat-btn");
 const prevBtn = document.querySelector(".prev-btn");
 
-export const paintPlayerScreen = () => {
+export const paintPlayerScreen = async () => {
+  await playerReadyPromise;
   const { videoId, title, artist, albumImageUrl } =
     state.clientPlaylist[state.currQueueIndex];
   const albumCoverArea = playerScreen.querySelector(".album-img");
@@ -68,7 +69,6 @@ export let isShuffleOn = false;
 export let isRepeatOn = false;
 
 export const handleShuffleBtnClick = () => {
-  console.log("shuffle");
   isShuffleOn = !isShuffleOn;
   if (isShuffleOn) {
     const shuffledPlaylist = state.clientPlaylist.sort(

@@ -56,11 +56,9 @@ export const postJoin = async (req, res) => {
       profilePicPath: picFile.path,
     });
 
-    console.log("userCreated!!", newUser);
     return res.redirect("/user/login");
   } catch (error) {
     console.log("errorMsg", error);
-
     return res.status(400).render("user/join", {
       pageTitle,
       errorMessage: error._message,
@@ -151,7 +149,6 @@ export const postAccountSetting = async (req, res) => {
   if (file) {
     isPicSame = false;
     newProfilePicPath = file.location;
-    console.log("file", file);
   } else if (!profilePicPath) {
     console.log("setting default profilepic");
     newProfilePicPath = "/images/default_user_avatar.jpeg";

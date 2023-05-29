@@ -5,7 +5,6 @@ import User from "../../models/User.js";
 export const playListMain = async (req, res) => {
   const userId = req.session.user._id;
   const userPlaylists = await PlayList.find({ creator: userId });
-  console.log("userPlaylists", userPlaylists);
   let hasPlaylists = userPlaylists.length > 0 ? true : false;
 
   return res.render("playlist", { userPlaylists, hasPlaylists });
@@ -24,7 +23,6 @@ export const postAddPlayList = async (req, res) => {
   } = req;
   const fileLocation = req.file ? req.file.location : null;
 
-  console.log("req.file********", req.file);
   if (!fileLocation) {
     console.error("File upload failed. fileLocation is undefined.");
   }
@@ -37,7 +35,6 @@ export const postAddPlayList = async (req, res) => {
     for (const trackId of trackVideoIds) {
       const track = await Track.findOne({ youtubeVideoId: trackId });
       if (track) {
-        console.log("track", track);
         tracksFoundInDB.push(track._id);
       }
     }

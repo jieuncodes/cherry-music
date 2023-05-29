@@ -1,4 +1,4 @@
-import { state } from "./main.js";
+import { playerReadyPromise, state } from "./main.js";
 import {
   handleMusicCardClick,
   playerBox,
@@ -28,16 +28,20 @@ export const paintMainScreenBg = () => {
 //player painters
 export const paintPlayerWithTrackInfo = () => {
   togglePlayPauseBtn();
-
   const track = state.clientPlaylist[state.currQueueIndex];
-  const albumImgArea = playerBox.querySelector(".album-cover");
-  const trackTitleArea = playerBox.querySelector(".track-title-area");
-  const artistArea = playerBox.querySelector(".artist");
+  if (track) {
+    const albumImgArea = playerBox.querySelector(".album-cover");
+    const trackTitleArea = playerBox.querySelector(".track-title-area");
+    const artistArea = playerBox.querySelector(".artist");
 
-  albumImgArea.style.backgroundImage = `url(${track.albumImageUrl})`;
-  artistArea.textContent = track.artist;
+    console.log("track", track.albumImageUrl);
 
-  trackTitleArea.innerHTML = paintTitleWithMarquee(track.title);
+    albumImgArea.style.backgroundImage = `url(${track.albumImageUrl})`;
+    artistArea.textContent = track.artist;
+    trackTitleArea.innerHTML = paintTitleWithMarquee(track.title);
+  } else {
+    console.log("No track found at current index:", state.currQueueIndex);
+  }
 };
 
 //button painters
