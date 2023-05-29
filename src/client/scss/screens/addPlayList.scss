@@ -8,7 +8,7 @@
     flex-direction: column;
 
     .add-playlist-box__header {
-        font-size: 3.5rem;
+        font-size: 1.2rem;
         margin-bottom: 6rem;
     }
 
@@ -58,7 +58,7 @@
             }
 
             .input-box.bolder {
-                font-size: 3.5rem;
+                font-size: 1.2rem;
                 font-weight: bolder;
             }
 
@@ -69,7 +69,7 @@
             button.add-track {
                 place-self: start;
                 padding: 1rem;
-                font-size: 3.5rem;
+                font-size: 1.2rem;
                 color: $highlight-cherry;
                 margin-top: 5rem;
             }
@@ -79,7 +79,7 @@
                 top: 45%;
                 left: 550%;
                 color: rgba(255, 255, 255, 0.67);
-                font-size: 3.5rem;
+                font-size: 1.2rem;
             }
 
             button.submit-btn {

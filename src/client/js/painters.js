@@ -52,7 +52,7 @@ export const replaceClassForButton = (button, oldClass, newClass) => {
 export const paintToPauseBtn = () => {
   replaceClassForButton(playerBoxPlayBtn, "fa-play", "fa-pause");
   replaceClassForButton(playerScreenPlayBtn, "fa-play", "fa-pause");
-  playerScreenPlayBtn.childNodes[0].style.fontSize = "4rem";
+  playerScreenPlayBtn.childNodes[0].style.fontSize = "1.7rem";
 };
 
 export const paintToPlayBtn = () => {

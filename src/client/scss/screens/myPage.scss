@@ -14,7 +14,7 @@
         }
 
         .my-page__box__header {
-            font-size: 3.5rem;
+            font-size: 1.2rem;
             margin: $default-gap 0;
 
         }
@@ -25,13 +25,13 @@
             color: $fall-back-black;
 
             span {
-                line-height: 4rem;
+                line-height: 1.7rem;
             }
 
             i {
                 position: relative;
                 place-self: end;
-                bottom: 4rem;
+                bottom: 1.7rem;
                 font-size: 10rem;
                 color: $fall-back-black-dark;
             }
@@ -67,7 +67,7 @@
 
             .user-welcome {
                 grid-area: welcome-msg;
-                font-size: 3.5rem;
+                font-size: 1.2rem;
             }
 
             .user-email {

@@ -9,7 +9,7 @@
 }
 
 .playlist-box__header {
-    font-size: 3.5rem;
+    font-size: 1.2rem;
     margin-bottom: 5rem;
 }
 
@@ -61,14 +61,14 @@
 .empty-playlist-instruction span:nth-child(3) {
     margin-top: 3rem;
     color: $fall-back-black-dark;
-    margin-bottom: 4rem;
+    margin-bottom: 1.7rem;
 }
 
 .empty-playlist-instruction .href-btn {
     padding: 1rem $default-padding;
     height: 5rem;
     font-size: 3rem;
-    border-radius: 4rem;
+    border-radius: 1.7rem;
     margin-top: 6rem;
 }
 
@@ -78,7 +78,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 3.5rem;
+    font-size: 1.2rem;
 }
 
 .playlist-cards-container {

@@ -8,7 +8,7 @@
 
     background-color: $bg;
     top: 0;
-    font-size: 3.5rem;
+    font-size: 1.2rem;
     transition: right 0.3s ease;
 
     .sliding-search__header {
@@ -35,7 +35,7 @@
         .search-input {
             background-color: rgba(39, 39, 39, 0.861);
             color: white;
-            font-size: 4rem;
+            font-size: 1.7rem;
             border-radius: 6rem;
 
             display: flex;
@@ -43,7 +43,7 @@
             align-items: center;
 
             input {
-                height: 8rem;
+                height: 4rem;
                 width: 95%;
                 border-radius: 2rem;
                 padding: 0 3rem;

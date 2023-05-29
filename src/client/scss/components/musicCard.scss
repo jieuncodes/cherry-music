@@ -3,33 +3,32 @@
     display: grid;
     grid-template-areas:
         "album-cover ranking track-title-area play-btn"
-        "album-cover . artist play-btn"
-    ;
+        "album-cover . artist play-btn";
     grid-template-columns: 1.3fr 0.9fr 4fr 0.7fr;
     background-color: rgb(34, 34, 34);
     border-radius: 10px;
-    margin-top: $default-gap;
-    height: 5.5rem;
-    width: 45rem;
-    font-size: 3rem;
-    padding: 2rem 1.5rem 4rem 1.5rem;
+    margin-top: 0.2rem;
+    height: 2rem;
+    width: 18rem;
+    font-size: 1.4rem;
+    padding: 0.8rem 1rem 2rem 1rem;
 
     .album-cover {
         grid-area: album-cover;
         align-self: center;
         justify-self: center;
-        width: 8rem;
-        height: 8rem;
+        width: 3.5rem;
+        height: 3.5rem;
         background-color: rgba(100, 100, 100, 0.318);
-        border-radius: 1rem;
+        border-radius: 0.3rem;
         background-size: auto 100%;
         background-position: center;
     }
 
     .ranking {
         grid-area: ranking;
-        align-self: center;
         justify-self: center;
+        font-size: 1.3rem;
     }
 
     .track-title-area {
@@ -38,6 +37,7 @@
         justify-content: flex-start;
         box-sizing: border-box;
         overflow: hidden;
+        font-size: 1.3rem;
 
         .track-title {
             white-space: nowrap;
@@ -49,14 +49,16 @@
         grid-area: artist;
         color: $fall-back-black;
         margin-right: auto;
+        font-size: 1.1rem;
+
     }
 
     .play-btn {
         grid-area: play-btn;
-        font-size: 4rem;
+        font-size: 1.4rem;
         align-self: center;
         justify-self: center;
     }
 
-   
+
 }

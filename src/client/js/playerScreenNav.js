@@ -50,7 +50,7 @@ export const paintCurrentPlaying = async () => {
         card.style.padding = "3rem 1.5rem 5rem 1.5rem";
       } else {
         card.style.backgroundColor = "transparent";
-        card.style.padding = "2rem 1.5rem 4rem 1.5rem";
+        card.style.padding = "2rem 1.5rem 1.7rem 1.5rem";
       }
     });
   } else {

@@ -23,7 +23,7 @@
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        font-size: 3.5rem;
+        font-size: 1.2rem;
 
     }
 
@@ -54,7 +54,7 @@
 
             .dislike {
                 transform: scaleX(-1);
-                font-size: 4rem;
+                font-size: 1.7rem;
                 place-self: left;
             }
 
@@ -70,7 +70,7 @@
                 .track-title-area {
                     .track-title {
                         font-weight: bold;
-                        font-size: 4rem;
+                        font-size: 1.7rem;
                     }
                 }
 
@@ -83,7 +83,7 @@
             }
 
             .like {
-                font-size: 4rem;
+                font-size: 1.7rem;
 
             }
 
@@ -147,11 +147,11 @@
             flex-direction: row;
             align-items: center;
             justify-content: space-between;
-            font-size: 3.5rem;
+            font-size: 1.2rem;
 
             .prev-btn,
             .next-btn {
-                font-size: 4.5rem;
+                font-size: 2rem;
             }
 
             .play-btn {

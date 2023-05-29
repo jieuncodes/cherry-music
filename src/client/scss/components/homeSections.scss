@@ -5,11 +5,11 @@
     height: auto;
     width: 100%;
     overflow: scroll;
-    margin-bottom: 4rem;
+    margin-bottom: 1.7rem;
 
     .section__header {
         display: grid;
-        margin-bottom: 30px;
+        margin-bottom: 1rem;
         grid-template-areas:
             "update-time ."
             "section__title show-all";
@@ -20,14 +20,12 @@
 
         .section__update-time {
             grid-area: update-time;
-            font-size: 2rem;
             color: $fall-back-black;
         }
 
         .section__title {
             grid-area: section__title;
-            font-size: 4rem;
-            margin-top: 1rem;
+            font-size: 1.7rem;
         }
 
         .show-all-btn {
@@ -51,7 +49,7 @@
         display: grid;
         scroll-snap-type: x proximity;
         grid-template-rows: repeat(5, 0.85fr);
-        gap: 0 3rem;
+        gap: 0.8rem 1.3rem;
         grid-auto-flow: column;
         overflow-x: auto;
     }

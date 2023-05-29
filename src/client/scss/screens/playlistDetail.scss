@@ -20,7 +20,7 @@
 
     .playlist-title {
         font-size: 10rem;
-        margin-top: 18rem;
+        margin-top: 14rem;
         z-index: 2;
         text-overflow: ellipsis;
     }
@@ -37,7 +37,7 @@
     right: 0;
     bottom: 0;
     background: linear-gradient(transparent, black);
-    box-shadow: inset 0 0 8rem 1rem black;
+    box-shadow: inset 0 0 4rem 1rem black;
 }
 
 .playlist-detail .playlist-detail__body {
