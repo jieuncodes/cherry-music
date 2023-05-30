@@ -1,22 +1,25 @@
 #section {
-    position: relative;
     display: flex;
     flex-direction: column;
-    height: auto;
-    width: 100%;
+    position: relative;
     overflow: scroll;
-    margin-bottom: 1.7rem;
+    width: 100%;
+    margin-bottom: 2rem;
+
+    #section:not(:nth-child(1)) {
+        margin-top: 2rem;
+    }
 
     .section__header {
         display: grid;
-        margin-bottom: 1rem;
-        grid-template-areas:
-            "update-time ."
-            "section__title show-all";
-        grid-template-columns: 3fr 1fr;
-        grid-template-rows: 1fr 2fr;
         justify-content: space-between;
         align-items: center;
+        grid-template-rows: 1fr 2fr;
+        grid-template-columns: 3fr 1fr;
+        grid-template-areas: "update-time ."
+            "section__title show-all";
+        ;
+        margin-bottom: 1rem;
 
         .section__update-time {
             grid-area: update-time;
@@ -25,47 +28,45 @@
 
         .section__title {
             grid-area: section__title;
-            font-size: 1.7rem;
+
+            font-size: 2rem;
+            font-weight: 500;
         }
 
         .show-all-btn {
+            place-content: end;
             display: flex;
             grid-area: show-all;
-            place-content: end;
-            color: $fall-back-black;
             cursor: pointer;
+            color: $fall-back-black;
         }
     }
 
     .section__body {
         grid-area: section__body;
-        white-space: nowrap;
-        width: 100%;
         overflow-x: auto;
         overflow-y: hidden;
+        width: 100%;
+        white-space: nowrap;
     }
 
     .scroll-container {
-        display: grid;
         scroll-snap-type: x proximity;
-        grid-template-rows: repeat(5, 0.85fr);
+        display: grid;
         gap: 0.8rem 1.3rem;
+        grid-template-rows: repeat(5, 0.85fr);
         grid-auto-flow: column;
         overflow-x: auto;
     }
 
     .scroll_playlist {
-
-        display: grid;
         scroll-snap-type: x proximity;
+        display: grid;
+        gap: 0 1rem;
         grid-template-rows: repeat(1, 0.85fr);
-        gap: 0 3rem;
         grid-auto-flow: column;
         overflow-x: scroll;
     }
-
-
-
 }
 
 .playlists-section {

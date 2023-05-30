@@ -1,6 +1,6 @@
 import Queue from "../../models/PlayListQueue.js";
 
-const defaultQueueId = "507f1f77bcf86cd799439011";
+const defaultQueueId = "507f1f77bcf86cd799460011";
 
 export const addMusicToQueue = async (req, res) => {
   try {

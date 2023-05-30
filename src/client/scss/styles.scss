@@ -5,21 +5,24 @@
 @import "./config/_variables.scss";
 @import "./config/_reset.scss";
 
+//effects
+@import "./effects/marquee.scss";
+
+// Defaults
+@import "./base.scss";
+
 // Components
 @import "./components/header.scss";
 @import "./components/footer.scss";
 @import "./components/slidingMenu.scss";
 @import "./components/slidingSearch.scss";
-
 @import "./components/homeSections.scss";
 @import "./components/musicCard.scss";
 @import "./components/player.scss";
 @import "./components/playerScreen.scss";
 @import "./components/playerScreenNav.scss";
 @import "./components/searchModal.scss";
-
-
-
+@import "./components/buttons.scss";
 
 // Screens
 @import "./screens/login.scss";
@@ -35,7 +38,6 @@
 
 
 
-// Defaults
 .hidden {
   display: none;
 }
@@ -53,34 +55,7 @@ a {
   display: none;
 }
 
-.background-gradient {
-  width: 390px;
-  height: 23vh;
-  overflow: hidden;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-size: cover;
-  z-index: -1;
-  transition: opacity 0.5s ease;
-  opacity: 0.5;
-}
 
-.background-gradient::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background: linear-gradient(to bottom, transparent, black);
-  opacity: 1;
-}
-
-.background-gradient.inactive {
-  opacity: 0;
-  background-image: none;
-}
 
 textarea {
   all: unset;
@@ -128,128 +103,4 @@ textarea {
 
 .break-line span {
   padding: 0 10px;
-}
-
-//button styles
-.check-btn {
-  font-size: 2.5rem;
-  text-align: center;
-  width: 25%;
-  height: 7.5rem;
-  border-radius: 0.5rem;
-  background-color: $cherry-dark;
-
-  &:hover {
-    color: $disabled-white;
-  }
-}
-
-.normal-btn {
-  margin-top: 1.2rem;
-  font-size: 3.2rem;
-  display: flex;
-  height: 7rem;
-  border-radius: 3rem;
-  justify-content: center;
-  align-items: center;
-
-  border: solid 1px $fall-back-black;
-
-  &:hover {
-    color: whtie;
-    background-color: $fall-back-black-darker;
-    border: solid 1px $fall-back-black-darker;
-
-  }
-}
-
-.href-btn {
-  font-size: 2.5rem;
-  display: flex;
-  height: 5rem;
-  border-radius: 3rem;
-  justify-content: center;
-  align-items: center;
-  border: solid 1px $fall-back-black;
-
-  &:hover {
-    color: $fall-back-black;
-    background-color: $fall-back-black-darker;
-    border: solid 1px $fall-back-black-darker;
-
-  }
-}
-
-.valid {
-  color: $valid-blue;
-}
-
-.submit-btn {
-  text-align: center;
-  width: 100%;
-  height: 4rem;
-  border-radius: 1rem;
-  background-color: $cherry-dark;
-
-  &:hover {
-    color: $disabled-white;
-  }
-}
-
-// marquee
-.marquee {
-  width: 100%;
-  display: flex;
-  overflow: hidden;
-  gap: 3rem;
-  position: relative;
-  user-select: none;
-  white-space: nowrap;
-
-}
-
-.marquee-content {
-  white-space: nowrap;
-  flex-shrink: 0;
-  display: flex;
-  justify-content: space-around;
-  min-width: 100%;
-  gap: 3rem;
-}
-
-@keyframes scroll {
-  from {
-    transform: translateX(0);
-  }
-
-  to {
-    transform: translateX(calc(-100% - 1rem));
-  }
-}
-
-.scroll {
-  animation: scroll 10s linear infinite;
-}
-
-
-body {
-  z-index: 0;
-  width: 390px;
-  height: 844px;
-  bottom: 280px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background-color: $bg;
-  color: $text;
-  font-size: 16px;
-  align-items: center;
-  justify-self: center;
-
-
-
-  main {
-    position: relative;
-    height: calc(100vh - 17rem);
-    padding: 2rem $default-padding;
-  }
 }

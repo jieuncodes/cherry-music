@@ -1,0 +1,64 @@
+.check-btn {
+    font-size: 2.5rem;
+    text-align: center;
+    width: 25%;
+    height: 7.5rem;
+    border-radius: 0.5rem;
+    background-color: $cherry-dark;
+
+    &:hover {
+        color: $disabled-white;
+    }
+}
+
+.normal-btn {
+    margin-top: 1.2rem;
+    font-size: 3.2rem;
+    display: flex;
+    height: 7rem;
+    border-radius: 3rem;
+    justify-content: center;
+    align-items: center;
+
+    border: solid 1px $fall-back-black;
+
+    &:hover {
+        color: whtie;
+        background-color: $fall-back-black-darker;
+        border: solid 1px $fall-back-black-darker;
+
+    }
+}
+
+.href-btn {
+    font-size: 2.5rem;
+    display: flex;
+    height: 5rem;
+    border-radius: 3rem;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px $fall-back-black;
+
+    &:hover {
+        color: $fall-back-black;
+        background-color: $fall-back-black-darker;
+        border: solid 1px $fall-back-black-darker;
+
+    }
+}
+
+.valid {
+    color: $valid-blue;
+}
+
+.submit-btn {
+    text-align: center;
+    width: 100%;
+    height: 4rem;
+    border-radius: 1rem;
+    background-color: $cherry-dark;
+
+    &:hover {
+        color: $disabled-white;
+    }
+}

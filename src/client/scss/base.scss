@@ -1,0 +1,73 @@
+html {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(15 15 15 / 93%);
+    border-radius: 1.5rem;
+    overflow: hidden;
+
+    body {
+        border-radius: 1.5rem;
+        overflow: hidden;
+        justify-self: center;
+        position: relative;
+        align-items: center;
+        z-index: 0;
+        top: 0;
+        bottom: 0;
+        width: 600px;
+        height: 1298px;
+        background-color: #0e1117;
+        font-size: 16px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen;
+        color: white;
+
+        .background-gradient {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.5;
+            overflow: hidden;
+            width: 600px;
+            height: 23vh;
+            margin: 0;
+            padding: 0;
+            transition: opacity 0.5s ease;
+            transform: scaleX(-1);
+        }
+
+        .background-gradient::before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            opacity: 1;
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            transition: opacity 0.5s ease;
+            background: linear-gradient(to bottom, transparent, black);
+        }
+
+
+        .background-gradient.inactive {
+            opacity: 0;
+            background-image: none;
+        }
+
+        main {
+            // overflow: hidden;
+            margin-top: 6.5rem;
+
+            position: relative;
+            top: 0;
+            overflow: scroll;
+            box-sizing: border-box;
+            width: 600px;
+            height: calc(1298px - 6.5rem);
+            padding: 2rem $default-padding;
+        }
+    }
+}
